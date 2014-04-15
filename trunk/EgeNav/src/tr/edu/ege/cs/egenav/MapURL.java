@@ -4,7 +4,7 @@ package tr.edu.ege.cs.egenav;
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 13:28:15
  */
-public abstract class MapURLBuilder {
+public abstract class MapURL {
     
     private boolean secure=false,sensor=false;
     private String apiKey,clientID,signature,midURL,language="",region="",mapType="",format="";
@@ -13,15 +13,15 @@ public abstract class MapURLBuilder {
     private MapSize mapSize;
     
     
-    public MapURLBuilder(){
+    public MapURL(){
         
     }
     
-    public MapURLBuilder(String apiKey){
+    public MapURL(String apiKey){
         this.apiKey=apiKey;
     }
     
-    public MapURLBuilder(String clientID,String signature){
+    public MapURL(String clientID,String signature){
         this.clientID=clientID;
         this.signature=signature;
     }

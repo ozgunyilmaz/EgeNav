@@ -4,10 +4,10 @@ package tr.edu.ege.cs.egenav;
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:35:45
  */
-public class GSMMapURLBuilder extends MapURLBuilder{
+public class GSMMapURL extends MapURL{
     
     
-    public GSMMapURLBuilder(){
+    public GSMMapURL(){
         setMiddleURL("maps.googleapis.com/maps/api/staticmap?");
     }
 

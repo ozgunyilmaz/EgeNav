@@ -1,4 +1,11 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.test;
+
+import tr.edu.ege.cs.egenav.Coordinate;
+import tr.edu.ege.cs.egenav.GSMImageFormat;
+import tr.edu.ege.cs.egenav.GSMMapType;
+import tr.edu.ege.cs.egenav.GSMMapURL;
+import tr.edu.ege.cs.egenav.MapCenter;
+import tr.edu.ege.cs.egenav.MapSize;
 
 /**
  * @author Özgün Yılmaz
@@ -7,7 +14,7 @@ package tr.edu.ege.cs.egenav;
 public class Test {
     
      public static void main(String args[]) {
-         GSMMapURLBuilder url=new GSMMapURLBuilder();
+         GSMMapURL url=new GSMMapURL();
          
          url.setCenter(new MapCenter(new Coordinate(40,30)));
          url.setZoom(7);
