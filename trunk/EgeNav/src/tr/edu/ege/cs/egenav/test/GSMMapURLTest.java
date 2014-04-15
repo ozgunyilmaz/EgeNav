@@ -11,7 +11,7 @@ import tr.edu.ege.cs.egenav.MapSize;
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 15:17:44
  */
-public class Test {
+public class GSMMapURLTest {
     
      public static void main(String args[]) {
          GSMMapURL url=new GSMMapURL();
