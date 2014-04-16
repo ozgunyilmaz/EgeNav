@@ -9,40 +9,24 @@ import java.util.Collection;
  */
 public abstract class MapURL {
     
-    private boolean secure=false,sensor=false;
-    private String apiKey,clientID,signature,midURL,language,region,mapType,format;
-    private Location center=null;
-    private int zoom=-1,scale=-1;
-    private MapSize mapSize;
-    private ArrayList<Object> parameters=new ArrayList<Object>();
-    private char separator;
-    
+    private boolean secure=false;
+    private String midURL;
+    private String separator;
+    protected ArrayList<Parameter> parameters=new ArrayList<Parameter>();
     
     public MapURL(){
         
     }
 
-    public char getSeparator() {
+    public String getSeparator() {
         return separator;
     }
 
-    public void setSeparator(char seperator) {
+    public void setSeparator(String seperator) {
         this.separator = seperator;
     }
     
-    
-    
-    public MapURL(String apiKey){
-        this.apiKey=apiKey;
-    }
-    
-    public MapURL(String clientID,String signature){
-        this.clientID=clientID;
-        this.signature=signature;
-    }
-    
-    @Override
-    public abstract String toString();
+    public abstract String getAbsoluteURLString();
     
     public void setSecure(boolean b){
         secure=b;
@@ -52,31 +36,7 @@ public abstract class MapURL {
         return secure;
     }
 
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public Location getCenter() {
-        return center;
-    }
-
-    public void setCenter(Location center) {
-        this.center = center;
-    }
-    
-    public String getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(String clientID) {
-        this.clientID = clientID;
-    }
-
-    public String getMiddleURL() {
+        public String getMiddleURL() {
         return midURL;
     }
 
@@ -84,84 +44,12 @@ public abstract class MapURL {
         this.midURL = midURL;
     }
 
-    public int getScale() {
-        return scale;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public int getZoom() {
-        return zoom;
-    }
-
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
-    }
-
-    public MapSize getMapSize() {
-        return mapSize;
-    }
-
-    public void setMapSize(MapSize mapSize) {
-        this.mapSize = mapSize;
-    }
-
-    public boolean isSensor() {
-        return sensor;
-    }
-
-    public void setSensor(boolean sensor) {
-        this.sensor = sensor;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public String getMapType() {
-        return mapType;
-    }
-
-    public void setMapType(String mapType) {
-        this.mapType = mapType;
-    }
-
-    public void addParameter(Object o){
-        parameters.add(o);
+    public void addParameter(Parameter p){
+        parameters.add(p);
     }
     
-    public boolean removeParameter(Object o){
-        return parameters.remove(o);
+    public boolean removeParameter(Parameter p){
+        return parameters.remove(p);
     }
     
     public Object removeParameter(int i){
