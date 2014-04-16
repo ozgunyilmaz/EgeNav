@@ -1,19 +1,24 @@
 package tr.edu.ege.cs.egenav;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:29:26
  */
-public class MapCenter {
+public class Location {
     
     private Coordinate coordinate=null;
     private String address="";
     
-    public MapCenter(Coordinate coordinate){
+    public Location(Coordinate coordinate){
         this.coordinate=coordinate;
     }
     
-    public MapCenter(String address){
+    public Location(String address){
         this.address=address;
     }
 
@@ -34,7 +39,12 @@ public class MapCenter {
     }
     
     private String encodeAddress(){
-        return address.replace(" ", "+");
+        try {
+            return URLEncoder.encode(address, "ISO-8859-1");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+            return address.replace(" ", "+");
+        }
     }
     
     @Override

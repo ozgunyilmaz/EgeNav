@@ -8,7 +8,7 @@ public abstract class MapURL {
     
     private boolean secure=false,sensor=false;
     private String apiKey,clientID,signature,midURL,language="",region="",mapType="",format="";
-    private MapCenter center=null;
+    private Location center=null;
     private int zoom=-1,scale=-1;
     private MapSize mapSize;
     
@@ -45,11 +45,11 @@ public abstract class MapURL {
         this.apiKey = apiKey;
     }
 
-    public MapCenter getCenter() {
+    public Location getCenter() {
         return center;
     }
 
-    public void setCenter(MapCenter center) {
+    public void setCenter(Location center) {
         this.center = center;
     }
     
