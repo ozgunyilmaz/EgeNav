@@ -9,11 +9,27 @@ import java.util.ArrayList;
 public class GSMPath {
     
     private GSMPathStyle ps;
-    private ArrayList<Coordinate> path=new ArrayList<Coordinate>();
+    
+    private String encodedPath;
+    private ArrayList<Coordinate> path=null;
 
     public GSMPath(GSMPathStyle ps) {
+        
         this.ps = ps;
+        path=new ArrayList<Coordinate>();
+        
     }
+
+    public GSMPath(GSMPathStyle ps, String encodedPath) {
+        this.ps = ps;
+        this.encodedPath = encodedPath;
+    }
+
+    public String getEncodedPath() {
+        return encodedPath;
+    }
+
+    
 
     public void addPathPoint(Coordinate c){
         path.add(c);
@@ -40,8 +56,15 @@ public class GSMPath {
             p=p+getPathStyle().toString()+"|";
         }
         
-        for (int i=0;i<path.size();i++){
-            p=p+ path.get(i).toString()+"|";
+        
+        if (path!=null){
+            
+            for (int i=0;i<path.size();i++){
+                p=p+ path.get(i).toString()+"|";
+            }
+            
+        }else{
+            p=p+"enc:"+getEncodedPath()+"|";
         }
         
         while (p.endsWith("|")){
