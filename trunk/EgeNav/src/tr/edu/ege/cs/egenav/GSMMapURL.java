@@ -6,6 +6,8 @@ package tr.edu.ege.cs.egenav;
  */
 public class GSMMapURL extends MapURL{
     
+    //marker,styled maps, paths
+    //visible parametresini ekle.
     
     public GSMMapURL(){
         setMiddleURL("maps.googleapis.com/maps/api/staticmap?");
