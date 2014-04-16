@@ -1,5 +1,8 @@
 package tr.edu.ege.cs.egenav;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 13:28:15
@@ -7,15 +10,27 @@ package tr.edu.ege.cs.egenav;
 public abstract class MapURL {
     
     private boolean secure=false,sensor=false;
-    private String apiKey,clientID,signature,midURL,language="",region="",mapType="",format="";
+    private String apiKey,clientID,signature,midURL,language,region,mapType,format;
     private Location center=null;
     private int zoom=-1,scale=-1;
     private MapSize mapSize;
+    private ArrayList<Object> parameters=new ArrayList<Object>();
+    private char separator;
     
     
     public MapURL(){
         
     }
+
+    public char getSeparator() {
+        return separator;
+    }
+
+    public void setSeparator(char seperator) {
+        this.separator = seperator;
+    }
+    
+    
     
     public MapURL(String apiKey){
         this.apiKey=apiKey;
@@ -141,8 +156,20 @@ public abstract class MapURL {
         this.mapType = mapType;
     }
 
+    public void addParameter(Object o){
+        parameters.add(o);
+    }
     
+    public boolean removeParameter(Object o){
+        return parameters.remove(o);
+    }
     
+    public Object removeParameter(int i){
+        return parameters.remove(i);
+    }
     
+    public void appendParameters(Collection c){
+        parameters.addAll(c);
+    }
     
 }

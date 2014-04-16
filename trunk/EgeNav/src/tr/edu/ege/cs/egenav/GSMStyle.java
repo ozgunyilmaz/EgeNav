@@ -44,6 +44,7 @@ public class GSMStyle {
         rules.addAll(rules);
     }
     
+    
     @Override
     public String toString(){
         String str="style=";
