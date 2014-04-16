@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Özgün Yılmaz
  * Created on 07.Nis.2014, 15:53:56
  */
-public abstract class Marker {
+public abstract class Marker extends Parameter{
     
     protected ArrayList<Coordinate> points=new ArrayList<Coordinate>();
     private String color="",size="",label="";

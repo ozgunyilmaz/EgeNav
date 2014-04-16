@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Özgün Yılmaz
  * Created on 16.Nis.2014, 11:53:33
  */
-public class GSMPath {
+public class GSMPath extends Parameter{
     
     private GSMPathStyle ps;
     

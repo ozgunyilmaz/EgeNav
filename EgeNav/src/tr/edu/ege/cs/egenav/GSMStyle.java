@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Özgün Yılmaz
  * Created on 07.Nis.2014, 15:43:02
  */
-public class GSMStyle {
+public class GSMStyle extends Parameter{
     
     private String feature, element;
     private ArrayList<GSMStyleRule> rules=new ArrayList<GSMStyleRule>();
