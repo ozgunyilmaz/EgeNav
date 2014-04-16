@@ -1,5 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
+import java.util.ArrayList;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:35:45
@@ -8,6 +10,10 @@ public class GSMMapURL extends MapURL{
     
     //marker,styled maps, paths
     //visible parametresini ekle.
+    
+    ArrayList<GSMStyle> styles=new ArrayList<GSMStyle>();
+    ArrayList<GSMMarker> markers=new ArrayList<GSMMarker>();
+    ArrayList<GSMPath> style=new ArrayList<GSMStyle>();
     
     public GSMMapURL(){
         setMiddleURL("maps.googleapis.com/maps/api/staticmap?");
