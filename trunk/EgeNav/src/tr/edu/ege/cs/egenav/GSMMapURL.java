@@ -13,7 +13,8 @@ public class GSMMapURL extends MapURL{
     
     ArrayList<GSMStyle> styles=new ArrayList<GSMStyle>();
     ArrayList<GSMMarker> markers=new ArrayList<GSMMarker>();
-    ArrayList<GSMPath> style=new ArrayList<GSMStyle>();
+    ArrayList<GSMPath> paths=new ArrayList<GSMPath>();
+    ArrayList<Location> viewports=new ArrayList<Location>();
     
     public GSMMapURL(){
         setMiddleURL("maps.googleapis.com/maps/api/staticmap?");
