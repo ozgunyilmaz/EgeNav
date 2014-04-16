@@ -38,6 +38,14 @@ public class GSMPath {
     public void appendPath(ArrayList<Coordinate> p){
         path.addAll(p);
     }
+    
+    public boolean removePathPoint(Coordinate c){
+        return path.remove(c);
+    }
+    
+    public Coordinate removePathPoint(int i){
+        return path.remove(i);
+    }
 
     public GSMPathStyle getPathStyle() {
         return ps;

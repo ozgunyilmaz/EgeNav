@@ -11,6 +11,7 @@ public class GSMMapURL extends MapURL{
     //marker,styled maps, paths
     //visible parametresini ekle.
     
+    
     ArrayList<GSMStyle> styles=new ArrayList<GSMStyle>();
     ArrayList<GSMMarker> markers=new ArrayList<GSMMarker>();
     ArrayList<GSMPath> paths=new ArrayList<GSMPath>();
@@ -18,6 +19,7 @@ public class GSMMapURL extends MapURL{
     
     public GSMMapURL(){
         setMiddleURL("maps.googleapis.com/maps/api/staticmap?");
+        setSeparator('&');
     }
 
     @Override
