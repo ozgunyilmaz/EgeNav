@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class GSMStyle {
     
-    private String feature="", element="";
+    private String feature, element;
     private ArrayList<GSMStyleRule> rules=new ArrayList<GSMStyleRule>();
 
     public GSMStyle(String feature, String element) {
@@ -38,6 +38,10 @@ public class GSMStyle {
     
     public void addRule(GSMStyleRule r){
         rules.add(r);
+    }
+    
+    public void appendRules(ArrayList<GSMStyleRule> rules){
+        rules.addAll(rules);
     }
     
     @Override
