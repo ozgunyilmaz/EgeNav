@@ -13,7 +13,7 @@ public class GSMMapURL extends MapURL{
     
     private boolean sensor=false;
     private String apiKey,clientID,signature,language,region,mapType,format;
-    private Location center=null;
+    private GSMLocation center=null;
     private int zoom=-1,scale=-1;
     private MapSize mapSize;
     
@@ -42,11 +42,11 @@ public class GSMMapURL extends MapURL{
         this.apiKey = apiKey;
     }
 
-    public Location getCenter() {
+    public GSMLocation getCenter() {
         return center;
     }
 
-    public void setCenter(Location center) {
+    public void setCenter(GSMLocation center) {
         this.center = center;
     }
     

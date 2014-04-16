@@ -9,16 +9,16 @@ import java.util.logging.Logger;
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:29:26
  */
-public class Location {
+public class GSMLocation {
     
     private Coordinate coordinate=null;
     private String address="";
     
-    public Location(Coordinate coordinate){
+    public GSMLocation(Coordinate coordinate){
         this.coordinate=coordinate;
     }
     
-    public Location(String address){
+    public GSMLocation(String address){
         this.address=address;
     }
 
@@ -42,7 +42,7 @@ public class Location {
         try {
             return URLEncoder.encode(address, "ISO-8859-1");
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GSMLocation.class.getName()).log(Level.SEVERE, null, ex);
             return address.replace(" ", "+");
         }
     }
