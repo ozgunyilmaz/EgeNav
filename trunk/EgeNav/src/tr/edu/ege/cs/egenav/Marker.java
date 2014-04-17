@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public abstract class Marker extends Parameter{
     
-    protected ArrayList<GeoPoint2> points=new ArrayList<GeoPoint2>();
+    protected ArrayList<GeoPoint> points=new ArrayList<GeoPoint>();
     private String color="",size="",label="";
 
     public Marker(String color) {
@@ -50,7 +50,7 @@ public abstract class Marker extends Parameter{
         this.size = size;
     }
     
-    public void addPoint(GeoPoint2 c){
+    public void addPoint(GeoPoint c){
         points.add(c);
     }
     

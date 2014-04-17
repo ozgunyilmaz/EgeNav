@@ -11,10 +11,10 @@ import java.util.logging.Logger;
  */
 public class GSMLocation {
     
-    private GeoPoint2 point=null;
+    private GeoPoint point=null;
     private String address="";
     
-    public GSMLocation(GeoPoint2 point){
+    public GSMLocation(GeoPoint point){
         this.point=point;
     }
     
@@ -26,7 +26,7 @@ public class GSMLocation {
         return address;
     }
 
-    public GeoPoint2 getCoordinate() {
+    public GeoPoint getCoordinate() {
         return point;
     }
     
