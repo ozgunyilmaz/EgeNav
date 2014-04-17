@@ -1,7 +1,5 @@
 package tr.edu.ege.cs.egenav;
 
-import java.util.ArrayList;
-
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:35:45
