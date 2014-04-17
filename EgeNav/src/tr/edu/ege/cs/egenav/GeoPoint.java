@@ -7,16 +7,16 @@ package tr.edu.ege.cs.egenav;
 //Koordinat sınıfı
 //enlem ve boylam değereleri String'den double'a çevriliyor.
 
-public class GeoPoint2{
+public class GeoPoint{
 	
     private double lat,lon;	//enlem ve boylam
 
-    public GeoPoint2(double lat,double lon){
+    public GeoPoint(double lat,double lon){
         this.lat=lat;
         this.lon=lon;
     }
 
-    public GeoPoint2(String p){
+    public GeoPoint(String p){
         //Parametre olarak enlem ve boylam'dan oluşan string alınır.
         double dec,min,sec;
         //Aşağıda enlem için derece, dakika, saniye değerleri bulunuyor.		
