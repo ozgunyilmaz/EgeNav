@@ -10,10 +10,12 @@
  */
 package tr.edu.ege.cs.egenav.ui;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
 
 /**
@@ -22,8 +24,7 @@ import tr.edu.ege.cs.egenav.MapURL;
  */
 public class MapPanel extends javax.swing.JPanel {
 
-    private MapURL mapurl;
-    private Dimension dm;
+    private MapURL mapurl=null;
     private BufferedImage img;
     private InputStream in;
     private double x1,y1,x2,y2;
@@ -33,7 +34,28 @@ public class MapPanel extends javax.swing.JPanel {
     /** Creates new form MapPanel */
     public MapPanel() {
         initComponents();
+        setCursor(new Cursor(Cursor.MOVE_CURSOR));
     }
+    
+    public MapPanel(MapURL mapurl){
+        this.mapurl=mapurl;
+        img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+    }
+    
+    public void refreshMap(){
+        img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        repaint();
+    }
+
+    public MapURL getMapurl() {
+        return mapurl;
+    }
+
+    public void setMapurl(MapURL mapurl) {
+        this.mapurl = mapurl;
+    }
+    
+    
     
     @Override
     public void paint(Graphics g) {
@@ -41,7 +63,14 @@ public class MapPanel extends javax.swing.JPanel {
         g.drawImage(img, 0, 0, null);
     }
     
-    
+    @Override
+    public Dimension getPreferredSize() {
+        if (mapurl == null) {
+            return new Dimension(500,500);
+        } else {
+            return new Dimension(mapurl.getMapSize().getHorizantal(), mapurl.getMapSize().getVertical());
+       }
+    }
     
 
     /** This method is called from within the constructor to
