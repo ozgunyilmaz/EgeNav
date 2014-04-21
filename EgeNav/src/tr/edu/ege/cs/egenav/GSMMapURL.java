@@ -13,6 +13,7 @@ public class GSMMapURL extends MapURL{
     private String apiKey,signature,language,region,mapType,format;
     private int scale=-1;
     
+    public static final int MAX_ZOOM=21;
     
     
     public GSMMapURL(){
@@ -29,6 +30,15 @@ public class GSMMapURL extends MapURL{
         this();
         setClientID(clientID);
         this.signature=signature;
+    }
+    
+    @Override
+    public boolean incrementZoom(){
+        if (getZoom()<MAX_ZOOM){
+            incrementZoom();
+            return true;
+        }
+        return false;
     }
     
     public String getApiKey() {

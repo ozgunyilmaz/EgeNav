@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
 
@@ -28,6 +29,7 @@ public class MapPanel extends javax.swing.JPanel {
     private BufferedImage img;
     private InputStream in;
     private double x1,y1,x2,y2;
+    private boolean enforceCenter;
 
     
     
@@ -47,14 +49,47 @@ public class MapPanel extends javax.swing.JPanel {
         repaint();
     }
 
-    public MapURL getMapurl() {
+    public MapURL getMapUrl() {
         return mapurl;
     }
 
-    public void setMapurl(MapURL mapurl) {
+    //------------------------------------------------------------
+    public void setMapUrl(MapURL mapurl) {
         this.mapurl = mapurl;
     }
+    //todo geçmişe eklenecek
+    public int getMapZoom(){
+        return mapurl.getZoom();
+    }
     
+    public void setMapZoom(int z){
+        mapurl.setZoom(z);
+    }
+    
+    public boolean incrementZoom(){
+        return mapurl.incrementZoom();
+    }
+    
+    public boolean decrementZoom(){
+        return mapurl.incrementZoom();
+    }
+    
+    public Location getMapLocation(){
+        return mapurl.getLocation();
+    }
+    
+    public void setMapLocation(Location loc){
+        mapurl.setLocation(loc);
+    }
+    //-----------------------------------------------------------
+    
+    public void enableDragRefresh(){
+        //TODO 
+    }
+    
+    public void disableDragRefresh(){
+        //TODO 
+    }
     
     
     @Override
