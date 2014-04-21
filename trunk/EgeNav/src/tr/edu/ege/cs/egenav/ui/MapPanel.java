@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * MapPanel.java
  *
  * Created on 17.Nis.2014, 13:56:36
