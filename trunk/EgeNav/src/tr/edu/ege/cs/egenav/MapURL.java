@@ -70,6 +70,20 @@ public abstract class MapURL {
     public void setZoom(int zoom) {
         this.zoom = zoom;
     }
+    
+    public boolean incrementZoom(){
+        zoom++;
+        return true;
+    }
+    
+    public boolean decrementZoom(){
+        
+        if (zoom>0){
+            zoom--;
+            return true;
+        }
+        return false;
+    }
 
     public MapSize getMapSize() {
         return mapSize;
