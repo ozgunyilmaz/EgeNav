@@ -7,7 +7,7 @@ package tr.edu.ege.cs.egenav;
 //Koordinat sınıfı
 //enlem ve boylam değereleri String'den double'a çevriliyor.
 
-public class GeoPoint{
+public class GeoPoint extends Location{
 	
     private double lat,lon;	//enlem ve boylam
 

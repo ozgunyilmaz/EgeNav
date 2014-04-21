@@ -10,14 +10,25 @@ import java.util.Collection;
 public abstract class MapURL {
     
     private boolean secure=false;
-    private String midURL;
+    private String midURL,clientID,mapType,format;
     private String separator;
     protected ArrayList<Parameter> parameters=new ArrayList<Parameter>();
+    private MapSize mapSize;
+    private int zoom=-1;
+    private Location location=null;
     
     public MapURL(){
         
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    
     public String getSeparator() {
         return separator;
     }
@@ -36,12 +47,36 @@ public abstract class MapURL {
         return secure;
     }
 
-        public String getMiddleURL() {
+    public String getMiddleURL() {
         return midURL;
     }
 
     public void setMiddleURL(String midURL) {
         this.midURL = midURL;
+    }
+    
+    public String getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
+    
+    public int getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
+    }
+
+    public MapSize getMapSize() {
+        return mapSize;
+    }
+
+    public void setMapSize(MapSize mapSize) {
+        this.mapSize = mapSize;
     }
 
     public void addParameter(Parameter p){

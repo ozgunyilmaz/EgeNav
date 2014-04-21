@@ -10,10 +10,9 @@ public class GSMMapURL extends MapURL{
     //visible parametresini ekle.
     
     private boolean sensor=false;
-    private String apiKey,clientID,signature,language,region,mapType,format;
-    private GSMLocation center=null;
-    private int zoom=-1,scale=-1;
-    private MapSize mapSize;
+    private String apiKey,signature,language,region,mapType,format;
+    private int scale=-1;
+    
     
     
     public GSMMapURL(){
@@ -28,7 +27,7 @@ public class GSMMapURL extends MapURL{
     
     public GSMMapURL(String clientID,String signature){
         this();
-        this.clientID=clientID;
+        setClientID(clientID);
         this.signature=signature;
     }
     
@@ -39,21 +38,18 @@ public class GSMMapURL extends MapURL{
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
-
+    
+    @Override
+    public GSMLocation getLocation(){
+        return (GSMLocation)getLocation();
+    }
+    
     public GSMLocation getCenter() {
-        return center;
+        return getLocation();
     }
 
     public void setCenter(GSMLocation center) {
-        this.center = center;
-    }
-    
-    public String getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(String clientID) {
-        this.clientID = clientID;
+        setLocation(center);
     }
     
     public int getScale() {
@@ -70,22 +66,6 @@ public class GSMMapURL extends MapURL{
 
     public void setSignature(String signature) {
         this.signature = signature;
-    }
-
-    public int getZoom() {
-        return zoom;
-    }
-
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
-    }
-
-    public MapSize getMapSize() {
-        return mapSize;
-    }
-
-    public void setMapSize(MapSize mapSize) {
-        this.mapSize = mapSize;
     }
 
     public boolean isSensor() {

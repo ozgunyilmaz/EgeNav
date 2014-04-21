@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:29:26
  */
-public class GSMLocation {
+public class GSMLocation extends Location{
     
     private GeoPoint point=null;
     private String address="";
