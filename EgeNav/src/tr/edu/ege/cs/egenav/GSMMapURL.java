@@ -176,5 +176,10 @@ public class GSMMapURL extends MapURL{
         
         return url;
     }
+
+    @Override
+    public GSMMapURL clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

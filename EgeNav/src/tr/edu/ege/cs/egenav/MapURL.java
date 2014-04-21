@@ -38,6 +38,9 @@ public abstract class MapURL {
     }
     
     public abstract String getAbsoluteURLString();
+    @Override
+    public abstract MapURL clone();
+    
     
     public void setSecure(boolean b){
         secure=b;
