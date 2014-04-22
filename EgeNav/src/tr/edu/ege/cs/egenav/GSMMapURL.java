@@ -179,7 +179,25 @@ public class GSMMapURL extends MapURL{
 
     @Override
     public GSMMapURL clone() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        GSMMapURL gsm=new GSMMapURL();
+        gsm.setApiKey(getApiKey());
+        gsm.setCenter(getCenter().clone());
+        gsm.setClientID(getClientID());
+        gsm.setFormat(getFormat());
+        gsm.setLanguage(getLanguage());
+        gsm.setMapSize(getMapSize().clone());
+        gsm.setMapType(getMapType());
+        gsm.setMiddleURL(getMiddleURL());
+        gsm.setRegion(getRegion());
+        gsm.setScale(getScale());
+        gsm.setSecure(isSecure());
+        gsm.setSensor(isSensor());
+        gsm.setSeparator(getSeparator());
+        gsm.setSignature(getSignature());
+        gsm.setZoom(getZoom());
+        
+        return gsm;
     }
     
 }

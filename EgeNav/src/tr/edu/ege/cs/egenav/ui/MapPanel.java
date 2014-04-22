@@ -89,7 +89,7 @@ public class MapPanel extends javax.swing.JPanel {
     
     @Override
     public void paint(Graphics g) {
-
+        
         g.drawImage(img, 0, 0, null);
     }
     

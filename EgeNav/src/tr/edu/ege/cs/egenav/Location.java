@@ -24,4 +24,9 @@ public class Location {
         this.description = description;
     }
     
+    @Override
+    public Location clone(){
+        return new Location(description);
+    }
+    
 }
