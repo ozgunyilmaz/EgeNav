@@ -55,4 +55,15 @@ public class GSMLocation extends Location{
             return point.toString();
         }
     }
+    
+    @Override
+    public GSMLocation clone(){
+        
+        if (isAddress()){
+            return new GSMLocation(getAddress());
+        }else{
+            return new GSMLocation(getCoordinate().clone());
+        }
+        
+    }
 }

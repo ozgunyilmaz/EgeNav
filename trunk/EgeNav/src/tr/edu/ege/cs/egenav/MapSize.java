@@ -28,5 +28,12 @@ public class MapSize {
         this.vertical = vertical;
     }
     
+    @Override
+    public MapSize clone(){
+        
+        return new MapSize(horizantal,vertical);
+        
+    }
+    
     
 }

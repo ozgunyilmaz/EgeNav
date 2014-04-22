@@ -103,5 +103,13 @@ public class GeoPoint extends Location{
     public void setLongitude(double lon){
         this.lon=lon;
     }
+    
+    @Override
+    public GeoPoint clone(){
+        
+        GeoPoint point=new GeoPoint(lat,lon);
+        
+        return point;
+    }
 	
 }
