@@ -28,7 +28,7 @@ public class MapPanel extends javax.swing.JPanel {
     private boolean enforceCenter=false;
     private ArrayList<MapURL> history=new ArrayList<MapURL>();
     private boolean recordHistory=false;
-
+    private int bearing=-1,speed=-1;
     
     
     /** Creates new form MapPanel */
@@ -66,9 +66,15 @@ public class MapPanel extends javax.swing.JPanel {
     public void setEnforceCenter(boolean enforceCenter) {
         this.enforceCenter = enforceCenter;
     }
-    
-    
 
+    public int getBearing() {
+        return bearing;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+    
     public MapURL getMapUrl() {
         return mapurl;
     }
