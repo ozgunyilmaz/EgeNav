@@ -89,6 +89,7 @@ public class MapPanel extends javax.swing.JPanel {
 
     //------------------------------------------------------------
     public void setMapUrl(MapURL mapurl) {
+        //todo navigation history için navigation ayrı sınıfta
         if (recordHistory){
             history.add(this.mapurl);
         }
