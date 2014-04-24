@@ -8,6 +8,7 @@ package tr.edu.ege.cs.egenav.ui;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ public class MapPanel extends javax.swing.JPanel {
     private InputStream in;
     private double x1,y1,x2,y2;
     private boolean enforceCenter=false;
-    private ArrayList<MapURL> history=new ArrayList<MapURL>();
-    private boolean recordHistory=false;
+    private ArrayList<Location> history=new ArrayList<Location>();
     private int bearing=-1,speed=-1;
+    private Arrow arrow=new Arrow();
+    private LineStyle routeLineStyle=new LineStyle();
     
     
     /** Creates new form MapPanel */
@@ -40,14 +42,6 @@ public class MapPanel extends javax.swing.JPanel {
     public MapPanel(MapURL mapurl){
         this.mapurl=mapurl;
         img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
-    }
-    
-    public void startNavigation(){
-        recordHistory=true;
-    }
-    
-    public void pauseNavigation(){
-        recordHistory=false;
     }
     
     public void clearNavigationHistory(){
@@ -83,49 +77,56 @@ public class MapPanel extends javax.swing.JPanel {
         return mapurl.getZoom();
     }
     
-    public Location getMapLocation(){
-        return mapurl.getLocation();
+    public Arrow getArrow() {
+        return arrow;
     }
 
+    public void setArrow(Arrow arrow) {
+        this.arrow = arrow;
+    }
+
+    public LineStyle getRouteLineStyle() {
+        return routeLineStyle;
+    }
+
+    public void setRouteLineStyle(LineStyle routeLineStyle) {
+        this.routeLineStyle = routeLineStyle;
+    }
+    
     //------------------------------------------------------------
     public void setMapUrl(MapURL mapurl) {
         //todo navigation history için navigation ayrı sınıfta
-        if (recordHistory){
-            history.add(this.mapurl);
-        }
         this.mapurl = mapurl;
     }
     
     public void setMapZoom(int z){
-        if (recordHistory){
-            history.add(this.mapurl.clone());
-        }
+        
         mapurl.setZoom(z);
     }
     
     public boolean incrementZoom(){
-        if (recordHistory){
-            history.add(this.mapurl.clone());
-        }
+        
         return mapurl.incrementZoom();
     }
     
     public boolean decrementZoom(){
-        if (recordHistory){
-            history.add(this.mapurl.clone());
-        }
+        
         return mapurl.incrementZoom();
     }
     
-    
-    
-    public void setMapLocation(Location loc){
-        if (recordHistory){
-            history.add(this.mapurl.clone());
-        }
-        mapurl.setLocation(loc);
-    }
     //-----------------------------------------------------------
+    
+    public void updateLocation(Location loc){
+        //todo navigasyon sırasında time stampleri ve noktadan noktaya uzaklık hesaplanmalı
+        //todo navigationinfo sınıfını kullan.
+        history.add(loc);
+        if (enforceCenter){
+            mapurl.setLocation(loc.clone());
+        }else{
+            //todo harita dışına çıkılmışsa harita güncellenmeli
+        }
+        
+    }
     
     public void enableDragRefresh(){
         //TODO 
@@ -139,9 +140,27 @@ public class MapPanel extends javax.swing.JPanel {
     
     
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d=(Graphics2D)g;
+        g2d.drawImage(img, 0, 0, null);
+        //**************************draw route
+        g2d.setColor(getRouteLineStyle().getColor());
+        if (getRouteLineStyle().getStroke()!=null){
+            g2d.setStroke(getRouteLineStyle().getStroke());
+        }
+        g2d.setComposite(getRouteLineStyle().getComposite());
         
-        g.drawImage(img, 0, 0, null);
+        
+        //*****************************
+        
+        //***************************draw arrow
+        g2d.setColor(getArrow().getLineStyle().getColor());
+        if (getArrow().getLineStyle().getStroke()!=null){
+            g2d.setStroke(getArrow().getLineStyle().getStroke());
+        }
+        g2d.setComposite(getArrow().getLineStyle().getComposite());
+        
     }
     
     @Override
