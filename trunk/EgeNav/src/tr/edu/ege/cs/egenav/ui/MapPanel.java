@@ -9,6 +9,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class MapPanel extends javax.swing.JPanel {
     private double x1,y1,x2,y2;
     private boolean enforceCenter=false;
     private ArrayList<Location> history=new ArrayList<Location>();
-    private int bearing=-1,speed=-1;
+    private int heading=-1,speed=-1;
     private Arrow arrow=new Arrow();
     private LineStyle routeLineStyle=new LineStyle();
     
@@ -62,7 +63,7 @@ public class MapPanel extends javax.swing.JPanel {
     }
 
     public int getBearing() {
-        return bearing;
+        return heading;
     }
 
     public int getSpeed() {
@@ -145,12 +146,13 @@ public class MapPanel extends javax.swing.JPanel {
         Graphics2D g2d=(Graphics2D)g;
         g2d.drawImage(img, 0, 0, null);
         //**************************draw route
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(getRouteLineStyle().getColor());
         if (getRouteLineStyle().getStroke()!=null){
             g2d.setStroke(getRouteLineStyle().getStroke());
         }
         g2d.setComposite(getRouteLineStyle().getComposite());
-        
+        //...
         
         //*****************************
         
@@ -160,7 +162,7 @@ public class MapPanel extends javax.swing.JPanel {
             g2d.setStroke(getArrow().getLineStyle().getStroke());
         }
         g2d.setComposite(getArrow().getLineStyle().getComposite());
-        
+        //...
     }
     
     @Override
