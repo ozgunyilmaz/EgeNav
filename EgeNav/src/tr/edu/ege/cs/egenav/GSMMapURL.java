@@ -1,5 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
+import java.awt.Point;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:35:45
@@ -198,6 +200,16 @@ public class GSMMapURL extends MapURL{
         gsm.setZoom(getZoom());
         
         return gsm;
+    }
+
+    @Override
+    public Point getPixelOnMap(double lat, double lon) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public GeoPoint getCordinatesOnMap(Point p) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

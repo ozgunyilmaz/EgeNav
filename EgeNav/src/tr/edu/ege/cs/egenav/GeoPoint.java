@@ -1,5 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
+import java.awt.Point;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 13:44:59
@@ -88,10 +90,12 @@ public class GeoPoint extends Location{
     }
 
     //Aşağıda getter ve setter metodları bulunmaktadır.
+    @Override
     public double getLatitude(){
         return lat;
     }
 
+    @Override
     public double getLongitude(){
         return lon;
     }
@@ -111,5 +115,37 @@ public class GeoPoint extends Location{
         
         return point;
     }
+
+    @Override
+    public double getDistanceTo(Location location) {
+        GeoPoint gp=(GeoPoint)location;
+        return calculateDistance(getLatitude(),getLongitude(),gp.getLatitude(),gp.getLongitude());
+    }
+    
+    public static double calculateDistance(double lat1, double lon1, double lat2, double lon2){
+        //Haversine formülüne göre enlemleri ve boylamları bilinen
+        //2 nokta arasındaki uzaklık hesaplanıyor.
+        double r = 6371; // km
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLon = Math.toRadians(lon2-lon1); 
+
+        lat1=Math.toRadians(lat1);
+        lon1=Math.toRadians(lon1);
+        lat2=Math.toRadians(lat2);
+        lon2=Math.toRadians(lon2);
+
+
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.cos(lat1) * Math.cos(lat2) * 
+                        Math.sin(dLon/2) * Math.sin(dLon/2); 
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        double d = r * c;
+
+
+//			System.out.println(d);
+        return d;	//km. cinsinden uzaklık
+    }
+
+    
 	
 }

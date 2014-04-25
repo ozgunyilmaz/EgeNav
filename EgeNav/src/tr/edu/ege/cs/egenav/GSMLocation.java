@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav;
 
+import java.awt.Point;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
@@ -66,4 +67,25 @@ public class GSMLocation extends Location{
         }
         
     }
+
+    @Override
+    public double getDistanceTo(Location location) {
+        
+        //Google geocoding api ile lat ve lon adres için de elde edilebilir.
+        //Adresi parametre olarak alan constructor'da lat ve lon otomatik elde edilebilir.
+        return getCoordinate().getDistanceTo(location);
+        
+    }
+
+    @Override
+    public double getLatitude() {
+        return getCoordinate().getLatitude();
+    }
+
+    @Override
+    public double getLongitude() {
+        return getCoordinate().getLongitude();
+    }
+
+    
 }

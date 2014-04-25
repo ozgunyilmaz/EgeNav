@@ -1,10 +1,12 @@
 package tr.edu.ege.cs.egenav;
 
+import java.awt.Point;
+
 /**
  * @author Özgün Yılmaz
  * Created on 21.Nis.2014, 14:14:03
  */
-public class Location {
+public abstract class Location {
     
     private String description;
     
@@ -24,9 +26,12 @@ public class Location {
         this.description = description;
     }
     
+
     @Override
-    public Location clone(){
-        return new Location(description);
-    }
+    public abstract Location clone();
+    
+    public abstract double getDistanceTo(Location location);
+    public abstract double getLatitude();
+    public abstract double getLongitude();
     
 }

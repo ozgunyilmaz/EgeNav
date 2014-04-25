@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -112,4 +113,8 @@ public abstract class MapURL {
         parameters.addAll(c);
     }
     
+    
+    public abstract Point getPixelOnMap(double lat, double lon);
+    
+    public abstract GeoPoint getCordinatesOnMap(Point p);
 }

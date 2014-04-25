@@ -10,19 +10,19 @@ public class NavigationInfo {
     
     private Location location;
     private long timeStamp;
-    private int distanceToPreviousLocation;
+    private double distanceToPreviousLocation;
 
-    public NavigationInfo(Location location, long timeStamp, int distanceToPreviousLocation) {
+    public NavigationInfo(Location location, long timeStamp, double distanceToPreviousLocation) {
         this.location = location;
         this.timeStamp = timeStamp;
         this.distanceToPreviousLocation = distanceToPreviousLocation;
     }
 
-    public int getDistanceToPreviousLocation() {
+    public double getDistanceToPreviousLocation() {
         return distanceToPreviousLocation;
     }
 
-    public void setDistanceToPreviousLocation(int distanceToPreviousLocation) {
+    public void setDistanceToPreviousLocation(double distanceToPreviousLocation) {
         this.distanceToPreviousLocation = distanceToPreviousLocation;
     }
 
