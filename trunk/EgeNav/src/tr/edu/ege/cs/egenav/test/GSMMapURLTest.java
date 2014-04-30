@@ -21,8 +21,8 @@ public class GSMMapURLTest {
          url.setCenter(new GSMLocation(new GeoPoint(40,30)));
          url.setZoom(6);
          url.setMapSize(new MapSize(500,500));
-         url.setMapType(GSMMapType.HYBRID);
-         url.setFormat(GSMImageFormat.PNG);
+//         url.setMapType(GSMMapType.HYBRID);
+//         url.setFormat(GSMImageFormat.PNG);
          System.out.println(url.getAbsoluteURLString());
          System.out.println(url.getCordinatesOnMap(new Point(10,10)));
          System.out.println(url.getPixelOnMap(38, 32));

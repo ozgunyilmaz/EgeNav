@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav.ui;
 
+import java.awt.Point;
 import tr.edu.ege.cs.egenav.Location;
 
 /**
@@ -11,6 +12,7 @@ public class NavigationInfo {
     private Location location;
     private long timeStamp;
     private double distanceToPreviousLocation;
+    private Point point;
 
     public NavigationInfo(Location location, long timeStamp, double distanceToPreviousLocation) {
         this.location = location;
@@ -41,7 +43,21 @@ public class NavigationInfo {
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
+    }
     
+    public int getX(){
+        return (int)point.getX();
+    }
     
+    public int getY(){
+        return (int)point.getY();
+    }
     
 }

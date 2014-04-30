@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -23,14 +25,14 @@ import tr.edu.ege.cs.egenav.MapURL;
  *
  * @author Özgün Yılmaz
  */
-public class MapPanel extends javax.swing.JPanel {
+public class MapPanel extends javax.swing.JPanel implements MouseListener{
 
     private MapURL mapurl=null;
     private BufferedImage img;
     private InputStream in;
     private double x1,y1,x2,y2;
     private boolean enforceCenter=false;
-    private ArrayList<NavigationInfo> history=new ArrayList<NavigationInfo>();
+    private ArrayList<NavigationInfo> history=new ArrayList<NavigationInfo>(); //todo bu liste ayrı bir sınıfta tutulabilir. İlgili metotlar yazılır ve daha temiz kodlama olur.
     private int heading=-1,speed=-1;
     private Arrow arrow=new Arrow();
     private LineStyle routeLineStyle=new LineStyle();
@@ -39,7 +41,7 @@ public class MapPanel extends javax.swing.JPanel {
     /** Creates new form MapPanel */
     public MapPanel() {
         initComponents();
-        setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        enableDragRefresh();
     }
     
     public MapPanel(MapURL mapurl){
@@ -98,7 +100,7 @@ public class MapPanel extends javax.swing.JPanel {
     
     //------------------------------------------------------------
     public void setMapUrl(MapURL mapurl) {
-        //todo navigation history için navigation ayrı sınıfta
+        
         this.mapurl = mapurl;
     }
     
@@ -120,8 +122,7 @@ public class MapPanel extends javax.swing.JPanel {
     //-----------------------------------------------------------
     
     public void updateLocation(Location loc){
-        //todo navigasyon sırasında time stampleri ve noktadan noktaya uzaklık hesaplanmalı
-        //todo navigationinfo sınıfını kullan.
+        
         long timestamp=Calendar.getInstance().getTimeInMillis();
         double distance;
         if (history.isEmpty()){
@@ -140,14 +141,16 @@ public class MapPanel extends javax.swing.JPanel {
         
     }
     
-    public void enableDragRefresh(){
-        //TODO 
+    public final void enableDragRefresh(){
+
         setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        addMouseListener(this);
     }
     
-    public void disableDragRefresh(){
-        //TODO 
+    public final void disableDragRefresh(){
+
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        removeMouseListener(this);
     }
     
     
@@ -200,7 +203,7 @@ public class MapPanel extends javax.swing.JPanel {
         
     }
     
-    //todo containsGeoPoint
+    
     
     private double calcArrowDegree(Point p1, Point p2){
         int x1=(int)p1.getX(),y1=(int)p1.getY(),x2=(int)p2.getX(),y2=(int)p2.getY();
@@ -259,4 +262,29 @@ public class MapPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
 }
