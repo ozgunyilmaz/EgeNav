@@ -32,7 +32,8 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private InputStream in;
     private double x1,y1,x2,y2;
     private boolean enforceCenter=false;
-    private ArrayList<NavigationInfo> history=new ArrayList<NavigationInfo>(); //todo bu liste ayrı bir sınıfta tutulabilir. İlgili metotlar yazılır ve daha temiz kodlama olur.
+    //private ArrayList<NavigationPointInfo> history=new ArrayList<NavigationPointInfo>(); //bu liste ayrı bir sınıfta tutulabilir. İlgili metotlar yazılır ve daha temiz kodlama olur.
+    private Navigation navigation=new Navigation();
     private int heading=-1,speed=-1;
     private Arrow arrow=new Arrow();
     private LineStyle routeLineStyle=new LineStyle();
@@ -50,7 +51,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     }
     
     public void clearNavigationHistory(){
-        history.clear();
+        navigation.clearHistory();
     }
     
     public void refreshMap(){
@@ -124,15 +125,16 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     public void updateLocation(Location loc){
         
         long timestamp=Calendar.getInstance().getTimeInMillis();
+        Point p=mapurl.getPixelOnMap(loc.getLatitude(),loc.getLongitude());
         double distance;
-        if (history.isEmpty()){
+        if (navigation.isEmpty()){
             distance=0;
         }else{
-            NavigationInfo ni=history.get(history.size()-1);
+            NavigationPointInfo ni=navigation.getLastElement();
             distance=ni.getLocation().getDistanceTo(loc);
         }
         //todo pikselleri de hesaplayıp navinfonun içine koy
-        history.add(new NavigationInfo(loc,timestamp,distance));
+        navigation.add(new NavigationPointInfo(loc,timestamp,distance,p));
         if (enforceCenter){
             mapurl.setLocation(loc.clone());
         }else{
@@ -160,74 +162,10 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         Graphics2D g2d=(Graphics2D)g;
         g2d.drawImage(img, 0, 0, null);
         //**************************draw route
-        
-        if (history.size()>1){
-            
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setColor(getRouteLineStyle().getColor());
-            if (getRouteLineStyle().getStroke()!=null){
-                g2d.setStroke(getRouteLineStyle().getStroke());
-            }
-            g2d.setComposite(getRouteLineStyle().getComposite());
-            //...
-            NavigationInfo ng1,ng2;
-            Point p1=null,p2=null;
-
-            for (int i=0;i<history.size()-1;i++){
-
-                ng1=history.get(i);
-                ng2=history.get(i+1);
-                p1=mapurl.getPixelOnMap(ng1.getLocation().getLatitude(),ng1.getLocation().getLongitude());
-                p2=mapurl.getPixelOnMap(ng2.getLocation().getLatitude(),ng2.getLocation().getLongitude());
-                g2d.drawLine((int)p1.getX(),(int)p1.getY(),(int)p2.getX(),(int)p2.getY());
-
-            }
-
-            //*****************************
-
-            //***************************draw arrow
-            g2d.setColor(getArrow().getLineStyle().getColor());
-            if (getArrow().getLineStyle().getStroke()!=null){
-                g2d.setStroke(getArrow().getLineStyle().getStroke());
-            }
-            g2d.setComposite(getArrow().getLineStyle().getComposite());
-            //...
-            int x2=(int)p2.getX(),y2=(int)p2.getY();
-
-            g2d.translate(x2, y2);
-            
-            g2d.rotate(calcArrowDegree(p1,p2)+Math.PI/2);
-
-            g2d.fill(getArrow().getShape());
-        }
-        
-    }
-    
-    
-    
-    private double calcArrowDegree(Point p1, Point p2){
-        int x1=(int)p1.getX(),y1=(int)p1.getY(),x2=(int)p2.getX(),y2=(int)p2.getY();
-        double degree;
-
-
-            if (x1==x2){
-                degree=Math.toRadians(90);
-                if (y2>y1){
-                    degree=Math.toRadians(90);
-                    //System.out.print(degree);
-                }else{
-                    degree=Math.toRadians(90)+Math.toRadians(180);
-                }
-            }else{
-                if (x2>x1){
-                    degree=Math.atan((y2-y1)/(x2-x1));
-                    System.out.print(degree);
-                }else{
-                    degree=Math.atan((y2-y1)/(x2-x1))+Math.toRadians(180);
-                }
-
-            }
-            return degree;
+        navigation.drawRoute(g2d,getRouteLineStyle());
+        //***************************draw arrow
+        navigation.drawDirectionArrow(g2d,getArrow());
+   
     }
     
     @Override
