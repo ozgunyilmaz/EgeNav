@@ -1,6 +1,7 @@
 package tr.edu.ege.cs.egenav.test;
 
 import java.awt.Point;
+import tr.edu.ege.cs.egenav.Direction;
 import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.GSMImageFormat;
 import tr.edu.ege.cs.egenav.GSMMapType;
@@ -25,5 +26,13 @@ public class GSMMapURLTest {
          System.out.println(url.getAbsoluteURLString());
          System.out.println(url.getCordinatesOnMap(new Point(10,10)));
          System.out.println(url.getPixelOnMap(38, 32));
+         System.out.println(url.getNeighborTile(Direction.NORTH, Direction.CONSTANT).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.SOUTH, Direction.CONSTANT).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.CONSTANT, Direction.WEST).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.CONSTANT, Direction.EAST).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.NORTH, Direction.WEST).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.NORTH, Direction.EAST).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.SOUTH, Direction.WEST).getAbsoluteURLString());
+         System.out.println(url.getNeighborTile(Direction.SOUTH, Direction.EAST).getAbsoluteURLString());
      }
 }

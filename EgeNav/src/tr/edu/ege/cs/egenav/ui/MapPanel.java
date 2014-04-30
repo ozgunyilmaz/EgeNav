@@ -232,7 +232,7 @@ public class MapPanel extends javax.swing.JPanel {
         if (mapurl == null) {
             return new Dimension(500,500);
         } else {
-            return new Dimension(mapurl.getMapSize().getHorizantal(), mapurl.getMapSize().getVertical());
+            return new Dimension(mapurl.getMapSize().getHorizontal(), mapurl.getMapSize().getVertical());
        }
     }
     
