@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav.test;
 
+import java.awt.Point;
 import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.GSMImageFormat;
 import tr.edu.ege.cs.egenav.GSMMapType;
@@ -17,10 +18,12 @@ public class GSMMapURLTest {
          GSMMapURL url=new GSMMapURL();
          
          url.setCenter(new GSMLocation(new GeoPoint(40,30)));
-         url.setZoom(7);
+         url.setZoom(6);
          url.setMapSize(new MapSize(500,500));
          url.setMapType(GSMMapType.HYBRID);
          url.setFormat(GSMImageFormat.PNG);
          System.out.println(url.getAbsoluteURLString());
+         System.out.println(url.getCordinatesOnMap(new Point(10,10)));
+         System.out.println(url.getPixelOnMap(38, 32));
      }
 }

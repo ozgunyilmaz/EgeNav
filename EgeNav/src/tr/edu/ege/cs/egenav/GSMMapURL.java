@@ -53,7 +53,7 @@ public class GSMMapURL extends MapURL{
     
     @Override
     public GSMLocation getLocation(){
-        return (GSMLocation)getLocation();
+        return (GSMLocation)super.getLocation();
     }
     
     public GSMLocation getCenter() {
@@ -204,11 +204,39 @@ public class GSMMapURL extends MapURL{
 
     @Override
     public Point getPixelOnMap(double lat, double lon) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        Point p=new Point(getMapSize().getVertical()/2+MercatorProjection.getDeltaByLats(this.getLocation().getLatitude(), lat, getZoom()),
+                getMapSize().getHorizantal()/2+MercatorProjection.getDeltaByLons(this.getLocation().getLongitude(), lon, getZoom()));
+        return p;
     }
 
     @Override
     public GeoPoint getCordinatesOnMap(Point p) {
+        
+        GeoPoint gp=new GeoPoint(
+                MercatorProjection.getLatByPixels(getCenter().getLatitude(),getMapSize().getVertical()/2-(int)p.getY(),getZoom()),
+                MercatorProjection.getLonByPixels(getCenter().getLongitude(),getMapSize().getHorizantal()/2-(int)p.getX(),getZoom()));
+        
+        return gp;
+    }
+
+    @Override
+    public MapURL getNorthTile() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public MapURL getEastTile() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public MapURL getSouthTile() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public MapURL getWestTile() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

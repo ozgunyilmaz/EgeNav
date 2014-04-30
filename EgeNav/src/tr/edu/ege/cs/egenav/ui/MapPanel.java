@@ -200,6 +200,8 @@ public class MapPanel extends javax.swing.JPanel {
         
     }
     
+    //todo containsGeoPoint
+    
     private double calcArrowDegree(Point p1, Point p2){
         int x1=(int)p1.getX(),y1=(int)p1.getY(),x2=(int)p2.getX(),y2=(int)p2.getY();
         double degree;
