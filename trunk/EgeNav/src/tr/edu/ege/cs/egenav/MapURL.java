@@ -117,4 +117,12 @@ public abstract class MapURL {
     public abstract Point getPixelOnMap(double lat, double lon);
     
     public abstract GeoPoint getCordinatesOnMap(Point p);
+    
+    public abstract MapURL getNorthTile();
+    
+    public abstract MapURL getEastTile();
+    
+    public abstract MapURL getSouthTile();
+    
+    public abstract MapURL getWestTile();
 }

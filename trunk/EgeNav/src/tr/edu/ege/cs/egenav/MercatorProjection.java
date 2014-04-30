@@ -22,8 +22,8 @@ public class MercatorProjection {
     }
 
     public static double LatToY(double lat) {
-        return Math.round(OFFSET - OFFSET_RADIUS * Math.log((1 + Math.sin(lat * MATHPI_180)) / (1 - Math.sin(lat * MATHPI_180))) / 2);
-        //return Math.round(OFFSET - OFFSET_RADIUS * Math.log((1 + bound(Math.sin(lat * MATHPI_180),-0.9999,0.9999)) / (1 - bound(Math.sin(lat * MATHPI_180),-0.9999,0.9999))) / 2);
+        //return Math.round(OFFSET - OFFSET_RADIUS * Math.log((1 + Math.sin(lat * MATHPI_180)) / (1 - Math.sin(lat * MATHPI_180))) / 2);
+        return Math.round(OFFSET - OFFSET_RADIUS * Math.log((1 + bound(Math.sin(lat * MATHPI_180),-0.9999,0.9999)) / (1 - bound(Math.sin(lat * MATHPI_180),-0.9999,0.9999))) / 2);
     }
 
     public static double XToLon(double x) {
@@ -34,11 +34,11 @@ public class MercatorProjection {
         return (Math.PI / 2 - 2 * Math.atan(Math.exp((Math.round(y) - OFFSET) / OFFSET_RADIUS))) * 180 / Math.PI;
     }
 
-    public static double adjustLonByPixels(double lon, int delta, int zoom) {
+    public static double getLonByPixels(double lon, int delta, int zoom) {
         return XToLon(LonToX(lon) + (delta << (21 - zoom)));
     }
 
-    public static double adjustLatByPixels(double lat, int delta, int zoom) {
+    public static double getLatByPixels(double lat, int delta, int zoom) {
         return YToLat(LatToY(lat) + (delta << (21 - zoom)));
     }
     
@@ -52,11 +52,11 @@ public class MercatorProjection {
     }
     
     public static void main(String args[]) {
-        System.out.println(adjustLatByPixels(30,500,6));
-        System.out.println(getDeltaByLats(30,28.079109647043285,6));
+        System.out.println(getLatByPixels(40,500,6));
+        System.out.println(getDeltaByLats(40,38,6));
         
-        System.out.println(adjustLonByPixels(30,250,6));
-        System.out.println(getDeltaByLons(30,32.19726584851742,6));
+        System.out.println(getLonByPixels(30,500,6));
+        System.out.println(getDeltaByLons(30,32,6));
         
         
     }
