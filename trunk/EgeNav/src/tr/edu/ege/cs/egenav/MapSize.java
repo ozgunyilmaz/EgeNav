@@ -5,19 +5,19 @@ package tr.edu.ege.cs.egenav;
  * Created on 04.Nis.2014, 14:03:02
  */
 public class MapSize {
-    private int horizantal,vertical;
+    private int horizontal,vertical;
 
     public MapSize(int horizantal, int vertical) {
-        this.horizantal = horizantal;
+        this.horizontal = horizantal;
         this.vertical = vertical;
     }
 
-    public int getHorizantal() {
-        return horizantal;
+    public int getHorizontal() {
+        return horizontal;
     }
 
     public void setHorizantal(int horizantal) {
-        this.horizantal = horizantal;
+        this.horizontal = horizantal;
     }
 
     public int getVertical() {
@@ -31,7 +31,7 @@ public class MapSize {
     @Override
     public MapSize clone(){
         
-        return new MapSize(horizantal,vertical);
+        return new MapSize(horizontal,vertical);
         
     }
 }

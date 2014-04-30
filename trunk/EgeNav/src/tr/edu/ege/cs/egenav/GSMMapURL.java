@@ -141,7 +141,7 @@ public class GSMMapURL extends MapURL{
             url=url+"zoom="+getZoom()+getSeparator();
         }
         
-        url=url+"size="+getMapSize().getHorizantal()+"x"+getMapSize().getVertical()+getSeparator()+
+        url=url+"size="+getMapSize().getHorizontal()+"x"+getMapSize().getVertical()+getSeparator()+
                 "sensor="+isSensor()+getSeparator();
         
         if (getScale()!=-1){
@@ -206,7 +206,7 @@ public class GSMMapURL extends MapURL{
     public Point getPixelOnMap(double lat, double lon) {
         
         Point p=new Point(getMapSize().getVertical()/2+MercatorProjection.getDeltaByLats(this.getLocation().getLatitude(), lat, getZoom()),
-                getMapSize().getHorizantal()/2+MercatorProjection.getDeltaByLons(this.getLocation().getLongitude(), lon, getZoom()));
+                getMapSize().getHorizontal()/2+MercatorProjection.getDeltaByLons(this.getLocation().getLongitude(), lon, getZoom()));
         return p;
     }
 
@@ -215,29 +215,31 @@ public class GSMMapURL extends MapURL{
         
         GeoPoint gp=new GeoPoint(
                 MercatorProjection.getLatByPixels(getCenter().getLatitude(),getMapSize().getVertical()/2-(int)p.getY(),getZoom()),
-                MercatorProjection.getLonByPixels(getCenter().getLongitude(),getMapSize().getHorizantal()/2-(int)p.getX(),getZoom()));
+                MercatorProjection.getLonByPixels(getCenter().getLongitude(),getMapSize().getHorizontal()/2-(int)p.getX(),getZoom()));
         
         return gp;
     }
 
     @Override
-    public MapURL getNorthTile() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public MapURL getEastTile() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public MapURL getSouthTile() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public MapURL getWestTile() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public MapURL getNeighborTile(int verticalDirection, int horizontalDirection) {
+        
+        GSMMapURL gsm=clone();
+        GeoPoint gp=gsm.getCenter().getCoordinate();
+        double lat=gp.getLatitude();
+        double lon=gp.getLongitude();
+        
+        if (verticalDirection!=Direction.CONSTANT){
+            double newLat=MercatorProjection.getLatByPixels(lat,verticalDirection*getMapSize().getVertical(),getZoom());
+            gp.setLatitude(newLat);
+        }
+        
+        if (horizontalDirection!=Direction.CONSTANT){
+            double newLon=MercatorProjection.getLonByPixels(lon,horizontalDirection*getMapSize().getHorizontal(),getZoom());
+            gp.setLongitude(newLon);
+        }
+        
+        return gsm;
+        
     }
     
 }

@@ -118,11 +118,6 @@ public abstract class MapURL {
     
     public abstract GeoPoint getCordinatesOnMap(Point p);
     
-    public abstract MapURL getNorthTile();
+    public abstract MapURL getNeighborTile(int verticalDirection, int horizontalDirection);
     
-    public abstract MapURL getEastTile();
-    
-    public abstract MapURL getSouthTile();
-    
-    public abstract MapURL getWestTile();
 }
