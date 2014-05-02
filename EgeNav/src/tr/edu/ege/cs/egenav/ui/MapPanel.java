@@ -10,16 +10,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
+import tr.edu.ege.cs.egenav.Direction;
 import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
+import tr.edu.ege.cs.egenav.MercatorProjection;
 
 /**
  *
@@ -30,7 +30,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private MapURL mapurl=null;
     private BufferedImage img;
     private InputStream in;
-    private double x1,y1,x2,y2;
+    private int x1,y1,x2,y2;
     private boolean enforceCenter=false;
     //private ArrayList<NavigationPointInfo> history=new ArrayList<NavigationPointInfo>(); //bu liste ayrı bir sınıfta tutulabilir. İlgili metotlar yazılır ve daha temiz kodlama olur.
     private Navigation navigation=new Navigation();
@@ -56,6 +56,8 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     
     public void refreshMap(){
         img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        //cache kullanılacaksa cachede mapurldeki harita indirilmeden oluşturulabilir mi diye kontrol et
+        //Eğer oluşturulan harita null değilse yeniden indirme
         repaint();
     }
 
@@ -133,12 +135,35 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             NavigationPointInfo ni=navigation.getLastElement();
             distance=ni.getLocation().getDistanceTo(loc);
         }
-        //todo pikselleri de hesaplayıp navinfonun içine koy
+        
         navigation.add(new NavigationPointInfo(loc,timestamp,distance,p));
+        
         if (enforceCenter){
+            
             mapurl.setLocation(loc.clone());
+            navigation.refreshPixelCoordinates(mapurl);
+            refreshMap();
         }else{
-            //todo harita dışına çıkılmışsa harita güncellenmeli
+            //harita dışına çıkılmışsa harita güncellenmeli, çıkılmamışsa güncellenmemeli
+            int hor=Direction.CONSTANT,ver=Direction.CONSTANT;
+            if (p.x<0){
+                hor=Direction.WEST;
+            }else if (p.x>getMapUrl().getMapSize().getHorizontal()){
+                hor=Direction.EAST;
+            }
+            if (p.y<0){
+                ver=Direction.NORTH;
+            }else if (p.y>getMapUrl().getMapSize().getVertical()){
+                ver=Direction.SOUTH;
+            }
+            
+            if (hor!=Direction.CONSTANT || ver!=Direction.CONSTANT){
+                MapURL m=mapurl.getNeighborTile(ver, hor);
+                setMapUrl(m);
+                navigation.refreshPixelCoordinates(m);
+                refreshMap();
+            }
+            
         }
         
     }
@@ -207,12 +232,16 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        
+    public void mousePressed(MouseEvent event) {
+        x1 = event.getX();
+        y1 = event.getY();
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent event) {
+        x2 = event.getX();
+	y2 = event.getY();
+        dragMap(x1,y1,x2,y2);
         
     }
 
@@ -223,6 +252,22 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
+        
+    }
+    
+    public void dragMap(int x1,int y1,int x2,int y2){//abstract olmalı
+        
+        if (y1!=y2){
+            double newLon=MercatorProjection.getLonByPixels(getMapUrl().getLocation().getLongitude(),y1-y2,getMapZoom());
+            getMapUrl().getLocation().setLongitude(newLon);
+        }
+        
+        if (x1!=x2){
+            double newLat=MercatorProjection.getLonByPixels(getMapUrl().getLocation().getLatitude(),x1-x2,getMapZoom());
+            getMapUrl().getLocation().setLatitude(newLat);
+        }
+        
+        refreshMap();
         
     }
 }
