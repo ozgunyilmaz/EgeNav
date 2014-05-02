@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
+import tr.edu.ege.cs.egenav.MapURL;
 
 /**
  * @author Özgün Yılmaz
@@ -105,5 +106,15 @@ public class Navigation {
 
             }
             return degree;
+    }
+    
+    public void refreshPixelCoordinates(MapURL m){
+        
+        for (int i=0;i<history.size();i++){
+            NavigationPointInfo np=history.get(i);
+            Point p=m.getPixelOnMap(np.getLocation().getLatitude(),np.getLocation().getLongitude());
+            np.setPoint(p);
+        }
+        
     }
 }

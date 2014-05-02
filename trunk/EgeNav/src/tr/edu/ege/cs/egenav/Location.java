@@ -1,7 +1,5 @@
 package tr.edu.ege.cs.egenav;
 
-import java.awt.Point;
-
 /**
  * @author Özgün Yılmaz
  * Created on 21.Nis.2014, 14:14:03
@@ -33,5 +31,7 @@ public abstract class Location {
     public abstract double getDistanceTo(Location location);
     public abstract double getLatitude();
     public abstract double getLongitude();
+    public abstract void setLatitude(double lat);
+    public abstract void setLongitude(double lon);
     
 }

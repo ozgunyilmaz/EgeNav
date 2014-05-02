@@ -87,5 +87,14 @@ public class GSMLocation extends Location{
         return getCoordinate().getLongitude();
     }
 
+    @Override
+    public void setLatitude(double lat) {
+        getCoordinate().setLatitude(lat);
+    }
+
+    @Override
+    public void setLongitude(double lon) {
+        getCoordinate().setLongitude(lon);
+    }
     
 }
