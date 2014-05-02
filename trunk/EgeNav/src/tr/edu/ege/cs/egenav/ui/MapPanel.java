@@ -46,6 +46,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     }
     
     public MapPanel(MapURL mapurl){
+        this();
         this.mapurl=mapurl;
         img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
     }
