@@ -29,7 +29,6 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
 
     private MapURL mapurl=null;
     private BufferedImage img;
-    private InputStream in;
     private int x1,y1,x2,y2;
     private boolean enforceCenter=false;
     //private ArrayList<NavigationPointInfo> history=new ArrayList<NavigationPointInfo>(); //bu liste ayrı bir sınıfta tutulabilir. İlgili metotlar yazılır ve daha temiz kodlama olur.
@@ -70,7 +69,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         this.enforceCenter = enforceCenter;
     }
 
-    public int getBearing() {
+    public int getHeading() {
         return heading;
     }
 
