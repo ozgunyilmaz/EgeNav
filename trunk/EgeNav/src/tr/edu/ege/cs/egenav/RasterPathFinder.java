@@ -1,6 +1,5 @@
 package tr.edu.ege.cs.egenav;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -23,8 +22,6 @@ public class RasterPathFinder {
             return null;
         }
         
-        BufferedImage img2=deepCopy(img);
-        
 //System.out.println(renk);
         ArrayList<Path> paths = new ArrayList<Path>();
         paths.add(new Path(init));
@@ -40,36 +37,36 @@ public class RasterPathFinder {
             if ((x2 == x) && (y2 == y)) {
             //Eğer bulunursa gidiş yolu p vektöründedir.
 
-                ArrayList<Point> p = temp.getPoints();
+                //ArrayList<Point> p = temp.getPoints();
                 //temp.normalize(img2);
-                temp.drawPath(img2, Color.RED);
+                //temp.drawPath(img2, Color.RED);
 
-                break;
+                return temp;
 
             }else{
 
                 if (x2 > 0 && img.getRGB(x2 - 1, y2) == renk) {
-                    img.setRGB(x2 - 1, y2, Color.BLACK.getRGB());
+                    img.setRGB(x2 - 1, y2, mcm.getABorderColor().getRGB());
                     Path p = temp.clone();
                     p.add(new Point(x2 - 1, y2));
                     paths.add(p);
                 }
                 if (y2 > 0 && img.getRGB(x2, y2 - 1) == renk) {
-                    img.setRGB(x2, y2 - 1, Color.BLACK.getRGB());
+                    img.setRGB(x2, y2 - 1, mcm.getABorderColor().getRGB());
                     Path p = temp.clone();
                     p.add(new Point(x2, y2 - 1));
                     paths.add(p);
                 }
 
                 if (x2 < img.getWidth() - 1 && img.getRGB(x2 + 1, y2) == renk) {
-                    img.setRGB(x2 + 1, y2, Color.BLACK.getRGB());
+                    img.setRGB(x2 + 1, y2, mcm.getABorderColor().getRGB());
                     Path p = temp.clone();
                     p.add(new Point(x2 + 1, y2));
                     paths.add(p);
                 }
 
                 if (y2 < img.getHeight() - 1 && img.getRGB(x2, y2 + 1) == renk) {
-                    img.setRGB(x2, y2 + 1, Color.BLACK.getRGB());
+                    img.setRGB(x2, y2 + 1, mcm.getABorderColor().getRGB());
                     Path p = temp.clone();
                     p.add(new Point(x2, y2 + 1));
                     paths.add(p);

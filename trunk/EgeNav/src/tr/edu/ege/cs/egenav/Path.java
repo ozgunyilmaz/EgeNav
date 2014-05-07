@@ -66,5 +66,13 @@ public class Path {
         }
     }
     
+    public void print(){
+            
+        for(int i=0;i<points.size();i++){
+            System.out.println(points.get(i));
+        }
+            
+    }
+    
     
 }
