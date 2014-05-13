@@ -8,21 +8,34 @@ import java.util.ArrayList;
  */
 public class GSMDirectionURL extends DirectionURL{
     
-    private static final String DRIVING="driving";
-    private static final String WALKING="walking";
-    private static final String BICYCLING ="bicycling";
-    private static final String TRANSIT="transit";
+    private static final String MODE_DRIVING="driving";
+    private static final String MODE_WALKING_MODE="walking";
+    private static final String MODE_BICYCLING_MODE ="bicycling";
+    private static final String MODE_TRANSIT_MODE="transit";
     
-    private boolean sensor=false;
+    private static final String AVOID_TOLLS="tolls";
+    private static final String AVOID_HIGHWAYS="highways";
+    private static final String AVOID_FERRIES="ferries";
     
-    private String apiKey,signature,language,region;
+    private static final String UNIT_METRIC="metric";
+    private static final String UNIT_IMPERIAL="imperial";
+    
+    private boolean sensor=false,alternatives=false;
+    
+    private String apiKey,signature,language,region,avoid,units ;
+    
+    private long departureTime, arrival_time;
+    
+    private GSMWaypoint waypoints;
     
     public GSMDirectionURL(Location org, Location dest) {
         super(org,dest);
+        setTravelMode(GSMDirectionURL.MODE_DRIVING);
     }
 
     public GSMDirectionURL(Location org, Location dest, String travelMode) {
         super(org,dest,travelMode);
+        setTravelMode(GSMDirectionURL.MODE_DRIVING);
     }
     
     public  String getEncodedDirectionPoints(){
@@ -38,4 +51,6 @@ public class GSMDirectionURL extends DirectionURL{
     public Object getDirectionObject() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    
 }

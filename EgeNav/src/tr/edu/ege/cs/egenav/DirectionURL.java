@@ -51,6 +51,14 @@ public abstract class DirectionURL {
     public void setSecure(boolean secure) {
         this.secure = secure;
     }
+
+    public String getTravelMode() {
+        return tmode;
+    }
+
+    public void setTravelMode(String mode) {
+        this.tmode = mode;
+    }
     
     
     
