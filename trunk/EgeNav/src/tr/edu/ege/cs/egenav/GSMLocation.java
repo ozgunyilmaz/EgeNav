@@ -1,6 +1,5 @@
 package tr.edu.ege.cs.egenav;
 
-import java.awt.Point;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
@@ -18,7 +17,7 @@ public class GSMLocation extends Location{
     public GSMLocation(GeoPoint point){
         this.point=point;
     }
-    
+ 
     public GSMLocation(String address){
         this.address=address;
     }
@@ -39,7 +38,7 @@ public class GSMLocation extends Location{
         return point==null;
     }
     
-    private String encodeAddress(){
+    private String encodedAddress(){
         try {
             return URLEncoder.encode(address, "ISO-8859-1");
         } catch (UnsupportedEncodingException ex) {
@@ -51,7 +50,7 @@ public class GSMLocation extends Location{
     @Override
     public String toString(){
         if (isAddress()){
-            return encodeAddress();
+            return encodedAddress();
         }else{
             return point.toString();
         }
