@@ -24,7 +24,7 @@ public class GSMDirectionURL extends DirectionURL{
     
     private String apiKey,signature,language,region,avoid,units,output;
     
-    private long departureTime, arrivalTime;
+    private long departureTime=-1, arrivalTime=-1;
     
     private GSMWaypoint waypoints;
     
@@ -65,6 +65,26 @@ public class GSMDirectionURL extends DirectionURL{
                 
         if (getRegion()!=null && !getRegion().isEmpty()){
             url=url+"region="+getRegion()+getSeparator();
+        }
+        
+        if (getUnits()!=null && !getUnits().isEmpty()){
+            url=url+"units="+getUnits()+getSeparator();
+        }
+        
+        if (getAvoid()!=null && !getAvoid().isEmpty()){
+            url=url+"avoid="+getAvoid()+getSeparator();
+        }
+        
+        if (getTravelMode()!=null && !getTravelMode().isEmpty()){
+            url=url+"mode="+getTravelMode()+getSeparator();
+        }
+        
+        if (getDepartureTime()>0){
+            url=url+"departure_time="+getDepartureTime()+getSeparator();
+        }
+        
+        if (getArrivalTime()>0){
+            url=url+"arrival_time="+getArrivalTime()+getSeparator();
         }
         
         if (getWaypoints()!=null){

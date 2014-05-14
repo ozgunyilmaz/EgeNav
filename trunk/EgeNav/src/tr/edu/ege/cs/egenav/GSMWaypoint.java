@@ -11,6 +11,7 @@ public class GSMWaypoint extends Parameter{
     
     
     private ArrayList<GSMLocation> waypoints;
+    private boolean optimize=false;
 
     public GSMWaypoint() {
         
@@ -45,6 +46,9 @@ public class GSMWaypoint extends Parameter{
         }
         
         String w="waypoints=";
+        if (optimize){
+            w=w+"optimize:true|";
+        }
         for (int i=0;i<waypoints.size();i++){
             w=w+waypoints.get(i).toString()+"|";
         }
@@ -57,6 +61,14 @@ public class GSMWaypoint extends Parameter{
     @Override
     public String toString() {
         return getWaypointString();
+    }
+
+    public boolean isOptimize() {
+        return optimize;
+    }
+
+    public void setOptimize(boolean optimize) {
+        this.optimize = optimize;
     }
     
 }
