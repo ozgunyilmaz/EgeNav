@@ -27,7 +27,8 @@ public abstract class Location {
 
     @Override
     public abstract Location clone();
-    
+    @Override
+    public abstract String toString();
     public abstract double getDistanceTo(Location location);
     public abstract double getLatitude();
     public abstract double getLongitude();

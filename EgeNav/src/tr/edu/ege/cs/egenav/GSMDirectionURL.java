@@ -22,20 +22,81 @@ public class GSMDirectionURL extends DirectionURL{
     
     private boolean sensor=false,alternatives=false;
     
-    private String apiKey,signature,language,region,avoid,units ;
+    private String apiKey,signature,language,region,avoid,units,output;
     
-    private long departureTime, arrival_time;
+    private long departureTime, arrivalTime;
     
     private GSMWaypoint waypoints;
     
-    public GSMDirectionURL(Location org, Location dest) {
+    public GSMDirectionURL(GSMLocation org, GSMLocation dest) {
         super(org,dest);
         setTravelMode(GSMDirectionURL.MODE_DRIVING);
+        output="json";
+        setSeparator("&");
+        setMidURL("http://maps.googleapis.com/maps/api/directions/");
     }
 
-    public GSMDirectionURL(Location org, Location dest, String travelMode) {
+    public GSMDirectionURL(GSMLocation org, GSMLocation dest, String travelMode) {
         super(org,dest,travelMode);
-        setTravelMode(GSMDirectionURL.MODE_DRIVING);
+        output="json";
+        setSeparator("&");
+        setMidURL("http://maps.googleapis.com/maps/api/directions/");
+        
+    }
+    
+    @Override
+    public String getAbsoluteURLString() {
+        String url;
+        
+        if (isSecure()){
+            url="https://";
+        }else{
+            url="http://";
+        }
+        
+        url=url+getMidURL()+getOutput()+"?";
+        
+        url=url+"origin="+getOrigin().toString()+getSeparator()+"destination="+getDestination().toString()+getSeparator()+
+                "sensor="+isSensor()+getSeparator();
+        
+        if (getLanguage()!=null && !getLanguage().isEmpty()){
+            url=url+"language="+getLanguage()+getSeparator();
+        }
+                
+        if (getRegion()!=null && !getRegion().isEmpty()){
+            url=url+"region="+getRegion()+getSeparator();
+        }
+        
+        if (getWaypoints()!=null){
+            url=url+getWaypoints().getWaypointString()+getSeparator();
+        }
+        
+        for (int i=0;i<parameters.size();i++){
+            url=url+parameters.get(i).toString()+getSeparator();
+        }
+        
+        if (getApiKey()!=null && !getApiKey().isEmpty()){
+            
+            url=url+"key="+getApiKey()+getSeparator();
+        }
+        
+        if (getClientID()!=null && !getClientID().isEmpty()){
+            
+            url=url+"client="+getClientID()+getSeparator();
+        }
+        
+        if (getSignature()!=null && !getSignature().isEmpty()){
+            
+            url=url+"signature="+getSignature()+getSeparator();
+        }
+        
+        while (url.endsWith(getSeparator())){
+            url=url.substring(0, url.lastIndexOf(getSeparator()));
+        }
+        
+        
+        
+        return url;
     }
     
     public  String getEncodedDirectionPoints(){
@@ -51,6 +112,103 @@ public class GSMDirectionURL extends DirectionURL{
     public Object getDirectionObject() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public boolean isAlternatives() {
+        return alternatives;
+    }
+
+    public void setAlternatives(boolean alternatives) {
+        this.alternatives = alternatives;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public long getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrival_time(long arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getAvoid() {
+        return avoid;
+    }
+
+    public void setAvoid(String avoid) {
+        this.avoid = avoid;
+    }
+
+    public long getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(long departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public boolean isSensor() {
+        return sensor;
+    }
+
+    public void setSensor(boolean sensor) {
+        this.sensor = sensor;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getUnits() {
+        return units;
+    }
+
+    public void setUnits(String units) {
+        this.units = units;
+    }
+
+    public GSMWaypoint getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(GSMWaypoint waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
+    }
     
     
+
 }

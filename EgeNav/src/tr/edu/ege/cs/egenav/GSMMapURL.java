@@ -14,6 +14,7 @@ public class GSMMapURL extends MapURL{
     private boolean sensor=false;
     private String apiKey,signature,language,region,mapType,format;
     private int scale=-1;
+    private GSMPath path;
     
     public static final int MAX_ZOOM=21;
     
@@ -166,15 +167,32 @@ public class GSMMapURL extends MapURL{
             url=url+"region="+getRegion()+getSeparator();
         }
         
+        if (getPath()!=null){
+            url=url+getPath().toString()+getSeparator();
+        }
+        
         for (int i=0;i<parameters.size();i++){
             url=url+parameters.get(i).toString()+getSeparator();
+        }
+        
+        if (getApiKey()!=null && !getApiKey().isEmpty()){
+            
+            url=url+"key="+getApiKey()+getSeparator();
+        }
+        
+        if (getClientID()!=null && !getClientID().isEmpty()){
+            
+            url=url+"client="+getClientID()+getSeparator();
+        }
+        
+        if (getSignature()!=null && !getSignature().isEmpty()){
+            
+            url=url+"signature="+getSignature()+getSeparator();
         }
         
         while (url.endsWith(getSeparator())){
             url=url.substring(0, url.lastIndexOf(getSeparator()));
         }
-        
-        
         
         return url;
     }
@@ -240,6 +258,14 @@ public class GSMMapURL extends MapURL{
         
         return gsm;
         
+    }
+
+    public GSMPath getPath() {
+        return path;
+    }
+
+    public void setPath(GSMPath path) {
+        this.path = path;
     }
     
 }
