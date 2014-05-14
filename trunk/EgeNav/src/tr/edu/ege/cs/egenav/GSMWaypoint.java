@@ -6,7 +6,9 @@ import java.util.ArrayList;
  * @author Özgün Yılmaz
  * Created on 13.May.2014, 11:34:46
  */
-public class GSMWaypoint {
+public class GSMWaypoint extends Parameter{
+    //todo rename to GSMWaypoint list
+    
     
     private ArrayList<GSMLocation> waypoints;
 
@@ -36,10 +38,25 @@ public class GSMWaypoint {
         return waypoints.remove(i);
     }
     
-//    public String getWaypointString(){
-//        
-//        
-//        
-//    }
+    public String getWaypointString(){
+        
+        if (waypoints.isEmpty()){
+            return "";
+        }
+        
+        String w="waypoints=";
+        for (int i=0;i<waypoints.size();i++){
+            w=w+waypoints.get(i).toString()+"|";
+        }
+        while (w.endsWith("|")){
+            w=w.substring(0, w.lastIndexOf("|"));
+        }
+        return w;
+    }
+
+    @Override
+    public String toString() {
+        return getWaypointString();
+    }
     
 }

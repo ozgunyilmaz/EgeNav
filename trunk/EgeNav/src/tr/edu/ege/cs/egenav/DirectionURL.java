@@ -1,6 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author Özgün Yılmaz
@@ -10,11 +11,12 @@ public abstract class DirectionURL {
     
     private Location org,dest;
     private String tmode;
+    private String midURL,separator,clientID;
     private boolean secure=false;
-    
+    protected ArrayList<Parameter> parameters=new ArrayList<Parameter>();
     
     public abstract ArrayList<Location> getDirectionPoints();
-    
+    public abstract String getAbsoluteURLString();
     public abstract Object getDirectionObject();
 
     public DirectionURL(Location org, Location dest) {
@@ -59,8 +61,46 @@ public abstract class DirectionURL {
     public void setTravelMode(String mode) {
         this.tmode = mode;
     }
+
+    public String getMidURL() {
+        return midURL;
+    }
+
+    public void setMidURL(String midURL) {
+        this.midURL = midURL;
+    }
+
+    public String getSeparator() {
+        return separator;
+    }
+
+    public void setSeparator(String separator) {
+        this.separator = separator;
+    }
     
+    public void addParameter(Parameter p){
+        parameters.add(p);
+    }
     
+    public boolean removeParameter(Parameter p){
+        return parameters.remove(p);
+    }
+    
+    public Object removeParameter(int i){
+        return parameters.remove(i);
+    }
+    
+    public void appendParameters(Collection c){
+        parameters.addAll(c);
+    }
+
+    public String getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
     
     public static ArrayList<GeoPoint> decodePolyline(String encoded) {
 
