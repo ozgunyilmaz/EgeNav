@@ -1,17 +1,65 @@
 package tr.edu.ege.cs.egenav;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Özgün Yılmaz
  * Created on 12.May.2014, 16:04:31
  */
 public class GSMRoute {
     
-    private String summary;
-//    private Leg[] legs;
-//    waypoint_order;
-//    overview_polyline 
-    private String bounds ;
-    private String copyrights;
-//    private Warning warnings[];
+    private String summary,copyrights;
+    private String[] warnings;
+    @SerializedName("waypoint_order")
+    private int[] waypointOrder;
+    private GSMBounds bounds;
+    //private GSMLeg[] legs;
+    @SerializedName("overview_polyline")
+    private OverviewPolyline overviewPolyline;
+
+    public String getCopyrights() {
+        return copyrights;
+    }
+
+    public void setCopyrights(String copyrights) {
+        this.copyrights = copyrights;
+    }
+
+    public OverviewPolyline getOverviewPolyline() {
+        return overviewPolyline;
+    }
+    
+    public String getOverviewPolylineString() {
+        return overviewPolyline.getOverviewPolyline();
+    }
+
+    public void setOverviewPolyline(OverviewPolyline overviewPolyline) {
+        this.overviewPolyline = overviewPolyline;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String[] getWarnings() {
+        return warnings;
+    }
+
+    public void setWarnings(String[] warnings) {
+        this.warnings = warnings;
+    }
+
+    public int[] getWaypointOrder() {
+        return waypointOrder;
+    }
+
+    public void setWaypointOrder(int[] waypointOrder) {
+        this.waypointOrder = waypointOrder;
+    }
+    
     
 }
