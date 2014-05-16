@@ -16,7 +16,7 @@ import tr.edu.ege.cs.egenav.OverviewPolylineDeserializer;
  * @author Özgün Yılmaz
  * Created on 14.May.2014, 16:10:01
  */
-public class GSMDirectionURLTest {
+public class GSMDirectionURLTest2 {
     
     public static void main(String args[]) throws MalformedURLException, IOException{
         
