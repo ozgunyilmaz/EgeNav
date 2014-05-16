@@ -1,6 +1,11 @@
 package tr.edu.ege.cs.egenav;
 
+import com.google.gson.GsonBuilder;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import org.apache.commons.io.IOUtils;
 
 /**
  * @author Özgün Yılmaz
@@ -119,18 +124,16 @@ public class GSMDirectionURL extends DirectionURL{
         return url;
     }
     
-    public  String getEncodedDirectionPoints(){
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     @Override
-    public ArrayList<Location> getDirectionPoints() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Object getDirectionObject() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public GSMDirectionResponse getDirectionObject() throws MalformedURLException, IOException{
+        String url = getAbsoluteURLString();
+        // Get the contents of json as a string using commons IO IOUTils class.
+        
+        GsonBuilder gson = new GsonBuilder();
+        gson.registerTypeAdapter(OverviewPolyline.class, new OverviewPolylineDeserializer());
+        //gson.registerTypeAdapter(GSMBounds.class, new BoundsDeserializer());
+        GSMDirectionResponse res = gson.create().fromJson(IOUtils.toString(new URL(url)), GSMDirectionResponse.class);
+        return res;
     }
 
     public boolean isAlternatives() {

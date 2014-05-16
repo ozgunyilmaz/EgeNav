@@ -15,9 +15,9 @@ public abstract class DirectionURL {
     private boolean secure=false;
     protected ArrayList<Parameter> parameters=new ArrayList<Parameter>();
     
-    public abstract ArrayList<Location> getDirectionPoints();
+    
     public abstract String getAbsoluteURLString();
-    public abstract Object getDirectionObject();
+    public abstract Object getDirectionObject() throws Exception;
 
     public DirectionURL(Location org, Location dest) {
         this.org = org;

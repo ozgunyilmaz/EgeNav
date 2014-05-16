@@ -13,7 +13,7 @@ public class GSMRoute {
     @SerializedName("waypoint_order")
     private int[] waypointOrder;
     private GSMBounds bounds;
-    //private GSMLeg[] legs;
+    private GSMLeg[] legs;
     @SerializedName("overview_polyline")
     private OverviewPolyline overviewPolyline;
 
@@ -59,6 +59,22 @@ public class GSMRoute {
 
     public void setWaypointOrder(int[] waypointOrder) {
         this.waypointOrder = waypointOrder;
+    }
+
+    public GSMBounds getBounds() {
+        return bounds;
+    }
+
+    public void setBounds(GSMBounds bounds) {
+        this.bounds = bounds;
+    }
+
+    public GSMLeg[] getLegs() {
+        return legs;
+    }
+
+    public void setLegs(GSMLeg[] legs) {
+        this.legs = legs;
     }
     
     
