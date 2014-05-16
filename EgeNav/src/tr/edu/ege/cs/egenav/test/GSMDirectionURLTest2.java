@@ -1,13 +1,10 @@
 package tr.edu.ege.cs.egenav.test;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.io.IOUtils;
-import tr.edu.ege.cs.egenav.BoundsDeserializer;
-import tr.edu.ege.cs.egenav.GSMBounds;
 import tr.edu.ege.cs.egenav.GSMDirectionResponse;
 import tr.edu.ege.cs.egenav.OverviewPolyline;
 import tr.edu.ege.cs.egenav.OverviewPolylineDeserializer;
@@ -25,7 +22,7 @@ public class GSMDirectionURLTest2 {
         
         GsonBuilder gson = new GsonBuilder();
         gson.registerTypeAdapter(OverviewPolyline.class, new OverviewPolylineDeserializer());
-        gson.registerTypeAdapter(GSMBounds.class, new BoundsDeserializer());
+        //gson.registerTypeAdapter(GSMBounds.class, new BoundsDeserializer());
         GSMDirectionResponse res = gson.create().fromJson(IOUtils.toString(new URL(url)), GSMDirectionResponse.class);
         System.out.println(res);
         System.out.println(res.getStatus());

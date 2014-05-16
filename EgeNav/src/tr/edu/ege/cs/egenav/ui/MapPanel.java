@@ -13,7 +13,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
 import java.util.Calendar;
 import tr.edu.ege.cs.egenav.Direction;
 import tr.edu.ege.cs.egenav.Location;

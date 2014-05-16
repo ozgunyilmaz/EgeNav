@@ -6,29 +6,29 @@ package tr.edu.ege.cs.egenav;
  */
 public class GSMBounds {
     
-    private double lat,lon;
+    private GSMPoint northeast;
+    private GSMPoint southwest;
 
-    public GSMBounds(double lat, double lon) {
-        this.lat = lat;
-        this.lon = lon;
+    public GSMBounds(GSMPoint northeast, GSMPoint southwest) {
+        this.northeast = northeast;
+        this.southwest = southwest;
     }
 
-    public double getLatitude() {
-        return lat;
+    public GSMPoint getNortheast() {
+        return northeast;
     }
 
-    public void setLatitude(double lat) {
-        this.lat = lat;
+    public void setNortheast(GSMPoint northeast) {
+        this.northeast = northeast;
     }
 
-    public double getLongitude() {
-        return lon;
+    public GSMPoint getSouthwest() {
+        return southwest;
     }
 
-    public void setLongitude(double lon) {
-        this.lon = lon;
+    public void setSouthwest(GSMPoint southwest) {
+        this.southwest = southwest;
     }
-    
-    
+
     
 }
