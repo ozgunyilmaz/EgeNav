@@ -15,7 +15,6 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.Calendar;
 import tr.edu.ege.cs.egenav.Direction;
-import tr.edu.ege.cs.egenav.DirectionURL;
 import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
@@ -37,7 +36,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private Arrow arrow=new Arrow();
     private LineStyle routeLineStyle=new LineStyle();
     
-    private DirectionURL durl;
+    private Direction direction;
     //todo bulunan yerden bir yere yol tarifi
     //konum bilgisi güncellendikçe yol bulma bilgilerin (yardımcı metin) gösterilmesi
     //yol bulmadaki kordinatların haritada işaretlenmesi
