@@ -10,7 +10,7 @@ import tr.edu.ege.cs.egenav.ui.LineStyle;
  * @author Özgün Yılmaz
  * Created on 15.May.2014, 14:58:19
  */
-public class GSMDirectionResponse extends Direction{
+public class GSMDirectionResponse extends Direction2{
     
     private double treshold;
     private String status;
