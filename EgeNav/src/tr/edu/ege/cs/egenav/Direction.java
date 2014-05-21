@@ -7,7 +7,7 @@ import tr.edu.ege.cs.egenav.ui.LineStyle;
  * @author Özgün Yılmaz
  * Created on 30.Nis.2014, 12:00:40
  */
-public abstract class Direction2 {
+public abstract class Direction {
     
     
     public abstract String getInstructions(GeoPoint g);
