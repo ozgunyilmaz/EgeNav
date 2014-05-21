@@ -35,7 +35,7 @@ public class GSMDirectionResponse extends Direction{
     
     @Override
     public String getInstructions(GeoPoint g) {
-        //todo bir önceki bulunan yer akılda tutulup oradan başlanabilir.
+        //todo_later bir önceki bulunan yer akılda tutulup oradan başlanabilir.
         GSMRoute r=routes[0];
 
         double dis=1000000;

@@ -12,6 +12,8 @@ import org.apache.commons.io.IOUtils;
  */
 public class GSMDirectionURL extends DirectionURL{
     
+    
+    
     private static final String MODE_DRIVING="driving";
     private static final String MODE_WALKING_MODE="walking";
     private static final String MODE_BICYCLING_MODE ="bicycling";
