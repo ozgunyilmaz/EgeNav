@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import tr.edu.ege.cs.egenav.ui.LineStyle;
-import tr.edu.ege.cs.egenav.ui.NavigationPointInfo;
 
 /**
  * @author Özgün Yılmaz
