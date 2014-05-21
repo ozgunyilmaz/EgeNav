@@ -126,7 +126,7 @@ public class GSMDirectionURL extends DirectionURL{
     }
     
     @Override
-    public GSMDirectionResponse getDirectionObject() throws MalformedURLException, IOException{
+    public GSMDirectionResponse getDirections() throws MalformedURLException, IOException{
         String url = getAbsoluteURLString();
         // Get the contents of json as a string using commons IO IOUTils class.
         
