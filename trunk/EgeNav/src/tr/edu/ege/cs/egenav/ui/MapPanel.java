@@ -15,6 +15,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.Calendar;
 import tr.edu.ege.cs.egenav.Direction;
+import tr.edu.ege.cs.egenav.Directions;
 import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
@@ -149,19 +150,19 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             refreshMap();
         }else{
             //harita dışına çıkılmışsa harita güncellenmeli, çıkılmamışsa güncellenmemeli
-            int hor=Direction.CONSTANT,ver=Direction.CONSTANT;
+            int hor=Directions.CONSTANT,ver=Directions.CONSTANT;
             if (p.x<0){
-                hor=Direction.WEST;
+                hor=Directions.WEST;
             }else if (p.x>getMapUrl().getMapSize().getHorizontal()){
-                hor=Direction.EAST;
+                hor=Directions.EAST;
             }
             if (p.y<0){
-                ver=Direction.NORTH;
+                ver=Directions.NORTH;
             }else if (p.y>getMapUrl().getMapSize().getVertical()){
-                ver=Direction.SOUTH;
+                ver=Directions.SOUTH;
             }
             
-            if (hor!=Direction.CONSTANT || ver!=Direction.CONSTANT){
+            if (hor!=Directions.CONSTANT || ver!=Directions.CONSTANT){
                 MapURL m=mapurl.getNeighborTile(ver, hor);
                 setMapUrl(m);
                 navigation.refreshPixelCoordinates(m);

@@ -246,12 +246,12 @@ public class GSMMapURL extends MapURL{
         double lat=gp.getLatitude();
         double lon=gp.getLongitude();
         
-        if (verticalDirection!=Direction.CONSTANT){
+        if (verticalDirection!=Directions.CONSTANT){
             double newLat=MercatorProjection.getLatByPixels(lat,verticalDirection*getMapSize().getVertical(),getZoom());
             gp.setLatitude(newLat);
         }
         
-        if (horizontalDirection!=Direction.CONSTANT){
+        if (horizontalDirection!=Directions.CONSTANT){
             double newLon=MercatorProjection.getLonByPixels(lon,horizontalDirection*getMapSize().getHorizontal(),getZoom());
             gp.setLongitude(newLon);
         }
