@@ -129,7 +129,7 @@ public class GSMDirectionURL extends DirectionURL{
         // Get the contents of json as a string using commons IO IOUTils class.
         
         GsonBuilder gson = new GsonBuilder();
-        gson.registerTypeAdapter(OverviewPolyline.class, new OverviewPolylineDeserializer());
+        gson.registerTypeAdapter(Polyline.class, new PolylineDeserializer());
         //gson.registerTypeAdapter(GSMBounds.class, new BoundsDeserializer());
         GSMDirectionResponse res = gson.create().fromJson(IOUtils.toString(new URL(url)), GSMDirectionResponse.class);
         return res;

@@ -15,7 +15,7 @@ public class GSMRoute {
     private GSMBounds bounds;
     private GSMLeg[] legs;
     @SerializedName("overview_polyline")
-    private OverviewPolyline overviewPolyline;
+    private Polyline overviewPolyline;
 
     public String getCopyrights() {
         return copyrights;
@@ -25,7 +25,7 @@ public class GSMRoute {
         this.copyrights = copyrights;
     }
 
-    public OverviewPolyline getOverviewPolyline() {
+    public Polyline getOverviewPolyline() {
         return overviewPolyline;
     }
     
@@ -33,7 +33,7 @@ public class GSMRoute {
         return overviewPolyline.getOverviewPolyline();
     }
 
-    public void setOverviewPolyline(OverviewPolyline overviewPolyline) {
+    public void setOverviewPolyline(Polyline overviewPolyline) {
         this.overviewPolyline = overviewPolyline;
     }
 
