@@ -11,13 +11,13 @@ import java.lang.reflect.Type;
  * @author Özgün Yılmaz
  * Created on 15.May.2014, 16:17:58
  */
-public class OverviewPolylineDeserializer implements JsonDeserializer<OverviewPolyline> {
+public class PolylineDeserializer implements JsonDeserializer<Polyline> {
 
     @Override
-    public OverviewPolyline deserialize(JsonElement je, Type type, JsonDeserializationContext jdc) throws JsonParseException {
+    public Polyline deserialize(JsonElement je, Type type, JsonDeserializationContext jdc) throws JsonParseException {
         JsonObject jo=je.getAsJsonObject();
         JsonElement je2=jo.get("points");
-        return new OverviewPolyline(je2.getAsString());
+        return new Polyline(je2.getAsString());
     }
     
 }

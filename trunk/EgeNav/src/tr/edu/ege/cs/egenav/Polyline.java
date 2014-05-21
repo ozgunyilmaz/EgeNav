@@ -6,11 +6,11 @@ import java.util.ArrayList;
  * @author Özgün Yılmaz
  * Created on 15.May.2014, 16:35:56
  */
-public class OverviewPolyline {
+public class Polyline {
     
     private String overviewPolyline;
 
-    public OverviewPolyline(String overviewPolyline) {
+    public Polyline(String overviewPolyline) {
         this.overviewPolyline = overviewPolyline;
     }
 

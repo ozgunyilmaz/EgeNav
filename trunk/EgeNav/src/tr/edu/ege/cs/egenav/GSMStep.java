@@ -10,7 +10,7 @@ public class GSMStep {
     
     
     private String html_instructions;
-    private OverviewPolyline polyline;
+    private Polyline polyline;
     @SerializedName("travel_mode")
     private String travelMode;
         
@@ -53,11 +53,11 @@ public class GSMStep {
         this.html_instructions = html_instructions;
     }
 
-    public OverviewPolyline getPolyline() {
+    public Polyline getPolyline() {
         return polyline;
     }
 
-    public void setPolyline(OverviewPolyline polyline) {
+    public void setPolyline(Polyline polyline) {
         this.polyline = polyline;
     }
 

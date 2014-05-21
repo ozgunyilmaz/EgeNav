@@ -6,8 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import tr.edu.ege.cs.egenav.GSMDirectionResponse;
-import tr.edu.ege.cs.egenav.OverviewPolyline;
-import tr.edu.ege.cs.egenav.OverviewPolylineDeserializer;
+import tr.edu.ege.cs.egenav.Polyline;
+import tr.edu.ege.cs.egenav.PolylineDeserializer;
 
 /**
  * @author Özgün Yılmaz
@@ -21,7 +21,7 @@ public class GSMDirectionURLTest2 {
         // Get the contents of json as a string using commons IO IOUTils class.
         
         GsonBuilder gson = new GsonBuilder();
-        gson.registerTypeAdapter(OverviewPolyline.class, new OverviewPolylineDeserializer());
+        gson.registerTypeAdapter(Polyline.class, new PolylineDeserializer());
         //gson.registerTypeAdapter(GSMBounds.class, new BoundsDeserializer());
         GSMDirectionResponse res = gson.create().fromJson(IOUtils.toString(new URL(url)), GSMDirectionResponse.class);
         System.out.println(res);
