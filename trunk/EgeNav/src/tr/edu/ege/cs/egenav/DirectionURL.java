@@ -17,7 +17,7 @@ public abstract class DirectionURL {
     
     
     public abstract String getAbsoluteURLString();
-    public abstract Object getDirectionObject() throws Exception;
+    public abstract Direction getDirections() throws Exception;
 
     public DirectionURL(Location org, Location dest) {
         this.org = org;

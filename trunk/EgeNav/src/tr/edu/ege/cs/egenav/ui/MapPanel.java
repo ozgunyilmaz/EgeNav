@@ -5,6 +5,8 @@
  */
 package tr.edu.ege.cs.egenav.ui;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.util.Calendar;
 import tr.edu.ege.cs.egenav.Direction;
 import tr.edu.ege.cs.egenav.Directions;
+import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
@@ -27,6 +30,9 @@ import tr.edu.ege.cs.egenav.MercatorProjection;
  */
 public class MapPanel extends javax.swing.JPanel implements MouseListener{
 
+    
+    //todo cache haritaların bulunduğu dizin için string ve getter setter lar
+    //Eğer bu string set edilmezse local path te çalışılır.
     private MapURL mapurl=null;
     private BufferedImage img;
     private int x1,y1,x2,y2;
@@ -35,13 +41,10 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private Navigation navigation=new Navigation();
     private int heading=-1,speed=-1;
     private Arrow arrow=new Arrow();
-    private LineStyle routeLineStyle=new LineStyle();
+    private LineStyle routeLineStyle=new LineStyle(Color.YELLOW,null,AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F));
+    private LineStyle directionLineStyle=new LineStyle();
     
     private Direction direction;
-    //todo bulunan yerden bir yere yol tarifi
-    //konum bilgisi güncellendikçe yol bulma bilgilerin (yardımcı metin) gösterilmesi
-    //yol bulmadaki kordinatların haritada işaretlenmesi
-    //travel mode, vs. değiştirilebilmeli
     
     /** Creates new form MapPanel */
     public MapPanel() {
@@ -141,12 +144,15 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             distance=ni.getLocation().getDistanceTo(loc);
         }
         
-        navigation.add(new NavigationPointInfo(loc,timestamp,distance,p));
+        //todo bilgi panelinde gösterilecek
+        //direction.getInstructions((GeoPoint)loc);
+        
         
         if (enforceCenter){
             
             mapurl.setLocation(loc.clone());
             navigation.refreshPixelCoordinates(mapurl);
+            direction.refreshPixelCoordinates(mapurl);
             refreshMap();
         }else{
             //harita dışına çıkılmışsa harita güncellenmeli, çıkılmamışsa güncellenmemeli
@@ -166,11 +172,21 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
                 MapURL m=mapurl.getNeighborTile(ver, hor);
                 setMapUrl(m);
                 navigation.refreshPixelCoordinates(m);
+                direction.refreshPixelCoordinates(mapurl);
                 refreshMap();
             }
             
         }
         
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+        repaint();
     }
     
     public final void enableDragRefresh(){
@@ -191,10 +207,15 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         super.paintComponent(g);
         Graphics2D g2d=(Graphics2D)g;
         g2d.drawImage(img, 0, 0, null);
+        //**************************if set draw direction
+        if (direction!=null){
+            direction.drawPathOnMap(g2d, directionLineStyle);
+        }
         //**************************draw route
         navigation.drawRoute(g2d,getRouteLineStyle());
         //***************************draw arrow
         navigation.drawDirectionArrow(g2d,getArrow());
+        
    
     }
     
