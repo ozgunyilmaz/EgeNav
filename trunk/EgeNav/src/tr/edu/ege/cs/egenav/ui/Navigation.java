@@ -13,18 +13,39 @@ import tr.edu.ege.cs.egenav.MapURL;
 public class Navigation {
     
     private ArrayList<NavigationPointInfo> history=new ArrayList<NavigationPointInfo>();
-    private double heading;
-    
+    private double heading,speed,averageSpeed,timeElapsed,totalDistance;
+    //todo navigation sınıfının içine al, ortalama hız, toplam süre, toplam uzaklık da bulunmalı
     public void add(NavigationPointInfo np){
         history.add(np);
+        totalDistance=totalDistance+np.getDistanceToPreviousLocation();
+        updateNavigationInfo();
+        
     }
     
-    public boolean remove(NavigationPointInfo np){
-        return history.remove(np);
-    }
+//    public boolean remove(NavigationPointInfo np){
+//        updateNavigationInfo();
+//        return history.remove(np);
+//    }
+//    
+//    public NavigationPointInfo remove(int i){
+//        updateNavigationInfo();
+//        return history.remove(i);
+//    }
     
-    public NavigationPointInfo remove(int i){
-        return history.remove(i);
+    public void updateNavigationInfo(){
+        
+        if (history.size()>1){
+            
+            heading=calcArrowDegree(history.get(history.size()-2).getPoint(),getLastElement().getPoint())+Math.PI/2;
+        
+            double deltad=getLastElement().getDistanceToPreviousLocation();
+            double deltat=(getLastElement().getTimeStamp()-history.get(history.size()-2).getTimeStamp())/(60*60*1000);
+            speed=deltad/deltat;    //  in km/hr
+            timeElapsed=getLastElement().getTimeStamp()-getFirstElement().getTimeStamp();   //in miliseconds
+            averageSpeed=totalDistance/(timeElapsed/60*60*1000);    //  in km/hr
+            
+        }
+        
     }
     
     public void clearHistory(){
@@ -37,6 +58,10 @@ public class Navigation {
     
     public NavigationPointInfo getLastElement(){
         return history.get(history.size()-1);
+    }
+    
+    public NavigationPointInfo getFirstElement(){
+        return history.get(0);
     }
 
     public void drawRoute(Graphics2D g2d, LineStyle routeLineStyle) {
@@ -74,9 +99,9 @@ public class Navigation {
 
 
             g2d.translate(getLastElement().getX(), getLastElement().getY());
-
-            heading=calcArrowDegree(history.get(history.size()-2).getPoint(),getLastElement().getPoint())+Math.PI/2;
-
+//*************
+//            heading=calcArrowDegree(history.get(history.size()-2).getPoint(),getLastElement().getPoint())+Math.PI/2;
+//**************
             g2d.rotate(heading);
 
             g2d.fill(arrow.getShape());
@@ -117,4 +142,26 @@ public class Navigation {
         }
         
     }
+
+    public double getAverageSpeed() {
+        return averageSpeed;
+    }
+
+    public double getHeading() {
+        return heading;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getTimeElapsed() {
+        return timeElapsed;
+    }
+
+    public double getTotalDistance() {
+        return totalDistance;
+    }
+    
+    
 }
