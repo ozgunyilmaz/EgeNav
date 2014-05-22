@@ -16,6 +16,6 @@ public interface NavigationInformation {
     public void setSpeed(double speed);
     public void setTotalDistance(double dist);
     public void setTimeElapsed(double timeElapsed);
-    public void setAverageSpeed(double averagSpeed);
+    public void setAverageSpeed(double averageSpeed);
     public void setInstructions(String ins);
 }
