@@ -30,19 +30,18 @@ import tr.edu.ege.cs.egenav.MercatorProjection;
  */
 public class MapPanel extends javax.swing.JPanel implements MouseListener{
 
-    
+    //cache desteklenecek mi? için boolean
     //todo cache haritaların bulunduğu dizin için string ve getter setter lar
     //Eğer bu string set edilmezse local path te çalışılır.
     private MapURL mapurl=null;
     private BufferedImage img;
     private int x1,y1,x2,y2;
     private boolean enforceCenter=false;
-    //private ArrayList<NavigationPointInfo> history=new ArrayList<NavigationPointInfo>(); //bu liste ayrı bir sınıfta tutulabilir. İlgili metotlar yazılır ve daha temiz kodlama olur.
     private Navigation navigation=new Navigation();
-    private int heading=-1,speed=-1;
+    
     private Arrow arrow=new Arrow();
-    private LineStyle routeLineStyle=new LineStyle(Color.YELLOW,null,AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F));
-    private LineStyle directionLineStyle=new LineStyle();
+    private LineStyle directionLineStyle=new LineStyle(Color.YELLOW,null,AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F));
+    private LineStyle routeLineStyle=new LineStyle();
     
     private Direction direction;
     
@@ -77,13 +76,13 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         this.enforceCenter = enforceCenter;
     }
 
-    public int getHeading() {
-        return heading;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
+//    public int getHeading() {
+//        return heading;
+//    }
+//
+//    public int getSpeed() {
+//        return speed;
+//    }
     
     public MapURL getMapUrl() {
         return mapurl;
@@ -143,6 +142,8 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             NavigationPointInfo ni=navigation.getLastElement();
             distance=ni.getLocation().getDistanceTo(loc);
         }
+        
+        navigation.add(new NavigationPointInfo(loc,timestamp,distance,p));
         
         //todo bilgi panelinde gösterilecek
         //direction.getInstructions((GeoPoint)loc);
