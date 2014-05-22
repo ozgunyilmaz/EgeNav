@@ -44,6 +44,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private LineStyle routeLineStyle=new LineStyle();
     
     private Direction direction;
+    private NavigationInformation navPanel;
     
     /** Creates new form MapPanel */
     public MapPanel() {
@@ -55,6 +56,14 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         this();
         this.mapurl=mapurl;
         img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+    }
+
+    public NavigationInformation getNavPanel() {
+        return navPanel;
+    }
+
+    public void setNavPanel(NavigationInformation navPanel) {
+        this.navPanel = navPanel;
     }
     
     public void clearNavigationHistory(){
@@ -147,6 +156,20 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         
         //todo bilgi panelinde gösterilecek
         //direction.getInstructions((GeoPoint)loc);
+        navPanel.setAverageSpeed(navigation.getAverageSpeed());
+        navPanel.setHeading(Math.toDegrees(navigation.getHeading()));
+        if (direction!=null){
+            navPanel.setInstructions(direction.getInstructions((GeoPoint)loc));
+        }else{
+            navPanel.setInstructions("");
+        }
+        navPanel.setLatitude(loc.getLatitude());
+        navPanel.setLongitude(loc.getLongitude());
+        navPanel.setSpeed(navigation.getSpeed());
+        navPanel.setTimeElapsed(navigation.getTimeElapsed());
+        navPanel.setTotalDistance(navigation.getTotalDistance());
+        
+        
         
         
         if (enforceCenter){
