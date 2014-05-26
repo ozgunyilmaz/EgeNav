@@ -4,7 +4,7 @@
  */
 
 /*
- * DefaultNavigationInfoPanelTest.java
+ * DefaultNavigationInfoPanelTest2.java
  *
  * Created on 22.May.2014, 16:22:12
  */
@@ -14,10 +14,10 @@ package tr.edu.ege.cs.egenav.test;
  *
  * @author Özgün Yılmaz
  */
-public class DefaultNavigationInfoPanelTest extends javax.swing.JFrame {
+public class DefaultNavigationInfoPanelTest2 extends javax.swing.JFrame {
 
-    /** Creates new form DefaultNavigationInfoPanelTest */
-    public DefaultNavigationInfoPanelTest() {
+    /** Creates new form DefaultNavigationInfoPanelTest2 */
+    public DefaultNavigationInfoPanelTest2() {
         initComponents();
     }
 
@@ -55,7 +55,7 @@ public class DefaultNavigationInfoPanelTest extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new DefaultNavigationInfoPanelTest().setVisible(true);
+                new DefaultNavigationInfoPanelTest2().setVisible(true);
             }
         });
     }
