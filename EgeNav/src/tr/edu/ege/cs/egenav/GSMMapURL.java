@@ -12,7 +12,7 @@ public class GSMMapURL extends MapURL{
     //visible parametresini ekle.
     
     private boolean sensor=false;
-    private String apiKey,signature,language,region,mapType,format;
+    private String apiKey,signature,language,region;
     private int scale=-1;
     private GSMPath path;
     
@@ -105,21 +105,7 @@ public class GSMMapURL extends MapURL{
         this.region = region;
     }
 
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public String getMapType() {
-        return mapType;
-    }
-
-    public void setMapType(String mapType) {
-        this.mapType = mapType;
-    }
+    
 
     @Override
     public String getAbsoluteURLString() {
