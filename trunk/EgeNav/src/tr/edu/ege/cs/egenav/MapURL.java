@@ -30,6 +30,22 @@ public abstract class MapURL {
         this.location = location;
     }
     
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getMapType() {
+        return mapType;
+    }
+
+    public void setMapType(String mapType) {
+        this.mapType = mapType;
+    }
+    
     public String getSeparator() {
         return separator;
     }
