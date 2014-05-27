@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav.test;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,6 +17,10 @@ public class DBTest {
     Connection c = null;
     Statement stmt = null;
     try {
+        File f=new File("C:\\Users\\samsung\\Documents\\test.db");
+        if (f.exists()){
+            f.delete();
+        }
       Class.forName("org.sqlite.JDBC");
       c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\samsung\\Documents\\test.db");
       System.out.println("Opened database successfully");
@@ -30,7 +35,22 @@ public class DBTest {
       
       
       sql = "INSERT INTO Maps (Mapurl,ImageFileName,DownloadDate,UsageCount) " +
-                   "VALUES ('www.kgk.com', 'deneme.png', 8589934592, 1);"; 
+                   "VALUES ('www.kgk.com', 'deneme.png', 11, 1);"; 
+      stmt.executeUpdate(sql);
+      
+      sql = "INSERT INTO Maps (Mapurl,ImageFileName,DownloadDate,UsageCount) " +
+                   "VALUES ('www.abc.com', 'jfjf.png', 12, 1);"; 
+      stmt.executeUpdate(sql);
+      
+      sql = "INSERT INTO Maps (Mapurl,ImageFileName,DownloadDate,UsageCount) " +
+                   "VALUES ('www.zzzz.com', 'zzzz.png', 13, 1);"; 
+      stmt.executeUpdate(sql);
+      
+      sql = "INSERT INTO Maps (Mapurl,ImageFileName,DownloadDate,UsageCount) " +
+                   "VALUES ('www.aaaa.com', 'aaaaa.png', 10, 4);"; 
+      stmt.executeUpdate(sql);
+      
+      sql = "UPDATE Maps set Mapurl = 'www.xxx.com',ImageFileName='xxxx.PNG' where Mapurl='www.zzzz.com';";
       stmt.executeUpdate(sql);
 
       ////**************************************************
@@ -50,7 +70,7 @@ public class DBTest {
          System.out.println();
       }
       //*********************************************************
-      
+      //System.out.println(rs.getString(1));
 
       stmt.close();
       //c.commit();

@@ -2,12 +2,18 @@ package tr.edu.ege.cs.egenav.mapcache;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
 
 /**
@@ -34,8 +40,9 @@ public class DBMapCache extends MapCache{
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:"+getCacheFileAbsoluteName());
+            
 
-            System.out.println("Opened database successfully");
+            //System.out.println("Opened database successfully");
         } catch (SQLException ex) {
             Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -46,6 +53,8 @@ public class DBMapCache extends MapCache{
             //yeni tablo yarat
             createTable();
             
+        }else{
+            deleteDateDueMaps();
         }
     }
     
@@ -64,154 +73,197 @@ public class DBMapCache extends MapCache{
         }
     }
     
-////    private void deleteDateDueMaps(){
-////        
-////        if (getTimeLimit()<0){
-////            return;
-////        }
-////        for (int i=0;i<maps.size();i++){
-////            
-////            MapInfo m=maps.get(i);
-////            long now=Calendar.getInstance().getTimeInMillis();
-////            long past=m.getDownloadDate().getTime();
-////            int day=(int)((now-past)/((24 * 60 * 60 * 1000)));
-////            
-////            
-////            if (day>getTimeLimit()){
-////                maps.remove(i);
-////                i--;
-////                m.deleteImageFile();
-////            }
-////        }
-////        
-////    }
-////    
-////    @Override
-////    public boolean isLimitReached(){
-////        if (getLimit()>0){
-////            return getLimit()<=maps.size();
-////        }else{
-////            return false;
-////        }
-////        
-////    }
-////    
-////    @Override
-////    public BufferedImage getMap(MapURL mapurl) {
-////        
-////        String mstr=mapurl.getAbsoluteURLString();
-////        MapInfo m=find(mstr);
-////        if (m==null){
-////            BufferedImage bim=MapDownloader.downloadMap(mstr);
-////            
-////            String fs;
-////            if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
-////                fs="png";
-////            }else{
-////                fs=mapurl.getFormat();
-////            }
-////            
-////            MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
-////            
-////            File outputfile = new File(getImagePath() + minfo.getImageFileName());
-////            try {
-////                
-////                ImageIO.write(bim, fs, outputfile);
-////            } catch (IOException ex) {
-////                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-////            }
-////            
-////            if (isLimitReached()){
-////                removeLeastUsed();  
-////                //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
-////            }
-////            
-////            maps.add(minfo);
-////            
-////            return bim;
-////        }else{
-////            m.incrementUsageCount();
-////            String fname=m.getImageFileName();
-////            try {
-////                return ImageIO.read(new File(getImagePath()+fname));
-////            } catch (IOException ex) {
-////                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-////                return null;
-////            }
-////            
-////        }
-////        
-////    }
-////    
-////    private void removeLeastUsed(){
-////        
-////        int index=-1,eks=1000;
-////        for (int i=0;i<maps.size();i++){
-////            
-////            MapInfo m=maps.get(i);
-////            if (m.getUsageCount()<eks){
-////                
-////                index=i;
-////                
-////            }
-////        }
-////        MapInfo m=maps.get(index);
-////        m.deleteImageFile();
-////        
-////    }
-////    
-////    public MapInfo find(String mapurl){
-////        
-////        for (int i=0;i<maps.size();i++){
-////            if (maps.get(i).getMapurl().equals(mapurl)){
-////                return maps.get(i);
-////            }
-////        }
-////        return null;
-////    }
-////
-////    @Override
-////    public void close() {
-////        FileOutputStream fout = null;
-////        try {
-////            fout = new FileOutputStream(getFilePath()+"\\mapdata");
-////            ObjectOutputStream oos = new ObjectOutputStream(fout);
-////            oos.writeObject(maps);
-////            oos.close();
-////            System.out.println("Done");
-////        } catch (Exception ex) {
-////            Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-////        } finally {
-////            try {
-////                fout.close();
-////            } catch (IOException ex) {
-////                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-////            }
-////        }
-////    }
-////    
-////    public static void main(String args[]){
-////        MemoryMapCache m=new MemoryMapCache();
-////    }
+    private void deleteDateDueMaps(){
+        
+        if (getTimeLimit()<0){
+            return;
+        }
+
+        long now=Calendar.getInstance().getTimeInMillis();
+        long tl=getTimeLimit()* 24 * 60 * 60 * 1000;
+        long due=now-tl;
+            
+        try {    
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT ImageFileName FROM Maps WHERE DownloadDate<"+due+";" );
+            while ( rs.next() ) {
+                
+                String  fname = rs.getString("ImageFileName");
+                File f=new File(getImagePath()+fname);
+                f.delete();
+                
+            }
+            
+            rs.close();
+            String sql = "DELETE from Maps where DownloadDate<"+due+";";
+            stmt.executeUpdate(sql);
+            
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
     @Override
-    public final String getCacheFileAbsoluteName() {
-        return getPath()+"mapdata.db";
-    }
+    public boolean isLimitReached(){
+        if (getLimit()<=0){
+            return false;
+        }
+        
+        try {    
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT COUNT(*) FROM Maps;" );
+            int x=rs.getInt(1);
+            
 
+            rs.close();
+            
+            stmt.close();
+            return getLimit()<=x;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public void setAutoCommit(boolean b){
+        try {
+            c.setAutoCommit(b);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @Override
     public BufferedImage getMap(MapURL mapurl) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        String mstr=mapurl.getAbsoluteURLString();
+        MapInfo m=find(mstr);
+        if (m==null){
+            BufferedImage bim=MapDownloader.downloadMap(mstr);
+            
+            String fs;
+            if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
+                fs="png";
+            }else{
+                fs=mapurl.getFormat();
+            }
+            
+            MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
+            
+            File outputfile = new File(getImagePath() + minfo.getImageFileName());
+            try {
+                
+                ImageIO.write(bim, fs, outputfile);
+            } catch (IOException ex) {
+                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            if (isLimitReached()){
+                removeLeastUsed();  
+                //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
+            }
+            
+            addToDB(minfo);
+            
+            return bim;
+        }else{
+            m.incrementUsageCount();
+            updateToDB(m);
+            String fname=m.getImageFileName();
+            try {
+                return ImageIO.read(new File(getImagePath()+fname));
+            } catch (IOException ex) {
+                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+            
+        }
+        
+    }
+    
+    private void removeLeastUsed(){
+        //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
+        
+        try {    
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM Maps GROUP BY UsageCount,DownloadDate;" );
+            
+            String  fname = rs.getString("ImageFileName");
+            File f=new File(getImagePath()+fname);
+            f.delete();
+            rs.close();
+            
+            String sql = "DELETE from Maps where Mapurl='"+rs.getString("Mapurl")+"';";
+            stmt.executeUpdate(sql);
+            
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public MapInfo find(String mapurl){
+        MapInfo m=null;
+        try {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM Maps WHERE Mapurl='"+mapurl+"';" );
+            m=new MapInfo(mapurl,rs.getString("ImageFileName"),new Date(rs.getLong("DownloadDate")),rs.getInt("UsageCount"));
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return m;
+    }
+    
+    public void addToDB(MapInfo m){
+        try {
+            Statement stmt = c.createStatement();
+            String sql = "INSERT INTO Maps (Mapurl,ImageFileName,DownloadDate,UsageCount) " +
+                       "VALUES ('"+m.getMapurl()+"', '"+m.getImageFileName()+"', "+m.getDownloadDate().getTime()+", "+m.getUsageCount()+");"; 
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateToDB(MapInfo m){
+        try {
+            Statement stmt = c.createStatement();
+            String sql = "UPDATE Maps set UsageCount = "+m.getUsageCount()+" where Mapurl='"+m.getMapurl()+"';"; 
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void close() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            if (!c.getAutoCommit()){
+                c.commit();
+            }
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public static void main(String args[]){
+        MemoryMapCache m=new MemoryMapCache();
     }
 
     @Override
-    public boolean isLimitReached() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public final String getCacheFileAbsoluteName() {
+        return getPath()+"mapdata.db";
     }
     
 }

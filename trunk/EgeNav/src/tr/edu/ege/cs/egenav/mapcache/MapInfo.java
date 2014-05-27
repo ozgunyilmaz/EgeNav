@@ -27,6 +27,15 @@ public class MapInfo implements Serializable{
         imageFileName="map_image"+dateFormat.format(downloadDate)+"."+format;
         usageCount=1;
     }
+
+    public MapInfo(String mapurl, String imageFileName, Date downloadDate, int usageCount) {
+        this.mapurl = mapurl;
+        this.imageFileName = imageFileName;
+        this.downloadDate = downloadDate;
+        this.usageCount = usageCount;
+    }
+    
+    
     
     public boolean deleteImageFile(){
         
@@ -62,6 +71,12 @@ public class MapInfo implements Serializable{
     public int getUsageCount() {
         return usageCount;
     }
+
+    public void setUsageCount(int usageCount) {
+        this.usageCount = usageCount;
+    }
+    
+    
 
     public void incrementUsageCount() {
         usageCount++;
