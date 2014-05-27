@@ -68,11 +68,10 @@ public class MemoryMapCache extends MapCache{
             
             MapInfo m=maps.get(i);
             long now=Calendar.getInstance().getTimeInMillis();
-            long past=m.getDownloadDate().getTime();
-            int day=(int)((now-past)/((24 * 60 * 60 * 1000)));
+            long dd=m.getDownloadDate().getTime();
+            long due=now-(getTimeLimit() * 24 * 60 *60 *1000);
             
-            
-            if (day>getTimeLimit()){
+            if (due>dd){
                 maps.remove(i);
                 i--;
                 m.deleteImageFile();
