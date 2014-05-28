@@ -23,6 +23,7 @@ import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
 import tr.edu.ege.cs.egenav.MercatorProjection;
+import tr.edu.ege.cs.egenav.mapcache.MapCache;
 
 /**
  *
@@ -46,6 +47,8 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private Direction direction;
     private NavigationInformation navPanel;
     
+    private MapCache cache=null;
+    
     /** Creates new form MapPanel */
     public MapPanel() {
         initComponents();
@@ -62,6 +65,14 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         return navPanel;
     }
 
+    public MapCache getMapCache() {
+        return cache;
+    }
+
+    public void setMapCache(MapCache cache) {
+        this.cache = cache;
+    }
+    
     public void setNavPanel(NavigationInformation navPanel) {
         this.navPanel = navPanel;
     }
@@ -71,7 +82,13 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     }
     
     public void refreshMap(){
-        img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        
+        if (cache==null){
+            img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        }else{
+            img=cache.getMap(mapurl);
+        }
+        
         //cache kullanılacaksa cachede mapurldeki harita indirilmeden oluşturulabilir mi diye kontrol et
         //Eğer oluşturulan harita null değilse yeniden indirme
         repaint();
@@ -153,9 +170,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         }
         
         navigation.add(new NavigationPointInfo(loc,timestamp,distance,p));
-        
-        //todo bilgi panelinde gösterilecek
-        //direction.getInstructions((GeoPoint)loc);
+
         navPanel.setAverageSpeed(navigation.getAverageSpeed());
         navPanel.setHeading(Math.toDegrees(navigation.getHeading()));
         if (direction!=null){
