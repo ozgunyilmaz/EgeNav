@@ -14,7 +14,7 @@ public class Navigation {
     
     private ArrayList<NavigationPointInfo> history=new ArrayList<NavigationPointInfo>();
     private double heading,speed,averageSpeed,timeElapsed,totalDistance;
-    //todo navigation sınıfının içine al, ortalama hız, toplam süre, toplam uzaklık da bulunmalı
+    
     public void add(NavigationPointInfo np){
         history.add(np);
         totalDistance=totalDistance+np.getDistanceToPreviousLocation();

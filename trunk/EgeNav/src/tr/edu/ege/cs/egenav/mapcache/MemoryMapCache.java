@@ -150,6 +150,7 @@ public class MemoryMapCache extends MapCache{
             }
         }
         MapInfo m=maps.get(index);
+        maps.remove(index);
         m.deleteImageFile();
         
     }
@@ -172,8 +173,8 @@ public class MemoryMapCache extends MapCache{
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(maps);
             oos.close();
-            System.out.println("Done");
-        } catch (Exception ex) {
+            //System.out.println("Done");
+        } catch (IOException ex) {
             Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
