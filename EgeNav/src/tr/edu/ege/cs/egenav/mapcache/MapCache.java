@@ -51,7 +51,7 @@ public abstract class MapCache {
     }
     
     public String getImagePath(){
-        return getPath()+"\\images\\";
+        return getPath()+"images\\";
     }
     
     public abstract String getCacheFileAbsoluteName();

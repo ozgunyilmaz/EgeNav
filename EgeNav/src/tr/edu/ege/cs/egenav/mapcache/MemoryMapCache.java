@@ -30,6 +30,12 @@ public class MemoryMapCache extends MapCache{
         
     }
 
+    public ArrayList<MapInfo> getMaps() {
+        return maps;
+    }
+    
+    
+
     public MemoryMapCache(String filePath) {
         super(filePath);
         
@@ -185,12 +191,6 @@ public class MemoryMapCache extends MapCache{
         }
     }
     
-    public static void main(String args[]){
-        MemoryMapCache m=new MemoryMapCache("\\fdgfdg\\");
-        MemoryMapCache m2=new MemoryMapCache("\\fdgfdg");
-        
-    }
-
     @Override
     public final String getCacheFileAbsoluteName() {
         return getPath()+"mapdata";

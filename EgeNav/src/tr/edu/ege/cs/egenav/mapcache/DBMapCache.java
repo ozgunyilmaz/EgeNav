@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -185,6 +186,29 @@ public class DBMapCache extends MapCache{
         
     }
     
+    public ArrayList<MapInfo> getMaps() {
+        
+        ArrayList<MapInfo> maps=new ArrayList<MapInfo>();
+        try {    
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM Maps;" );
+            
+            while ( rs.next() ) {
+                
+                MapInfo m=new MapInfo(rs.getString("Mapurl"),rs.getString("ImageFileName"),new Date(rs.getLong("DownloadDate")),rs.getInt("UsageCount"));
+                maps.add(m);
+                
+            }
+            
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return maps;
+    }
+    
     private void removeLeastUsed(){
         //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
         
@@ -258,7 +282,10 @@ public class DBMapCache extends MapCache{
     }
     
     public static void main(String args[]){
-        MemoryMapCache m=new MemoryMapCache();
+        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        if (f.exists()){
+            f.delete();
+        }
     }
 
     @Override
