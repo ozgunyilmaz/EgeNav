@@ -1,6 +1,7 @@
 package tr.edu.ege.cs.egenav.mapcache;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import tr.edu.ege.cs.egenav.MapURL;
 
 /**
@@ -18,6 +19,8 @@ public abstract class MapCache {
     }
     
     public MapCache(String filePath) {
+        File f=new File(filePath);
+        f.mkdirs();
         if (filePath.endsWith("\\")){
             this.path = filePath;
         }else{
