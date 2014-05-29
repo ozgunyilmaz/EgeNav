@@ -282,10 +282,13 @@ public class DBMapCache extends MapCache{
     }
     
     public static void main(String args[]){
-        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        DBMapCache dnm=new DBMapCache("C:\\Users\\samsung\\Documents\\Deneme2");
+        dnm.close();
+        File f=new File("C:\\Users\\samsung\\Documents\\Deneme2\\mapdata.db");
         if (f.exists()){
-            f.delete();
+            System.out.println(f.delete());
         }
+        
     }
 
     @Override

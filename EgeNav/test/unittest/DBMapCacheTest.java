@@ -32,14 +32,7 @@ public class DBMapCacheTest {
 
     @AfterClass
     public static void tearDownClass() throws Exception {
-        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
-        if (f.exists()){
-            f.delete();
-        }
-        f=new File(System.getProperty("user.dir")+"\\mapdata.db");
-        if (f.exists()){
-            f.delete();
-        }
+        
     }
     
     @Before
@@ -55,6 +48,7 @@ public class DBMapCacheTest {
     @Test
     public void contructorTest() {
         DBMapCache mmc=new DBMapCache();
+        mmc.close();
         assertEquals(mmc.getPath(),System.getProperty("user.dir")+"\\");
         File f=new File(System.getProperty("user.dir")+"\\mapdata.db");
         if (f.exists()){
@@ -66,6 +60,7 @@ public class DBMapCacheTest {
     public void contructorTest2() {
     
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents");
+        mmc.close();
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\");
         File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
         if (f.exists()){
@@ -77,6 +72,7 @@ public class DBMapCacheTest {
     public void contructorTest3() {
     
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\");
+        mmc.close();
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\");
         File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
         if (f.exists()){
@@ -88,6 +84,7 @@ public class DBMapCacheTest {
     public void cacheFilePathTest() {
     
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\");
+        mmc.close();
         assertEquals(mmc.getCacheFileAbsoluteName(),"C:\\Users\\samsung\\Documents\\mapdata.db");
         File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
         if (f.exists()){
