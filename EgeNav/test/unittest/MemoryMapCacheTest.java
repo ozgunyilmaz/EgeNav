@@ -102,6 +102,15 @@ public class MemoryMapCacheTest {
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),1);
         assertEquals(mmc.getMaps().get(0).getUsageCount(),2);
+        
+        url.setCenter(new GSMLocation(new GeoPoint(42,32)));
+        mmc.getMap(url);
+        assertEquals(mmc.getMaps().size(),2);
+        assertEquals(mmc.getMaps().get(1).getUsageCount(),1);
+        mmc.getMap(url);
+        assertEquals(mmc.getMaps().size(),2);
+        assertEquals(mmc.getMaps().get(1).getUsageCount(),2);
+        
         mmc.close();
         File f3=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata");
         File f4=new File("C:\\Users\\samsung\\Documents\\deneme\\images");
@@ -142,6 +151,16 @@ public class MemoryMapCacheTest {
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),1);
         assertEquals(mmc.getMaps().get(0).getUsageCount(),2);
+        
+        url.setCenter(new GSMLocation(new GeoPoint(42,32)));
+        mmc.getMap(url);
+        assertEquals(mmc.getMaps().size(),2);
+        assertEquals(mmc.getMaps().get(1).getUsageCount(),1);
+        mmc.getMap(url);
+        assertEquals(mmc.getMaps().size(),2);
+        assertEquals(mmc.getMaps().get(1).getUsageCount(),2);
+        
+        
         mmc.close();
         File f3=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata");
         File f4=new File("C:\\Users\\samsung\\Documents\\deneme\\images");
