@@ -14,17 +14,17 @@ public class GSMDirectionURL extends DirectionURL{
     
     
     
-    private static final String MODE_DRIVING="driving";
-    private static final String MODE_WALKING_MODE="walking";
-    private static final String MODE_BICYCLING_MODE ="bicycling";
-    private static final String MODE_TRANSIT_MODE="transit";
+    public static final String MODE_DRIVING="driving";
+    public static final String MODE_WALKING_MODE="walking";
+    public static final String MODE_BICYCLING_MODE ="bicycling";
+    public static final String MODE_TRANSIT_MODE="transit";
     
-    private static final String AVOID_TOLLS="tolls";
-    private static final String AVOID_HIGHWAYS="highways";
-    private static final String AVOID_FERRIES="ferries";
+    public static final String AVOID_TOLLS="tolls";
+    public static final String AVOID_HIGHWAYS="highways";
+    public static final String AVOID_FERRIES="ferries";
     
-    private static final String UNIT_METRIC="metric";
-    private static final String UNIT_IMPERIAL="imperial";
+    public static final String UNIT_METRIC="metric";
+    public static final String UNIT_IMPERIAL="imperial";
     
     private boolean sensor=false,alternatives=false;
     
@@ -36,17 +36,17 @@ public class GSMDirectionURL extends DirectionURL{
     
     public GSMDirectionURL(GSMLocation org, GSMLocation dest) {
         super(org,dest);
-        setTravelMode(GSMDirectionURL.MODE_DRIVING);
+        //setTravelMode(GSMDirectionURL.MODE_DRIVING);
         output="json";
         setSeparator("&");
-        setMidURL("http://maps.googleapis.com/maps/api/directions/");
+        setMidURL("maps.googleapis.com/maps/api/directions/");
     }
 
     public GSMDirectionURL(GSMLocation org, GSMLocation dest, String travelMode) {
         super(org,dest,travelMode);
         output="json";
         setSeparator("&");
-        setMidURL("http://maps.googleapis.com/maps/api/directions/");
+        setMidURL("maps.googleapis.com/maps/api/directions/");
         
     }
     
