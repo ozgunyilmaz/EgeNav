@@ -11,7 +11,7 @@ public class GSMStyleRule {
     public static final String VISIBILITY_OFF="off";
     public static final String VISIBILITY_SIMP="simplified";
     
-    private String color, hue, saturation, lightness, gamma, visibility;
+    private String color, hue, saturation, lightness, gamma, visibility, weight;
     private boolean inverseLightness;
 
     public String getColor() {
@@ -69,6 +69,14 @@ public class GSMStyleRule {
     public void setVisibility(String visibility) {
         this.visibility = visibility;
     }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
     
     @Override
     public String toString(){
@@ -77,6 +85,10 @@ public class GSMStyleRule {
         
         if (getColor()!=null && !getColor().equals("")){
             r="color:"+getColor()+"|";
+        }
+        
+        if (getWeight()!=null && !getWeight().equals("")){
+            r=r+"weight:"+getWeight()+"|";
         }
         
         if (getHue()!=null && !getHue().equals("")){
@@ -95,12 +107,12 @@ public class GSMStyleRule {
             r=r+"gamma:"+getGamma()+"|";
         }
         
-        if (isInverseLightness()){
-            r=r+"inverse_lightness:true|";
-        }
-        
         if (getVisibility()!=null && !getVisibility().equals("")){
             r=r+"visibility:"+getVisibility()+"|";
+        }
+        
+        if (isInverseLightness()){
+            r=r+"invert_lightness:true|";
         }
         
         while (r.endsWith("|")){
