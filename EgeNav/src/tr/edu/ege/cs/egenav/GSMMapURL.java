@@ -1,6 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  * @author Özgün Yılmaz
@@ -14,7 +15,8 @@ public class GSMMapURL extends MapURL{
     private boolean sensor=false;
     private String apiKey,signature,language,region;
     private int scale=-1;
-    private GSMPath path;
+    private ArrayList<GSMPath> paths;   //todo arraylist olacak
+    private ArrayList<GSMMarker> markers;  ////todo arraylist olacak
     
     public static final int MAX_ZOOM=21;
     
@@ -153,8 +155,16 @@ public class GSMMapURL extends MapURL{
             url=url+"region="+getRegion()+getSeparator();
         }
         
-        if (getPath()!=null){
-            url=url+getPath().toString()+getSeparator();
+        if (paths!=null && !paths.isEmpty()){
+            for (int i=0;i<paths.size();i++){
+                url=url+paths.get(i).toString()+getSeparator();
+            }
+        }
+        
+        if (markers!=null && !markers.isEmpty()){
+            for (int i=0;i<markers.size();i++){
+                url=url+markers.get(i).toString()+getSeparator();
+            }
         }
         
         for (int i=0;i<parameters.size();i++){
@@ -246,12 +256,62 @@ public class GSMMapURL extends MapURL{
         
     }
 
-    public GSMPath getPath() {
-        return path;
+    public ArrayList<GSMPath> getPathList() {
+        return paths;
     }
 
-    public void setPath(GSMPath path) {
-        this.path = path;
+    public void setPathList(ArrayList<GSMPath> pathList) {
+        this.paths = pathList;
+    }
+
+    public ArrayList<GSMMarker> getMarkerList() {
+        return markers;
+    }
+
+    public void setMarkerList(ArrayList<GSMMarker> markers) {
+        this.markers = markers;
+    }
+    
+    public void addPath(GSMPath path){
+        if (paths==null){
+            paths=new ArrayList<GSMPath>();
+        }
+        paths.add(path);
+    }
+    
+    public void addMarker(GSMMarker marker){
+        if (markers==null){
+            markers=new ArrayList<GSMMarker>();
+        }
+        markers.add(marker);
+    }
+    
+    public boolean removePath(GSMPath path){
+        if (paths==null){
+            return false;
+        }
+        return paths.remove(path);
+    }
+    
+    public boolean removeMarker(GSMMarker marker){
+        if (markers==null){
+            return false;
+        }
+        return markers.remove(marker);
+    }
+    
+    public void removePath(int i){
+        if (paths==null){
+            return;
+        }
+        paths.remove(i);
+    }
+    
+    public void removeMarker(int i){
+        if (markers==null){
+            return;
+        }
+        markers.remove(i);
     }
     
 }

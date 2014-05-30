@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author Özgün Yılmaz
  */
-public class GSMMarkerTest {
+public class GSMStyleRuleTest {
     
-    public GSMMarkerTest() {
+    public GSMStyleRuleTest() {
     }
 
     @BeforeClass
@@ -41,13 +41,11 @@ public class GSMMarkerTest {
     @Test
     public void toStringTest() {
     
-        GSMMarker m=new GSMMarker(GSMColor.YELLOW);
-        m.addPoint(new GeoPoint(30,40));
-        assertEquals(m.toString(),"markers=color:yellow|30.0,40.0");
-        m.addPoint(new GeoPoint(32,42));
-        assertEquals(m.toString(),"markers=color:yellow|30.0,40.0|32.0,42.0");
-        m.addPoint(new GeoPoint(33,43));
-        assertEquals(m.toString(),"markers=color:yellow|30.0,40.0|32.0,42.0|33.0,43.0");
-    
+        GSMStyleRule rule=new GSMStyleRule();
+        rule.setColor("0x00ff00");
+        rule.setWeight("3.9");
+        rule.setVisibility(GSMStyleRule.VISIBILITY_ON);
+        assertEquals(rule.toString(),"color:0x00ff00|weight:3.9|visibility:on");
+        
     }
 }

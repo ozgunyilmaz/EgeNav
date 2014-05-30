@@ -1,10 +1,18 @@
 package tr.edu.ege.cs.egenav.test;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import tr.edu.ege.cs.egenav.GSMColor;
 import tr.edu.ege.cs.egenav.GSMDirectionURL;
 import tr.edu.ege.cs.egenav.GSMLocation;
 import tr.edu.ege.cs.egenav.GSMMarker;
 import tr.edu.ege.cs.egenav.GSMPathStyle;
+import tr.edu.ege.cs.egenav.GSMStyle;
+import tr.edu.ege.cs.egenav.GSMStyleRule;
 import tr.edu.ege.cs.egenav.GeoPoint;
 
 /**
@@ -41,6 +49,24 @@ public class GSMDirectionURLTest {
         
         GeoPoint gp2=new GeoPoint("48 12 28N 028 22 32E");
         System.out.println(gp2.getDistanceTo(gp));
+        
+        File f=new File("ImageFiles\\center=40.0,30.0&zoom=6&size=500x500&sensor=false.png");
+        System.out.println(f.getAbsolutePath());
+        
+        GSMStyleRule rule=new GSMStyleRule();
+        rule.setColor("0x00ff00");
+        rule.setWeight("3.9");
+        rule.setVisibility(GSMStyleRule.VISIBILITY_ON);
+        System.out.println(rule.toString());
+        
+        GSMStyle style=new GSMStyle("administrative","labels");
+        
+        rule=new GSMStyleRule();
+        rule.setWeight("3.9");
+        rule.setVisibility(GSMStyleRule.VISIBILITY_ON);
+        rule.setInverseLightness(true);
+        style.addRule(rule);
+        System.out.println(style.toString());
     }
     
     
