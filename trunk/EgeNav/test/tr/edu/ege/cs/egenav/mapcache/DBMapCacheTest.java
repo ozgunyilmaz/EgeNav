@@ -2,28 +2,29 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package unittest;
+package tr.edu.ege.cs.egenav.mapcache;
 
-import java.io.File;
-import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.MapSize;
+import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.GSMLocation;
 import tr.edu.ege.cs.egenav.GSMMapURL;
-import tr.edu.ege.cs.egenav.mapcache.MemoryMapCache;
+import java.io.File;
+import tr.edu.ege.cs.egenav.mapcache.DBMapCache;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tr.edu.ege.cs.egenav.mapcache.DBMapCache;
 import static org.junit.Assert.*;
 
 /**
  *
  * @author Özgün Yılmaz
  */
-public class MemoryMapCacheTest {
+public class DBMapCacheTest {
     
-    public MemoryMapCacheTest() {
+    public DBMapCacheTest() {
     }
 
     @BeforeClass
@@ -32,6 +33,7 @@ public class MemoryMapCacheTest {
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        
     }
     
     @Before
@@ -46,42 +48,55 @@ public class MemoryMapCacheTest {
     //
     @Test
     public void contructorTest() {
-        MemoryMapCache mmc=new MemoryMapCache();
+        DBMapCache mmc=new DBMapCache();
+        mmc.close();
         assertEquals(mmc.getPath(),System.getProperty("user.dir")+"\\");
+        File f=new File(System.getProperty("user.dir")+"\\mapdata.db");
+        if (f.exists()){
+            f.delete();
+        }
     }
     
     @Test
     public void contructorTest2() {
     
-        MemoryMapCache mmc=new MemoryMapCache("C:\\Users\\samsung\\Documents");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents");
+        mmc.close();
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\");
+        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        if (f.exists()){
+            f.delete();
+        }
     }
     
     @Test
     public void contructorTest3() {
     
-        MemoryMapCache mmc=new MemoryMapCache("C:\\Users\\samsung\\Documents\\");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\");
+        mmc.close();
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\");
+        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        if (f.exists()){
+            f.delete();
+        }
     }
     
     @Test
     public void cacheFilePathTest() {
     
-        MemoryMapCache mmc=new MemoryMapCache("C:\\Users\\samsung\\Documents\\");
-        assertEquals(mmc.getCacheFileAbsoluteName(),"C:\\Users\\samsung\\Documents\\mapdata");
-    }
-    
-    @Test
-    public void imagePathTest() {
-    
-        MemoryMapCache mmc=new MemoryMapCache("C:\\Users\\samsung\\Documents\\");
-        assertEquals(mmc.getImagePath(),"C:\\Users\\samsung\\Documents\\images\\");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\");
+        mmc.close();
+        assertEquals(mmc.getCacheFileAbsoluteName(),"C:\\Users\\samsung\\Documents\\mapdata.db");
+        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        if (f.exists()){
+            f.delete();
+        }
     }
     
     @Test
     public void getMapTest() {
     
-        File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata");
+        File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
         if (f.exists()){
             f.delete();
         }
@@ -89,7 +104,7 @@ public class MemoryMapCacheTest {
         if (f2.exists()){
             f2.delete();
         }
-        MemoryMapCache mmc=new MemoryMapCache("C:\\Users\\samsung\\Documents\\deneme");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
          
         url.setCenter(new GSMLocation(new GeoPoint(40,30)));
@@ -102,7 +117,7 @@ public class MemoryMapCacheTest {
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),1);
         assertEquals(mmc.getMaps().get(0).getUsageCount(),2);
-        
+    
         url.setCenter(new GSMLocation(new GeoPoint(42,32)));
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),2);
@@ -110,9 +125,10 @@ public class MemoryMapCacheTest {
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),2);
         assertEquals(mmc.getMaps().get(1).getUsageCount(),2);
-        
+    
+    
         mmc.close();
-        File f3=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata");
+        File f3=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
         File f4=new File("C:\\Users\\samsung\\Documents\\deneme\\images");
         assertTrue(f3.exists());
         assertTrue(f4.exists());
@@ -138,7 +154,7 @@ public class MemoryMapCacheTest {
         if (f2.exists()){
             f2.delete();
         }
-        MemoryMapCache mmc=new MemoryMapCache("C:\\Users\\samsung\\Documents\\deneme");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
         url.setFormat("jpg");
         url.setCenter(new GSMLocation(new GeoPoint(40,30)));
@@ -151,7 +167,7 @@ public class MemoryMapCacheTest {
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),1);
         assertEquals(mmc.getMaps().get(0).getUsageCount(),2);
-        
+    
         url.setCenter(new GSMLocation(new GeoPoint(42,32)));
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),2);
@@ -159,8 +175,9 @@ public class MemoryMapCacheTest {
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),2);
         assertEquals(mmc.getMaps().get(1).getUsageCount(),2);
-        
-        
+    
+    
+    
         mmc.close();
         File f3=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata");
         File f4=new File("C:\\Users\\samsung\\Documents\\deneme\\images");
@@ -176,4 +193,5 @@ public class MemoryMapCacheTest {
             f4.delete();
         }
     }
+    
 }

@@ -100,10 +100,12 @@ public class GeoPoint extends Location{
         return lon;
     }
 
+    @Override
     public void setLatitude(double lat){
         this.lat=lat;
     }
 
+    @Override
     public void setLongitude(double lon){
         this.lon=lon;
     }
