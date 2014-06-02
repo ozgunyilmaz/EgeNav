@@ -11,12 +11,12 @@ public class GSMPath extends Parameter{
     private GSMPathStyle ps;
     
     private String encodedPath;
-    private ArrayList<GSMLocation> path=null;
+    private ArrayList<Location> path=null;
 
     public GSMPath(GSMPathStyle ps) {
         
         this.ps = ps;
-        path=new ArrayList<GSMLocation>();
+        path=new ArrayList<Location>();
         
     }
 
@@ -31,19 +31,19 @@ public class GSMPath extends Parameter{
 
     
 
-    public void addPathPoint(GSMLocation c){
+    public void addPathPoint(Location c){
         path.add(c);
     }
     
-    public void appendPath(ArrayList<GSMLocation> p){
+    public void appendPath(ArrayList<Location> p){
         path.addAll(p);
     }
     
-    public boolean removePathPoint(GSMLocation c){
+    public boolean removePathPoint(Location c){
         return path.remove(c);
     }
     
-    public GSMLocation removePathPoint(int i){
+    public Location removePathPoint(int i){
         return path.remove(i);
     }
 

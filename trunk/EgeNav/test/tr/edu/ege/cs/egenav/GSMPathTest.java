@@ -45,10 +45,10 @@ public class GSMPathTest {
         
         GSMPath path=new GSMPath(ps);
         
-        path.addPathPoint(new GSMLocation(new GeoPoint(40.737102,-73.990318)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(40.749825,-73.987963)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(40.752946,-73.987384)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(40.755823,-73.986397)));
+        path.addPathPoint(new Location(new GeoPoint(40.737102,-73.990318)));
+        path.addPathPoint(new Location(new GeoPoint(40.749825,-73.987963)));
+        path.addPathPoint(new Location(new GeoPoint(40.752946,-73.987384)));
+        path.addPathPoint(new Location(new GeoPoint(40.755823,-73.986397)));
         
         assertEquals(path.toString(),"path=color:0x0000ff|weight:5|40.737102,-73.990318|40.749825,-73.987963|40.752946,-73.987384|40.755823,-73.986397");
     }

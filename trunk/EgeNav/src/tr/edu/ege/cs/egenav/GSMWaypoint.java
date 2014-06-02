@@ -10,32 +10,32 @@ public class GSMWaypoint extends Parameter{
     //todo rename to GSMWaypoint list
     
     
-    private ArrayList<GSMLocation> waypoints;
+    private ArrayList<Location> waypoints;
     private boolean optimize=false;
 
     public GSMWaypoint() {
         
-        waypoints=new ArrayList<GSMLocation>();
+        waypoints=new ArrayList<Location>();
         
     }
     
-    public GSMWaypoint(ArrayList<GSMLocation> waypoints) {
+    public GSMWaypoint(ArrayList<Location> waypoints) {
         this.waypoints = waypoints;
     }
     
-    public void add(GSMLocation c){
+    public void add(Location c){
         waypoints.add(c);
     }
     
-    public void append(ArrayList<GSMLocation> p){
+    public void append(ArrayList<Location> p){
         waypoints.addAll(p);
     }
     
-    public boolean remove(GSMLocation c){
+    public boolean remove(Location c){
         return waypoints.remove(c);
     }
     
-    public GSMLocation remove(int i){
+    public Location remove(int i){
         return waypoints.remove(i);
     }
     

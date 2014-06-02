@@ -6,16 +6,14 @@ package tr.edu.ege.cs.egenav.mapcache;
 
 import tr.edu.ege.cs.egenav.MapSize;
 import tr.edu.ege.cs.egenav.GeoPoint;
-import tr.edu.ege.cs.egenav.GSMLocation;
+import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.GSMMapURL;
 import java.io.File;
-import tr.edu.ege.cs.egenav.mapcache.DBMapCache;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import tr.edu.ege.cs.egenav.mapcache.DBMapCache;
 import static org.junit.Assert.*;
 
 /**
@@ -107,7 +105,7 @@ public class DBMapCacheTest {
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
          
-        url.setCenter(new GSMLocation(new GeoPoint(40,30)));
+        url.setCenter(new Location(new GeoPoint(40,30)));
         url.setZoom(6);
         url.setMapSize(new MapSize(500,500));
         
@@ -118,7 +116,7 @@ public class DBMapCacheTest {
         assertEquals(mmc.getMaps().size(),1);
         assertEquals(mmc.getMaps().get(0).getUsageCount(),2);
     
-        url.setCenter(new GSMLocation(new GeoPoint(42,32)));
+        url.setCenter(new Location(new GeoPoint(42,32)));
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),2);
         assertEquals(mmc.getMaps().get(1).getUsageCount(),1);
@@ -157,7 +155,7 @@ public class DBMapCacheTest {
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
         url.setFormat("jpg");
-        url.setCenter(new GSMLocation(new GeoPoint(40,30)));
+        url.setCenter(new Location(new GeoPoint(40,30)));
         url.setZoom(6);
         url.setMapSize(new MapSize(500,500));
         
@@ -168,7 +166,7 @@ public class DBMapCacheTest {
         assertEquals(mmc.getMaps().size(),1);
         assertEquals(mmc.getMaps().get(0).getUsageCount(),2);
     
-        url.setCenter(new GSMLocation(new GeoPoint(42,32)));
+        url.setCenter(new Location(new GeoPoint(42,32)));
         mmc.getMap(url);
         assertEquals(mmc.getMaps().size(),2);
         assertEquals(mmc.getMaps().get(1).getUsageCount(),1);

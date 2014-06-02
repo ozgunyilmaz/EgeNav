@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import tr.edu.ege.cs.egenav.GSMColor;
 import tr.edu.ege.cs.egenav.GSMDirectionURL;
-import tr.edu.ege.cs.egenav.GSMLocation;
 import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.GSMMarker;
 import tr.edu.ege.cs.egenav.GSMPath;
@@ -16,6 +15,7 @@ import tr.edu.ege.cs.egenav.GSMPathStyle;
 import tr.edu.ege.cs.egenav.GSMStyle;
 import tr.edu.ege.cs.egenav.GSMStyleRule;
 import tr.edu.ege.cs.egenav.GeoPoint;
+import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapSize;
 
 /**
@@ -26,11 +26,11 @@ public class GSMDirectionURLTest {
     
     public static void main(String args[]){
         
-        GSMDirectionURL gdu=new GSMDirectionURL(new GSMLocation(new GeoPoint(30,30)),new GSMLocation(new GeoPoint(40,40)));
+        GSMDirectionURL gdu=new GSMDirectionURL(new Location(new GeoPoint(30,30)),new Location(new GeoPoint(40,40)));
         
         System.out.println(gdu.getAbsoluteURLString());
         
-        GSMDirectionURL gdu2=new GSMDirectionURL(new GSMLocation(new GeoPoint(30,30)),new GSMLocation(new GeoPoint(40,40)),GSMDirectionURL.MODE_WALKING_MODE);
+        GSMDirectionURL gdu2=new GSMDirectionURL(new Location(new GeoPoint(30,30)),new Location(new GeoPoint(40,40)),GSMDirectionURL.MODE_WALKING_MODE);
         System.out.println(gdu2.getAbsoluteURLString());
         
         GSMMarker m=new GSMMarker(GSMColor.YELLOW);
@@ -88,10 +88,10 @@ public class GSMDirectionURLTest {
         
         ps=new GSMPathStyle("0x0000ff","5");
         GSMPath path=new GSMPath(ps);
-        path.addPathPoint(new GSMLocation(new GeoPoint(35,45)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(36,44)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(37,46)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(38,47)));
+        path.addPathPoint(new Location(new GeoPoint(35,45)));
+        path.addPathPoint(new Location(new GeoPoint(36,44)));
+        path.addPathPoint(new Location(new GeoPoint(37,46)));
+        path.addPathPoint(new Location(new GeoPoint(38,47)));
         map.addPath(path);
         
         
