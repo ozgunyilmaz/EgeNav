@@ -34,9 +34,9 @@ public class MapFrameTest extends javax.swing.JFrame {
         
         MapPanel mp=new MapPanel(m);
         
-        mp.updateLocation(new GeoPoint(42,32));
-        mp.updateLocation(new GeoPoint(38,28));
-        mp.updateLocation(new GeoPoint(39,33));
+        mp.updateLocation(new GSMLocation(new GeoPoint(42,32)));
+        mp.updateLocation(new GSMLocation(new GeoPoint(38,28)));
+        mp.updateLocation(new GSMLocation(new GeoPoint(39,33)));
         
         getContentPane().add(mp);
         setVisible(true);

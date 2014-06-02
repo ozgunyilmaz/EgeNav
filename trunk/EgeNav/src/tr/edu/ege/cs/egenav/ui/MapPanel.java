@@ -174,7 +174,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         navPanel.setAverageSpeed(navigation.getAverageSpeed());
         navPanel.setHeading(Math.toDegrees(navigation.getHeading()));
         if (direction!=null){
-            navPanel.setInstructions(direction.getInstructions((GeoPoint)loc));
+            navPanel.setInstructions(direction.getInstructions(new GeoPoint(loc.getLatitude(),loc.getLongitude())));
         }else{
             navPanel.setInstructions("");
         }

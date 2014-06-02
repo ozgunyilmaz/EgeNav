@@ -26,7 +26,7 @@ public class GSMLocation extends Location{
         return address;
     }
 
-    public GeoPoint getCoordinate() {
+    public GeoPoint getGeoPoint() {
         return point;
     }
     
@@ -62,7 +62,7 @@ public class GSMLocation extends Location{
         if (isAddress()){
             return new GSMLocation(getAddress());
         }else{
-            return new GSMLocation(getCoordinate().clone());
+            return new GSMLocation(getGeoPoint().clone());
         }
         
     }
@@ -72,28 +72,28 @@ public class GSMLocation extends Location{
         
         //Google geocoding api ile lat ve lon adres için de elde edilebilir.
         //Adresi parametre olarak alan constructor'da lat ve lon otomatik elde edilebilir.
-        return getCoordinate().getDistanceTo(location);
+        return getGeoPoint().getDistanceTo(new GeoPoint(location.getLatitude(),location.getLongitude()));
         
     }
 
     @Override
     public double getLatitude() {
-        return getCoordinate().getLatitude();
+        return getGeoPoint().getLatitude();
     }
 
     @Override
     public double getLongitude() {
-        return getCoordinate().getLongitude();
+        return getGeoPoint().getLongitude();
     }
 
     @Override
     public void setLatitude(double lat) {
-        getCoordinate().setLatitude(lat);
+        getGeoPoint().setLatitude(lat);
     }
 
     @Override
     public void setLongitude(double lon) {
-        getCoordinate().setLongitude(lon);
+        getGeoPoint().setLongitude(lon);
     }
     
 }

@@ -9,11 +9,14 @@ import javax.imageio.ImageIO;
 import tr.edu.ege.cs.egenav.GSMColor;
 import tr.edu.ege.cs.egenav.GSMDirectionURL;
 import tr.edu.ege.cs.egenav.GSMLocation;
+import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.GSMMarker;
+import tr.edu.ege.cs.egenav.GSMPath;
 import tr.edu.ege.cs.egenav.GSMPathStyle;
 import tr.edu.ege.cs.egenav.GSMStyle;
 import tr.edu.ege.cs.egenav.GSMStyleRule;
 import tr.edu.ege.cs.egenav.GeoPoint;
+import tr.edu.ege.cs.egenav.MapSize;
 
 /**
  * @author Özgün Yılmaz
@@ -67,6 +70,58 @@ public class GSMDirectionURLTest {
         rule.setInverseLightness(true);
         style.addRule(rule);
         System.out.println(style.toString());
+        
+        
+        GSMMapURL map=new GSMMapURL();
+        map.setCenter(new GeoPoint(30,40));
+        map.setMapSize(new MapSize(500,500));
+        map.setZoom(10);
+        map.setSecure(true);
+        map.incrementZoom();
+        System.out.println(map.getAbsoluteURLString());
+        
+        /////////////////////
+        map=new GSMMapURL();
+        map.setCenter(new GeoPoint(30,40));
+        map.setMapSize(new MapSize(500,500));
+        map.setZoom(5);
+        
+        ps=new GSMPathStyle("0x0000ff","5");
+        GSMPath path=new GSMPath(ps);
+        path.addPathPoint(new GSMLocation(new GeoPoint(35,45)));
+        path.addPathPoint(new GSMLocation(new GeoPoint(36,44)));
+        path.addPathPoint(new GSMLocation(new GeoPoint(37,46)));
+        path.addPathPoint(new GSMLocation(new GeoPoint(38,47)));
+        map.addPath(path);
+        
+        
+        GSMPathStyle ps2=new GSMPathStyle("0x00ff00","3");
+        GSMPath path2=new GSMPath(ps,"_p~iF~ps|U");
+        map.addPath(path2);
+        
+        m=new GSMMarker(GSMColor.YELLOW);
+        m.addPoint(new GeoPoint(30,40));
+        m.addPoint(new GeoPoint(32,42));
+        m.addPoint(new GeoPoint(33,43));
+        map.addMarker(m);
+        
+        GSMMarker m2=new GSMMarker(GSMColor.BLUE);
+        m2.addPoint(new GeoPoint(27,40));
+        m2.addPoint(new GeoPoint(28,42));
+        m2.addPoint(new GeoPoint(29,43));
+        map.addMarker(m2);
+        
+        style=new GSMStyle("road.local","geometry");
+        
+        rule=new GSMStyleRule();
+        rule.setColor("0x00ff00");
+        rule.setWeight("1");
+        rule.setVisibility(GSMStyleRule.VISIBILITY_ON);
+        style.addRule(rule);
+        map.addStyle(style);
+        System.out.println(map.getAbsoluteURLString());
+        
+        
     }
     
     

@@ -15,8 +15,9 @@ public class GSMMapURL extends MapURL{
     private boolean sensor=false;
     private String apiKey,signature,language,region;
     private int scale=-1;
-    private ArrayList<GSMPath> paths;   //todo arraylist olacak
-    private ArrayList<GSMMarker> markers;  ////todo arraylist olacak
+    private ArrayList<GSMPath> paths;   
+    private ArrayList<GSMMarker> markers;
+    private ArrayList<GSMStyle> styles;
     
     public static final int MAX_ZOOM=21;
     
@@ -40,7 +41,7 @@ public class GSMMapURL extends MapURL{
     @Override
     public boolean incrementZoom(){
         if (getZoom()<MAX_ZOOM){
-            incrementZoom();
+            setZoom(getZoom()+1);
             return true;
         }
         return false;
@@ -65,6 +66,10 @@ public class GSMMapURL extends MapURL{
 
     public void setCenter(GSMLocation center) {
         setLocation(center);
+    }
+    
+    public void setCenter(GeoPoint center) {
+        setLocation(new GSMLocation(center));
     }
     
     public int getScale() {
@@ -161,6 +166,12 @@ public class GSMMapURL extends MapURL{
             }
         }
         
+        if (styles!=null && !styles.isEmpty()){
+            for (int i=0;i<styles.size();i++){
+                url=url+styles.get(i).toString()+getSeparator();
+            }
+        }
+        
         if (markers!=null && !markers.isEmpty()){
             for (int i=0;i<markers.size();i++){
                 url=url+markers.get(i).toString()+getSeparator();
@@ -238,7 +249,7 @@ public class GSMMapURL extends MapURL{
     public MapURL getNeighborTile(int verticalDirection, int horizontalDirection) {
         
         GSMMapURL gsm=clone();
-        GeoPoint gp=gsm.getCenter().getCoordinate();
+        GeoPoint gp=gsm.getCenter().getGeoPoint();
         double lat=gp.getLatitude();
         double lon=gp.getLongitude();
         
@@ -263,6 +274,14 @@ public class GSMMapURL extends MapURL{
     public void setPathList(ArrayList<GSMPath> pathList) {
         this.paths = pathList;
     }
+    
+    public ArrayList<GSMStyle> getStyleList() {
+        return styles;
+    }
+
+    public void setStyleList(ArrayList<GSMStyle> styleList) {
+        this.styles = styleList;
+    }
 
     public ArrayList<GSMMarker> getMarkerList() {
         return markers;
@@ -279,6 +298,13 @@ public class GSMMapURL extends MapURL{
         paths.add(path);
     }
     
+    public void addStyle(GSMStyle style){
+        if (styles==null){
+            styles=new ArrayList<GSMStyle>();
+        }
+        styles.add(style);
+    }
+    
     public void addMarker(GSMMarker marker){
         if (markers==null){
             markers=new ArrayList<GSMMarker>();
@@ -293,6 +319,13 @@ public class GSMMapURL extends MapURL{
         return paths.remove(path);
     }
     
+    public boolean removeStyle(GSMStyle style){
+        if (styles==null){
+            return false;
+        }
+        return styles.remove(style);
+    }
+    
     public boolean removeMarker(GSMMarker marker){
         if (markers==null){
             return false;
@@ -305,6 +338,13 @@ public class GSMMapURL extends MapURL{
             return;
         }
         paths.remove(i);
+    }
+    
+    public void removeStyle(int i){
+        if (styles==null){
+            return;
+        }
+        styles.remove(i);
     }
     
     public void removeMarker(int i){

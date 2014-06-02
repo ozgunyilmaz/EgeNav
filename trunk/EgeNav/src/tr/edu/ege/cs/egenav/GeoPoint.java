@@ -9,7 +9,7 @@ import java.awt.Point;
 //Koordinat sınıfı
 //enlem ve boylam değereleri String'den double'a çevriliyor.
 
-public class GeoPoint extends Location{
+public class GeoPoint{
 	
     private double lat,lon;	//enlem ve boylam
 
@@ -90,25 +90,26 @@ public class GeoPoint extends Location{
     }
 
     //Aşağıda getter ve setter metodları bulunmaktadır.
-    @Override
+    
     public double getLatitude(){
         return lat;
     }
 
-    @Override
+    
     public double getLongitude(){
         return lon;
     }
 
-    @Override
+    
     public void setLatitude(double lat){
         this.lat=lat;
     }
 
-    @Override
+    
     public void setLongitude(double lon){
         this.lon=lon;
     }
+    
     
     @Override
     public GeoPoint clone(){
@@ -118,9 +119,9 @@ public class GeoPoint extends Location{
         return point;
     }
 
-    @Override
-    public double getDistanceTo(Location location) {
-        GeoPoint gp=(GeoPoint)location;
+    
+    public double getDistanceTo(GeoPoint location) {
+        GeoPoint gp=location;
         return calculateDistance(getLatitude(),getLongitude(),gp.getLatitude(),gp.getLongitude());
     }
     
