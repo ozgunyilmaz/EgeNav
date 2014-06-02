@@ -5,6 +5,10 @@ package tr.edu.ege.cs.egenav;
  * Created on 07.Nis.2014, 15:44:38
  */
 public class GSMMarker extends Marker{
+    
+    public static final String SIZE_TINY="tiny";
+    public static final String SIZE_MID="mid";
+    public static final String SIZE_SMALL="small";
 
     public GSMMarker(String color) {
         super(color);
