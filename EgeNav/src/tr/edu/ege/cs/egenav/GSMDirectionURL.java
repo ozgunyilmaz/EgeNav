@@ -34,7 +34,7 @@ public class GSMDirectionURL extends DirectionURL{
     
     private GSMWaypoint waypoints;
     
-    public GSMDirectionURL(GSMLocation org, GSMLocation dest) {
+    public GSMDirectionURL(Location org, Location dest) {
         super(org,dest);
         //setTravelMode(GSMDirectionURL.MODE_DRIVING);
         output="json";
@@ -42,7 +42,7 @@ public class GSMDirectionURL extends DirectionURL{
         setMidURL("maps.googleapis.com/maps/api/directions/");
     }
 
-    public GSMDirectionURL(GSMLocation org, GSMLocation dest, String travelMode) {
+    public GSMDirectionURL(Location org, Location dest, String travelMode) {
         super(org,dest,travelMode);
         output="json";
         setSeparator("&");

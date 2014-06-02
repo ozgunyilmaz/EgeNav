@@ -63,10 +63,10 @@ public class GSMMapURLTest {
         
         GSMPathStyle ps=new GSMPathStyle("0x0000ff","5");
         GSMPath path=new GSMPath(ps);
-        path.addPathPoint(new GSMLocation(new GeoPoint(35,45)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(36,44)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(37,46)));
-        path.addPathPoint(new GSMLocation(new GeoPoint(38,47)));
+        path.addPathPoint(new Location(new GeoPoint(35,45)));
+        path.addPathPoint(new Location(new GeoPoint(36,44)));
+        path.addPathPoint(new Location(new GeoPoint(37,46)));
+        path.addPathPoint(new Location(new GeoPoint(38,47)));
         map.addPath(path);
         
         

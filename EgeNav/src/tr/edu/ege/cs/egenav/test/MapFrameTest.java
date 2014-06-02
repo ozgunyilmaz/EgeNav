@@ -10,7 +10,7 @@
  */
 package tr.edu.ege.cs.egenav.test;
 
-import tr.edu.ege.cs.egenav.GSMLocation;
+import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.MapSize;
@@ -26,7 +26,7 @@ public class MapFrameTest extends javax.swing.JFrame {
     public MapFrameTest() {
         initComponents();
         GSMMapURL m=new GSMMapURL();
-        m.setCenter(new GSMLocation(new GeoPoint(40,30)));
+        m.setCenter(new Location(new GeoPoint(40,30)));
         m.setZoom(6);
         m.setMapSize(new MapSize(500,500));
         
@@ -34,9 +34,9 @@ public class MapFrameTest extends javax.swing.JFrame {
         
         MapPanel mp=new MapPanel(m);
         
-        mp.updateLocation(new GSMLocation(new GeoPoint(42,32)));
-        mp.updateLocation(new GSMLocation(new GeoPoint(38,28)));
-        mp.updateLocation(new GSMLocation(new GeoPoint(39,33)));
+        mp.updateLocation(new Location(new GeoPoint(42,32)));
+        mp.updateLocation(new Location(new GeoPoint(38,28)));
+        mp.updateLocation(new Location(new GeoPoint(39,33)));
         
         getContentPane().add(mp);
         setVisible(true);

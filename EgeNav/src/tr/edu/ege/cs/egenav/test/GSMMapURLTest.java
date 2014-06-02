@@ -4,7 +4,7 @@ import java.awt.Point;
 import tr.edu.ege.cs.egenav.Directions;
 import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.GSMMapURL;
-import tr.edu.ege.cs.egenav.GSMLocation;
+import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapSize;
 
 /**
@@ -16,7 +16,7 @@ public class GSMMapURLTest {
      public static void main(String args[]) {
          GSMMapURL url=new GSMMapURL();
          
-         url.setCenter(new GSMLocation(new GeoPoint(40,30)));
+         url.setCenter(new Location(new GeoPoint(40,30)));
          url.setZoom(6);
          url.setMapSize(new MapSize(500,500));
 //         url.setMapType(GSMMapType.HYBRID);

@@ -4,9 +4,6 @@
  */
 package tr.edu.ege.cs.egenav;
 
-import tr.edu.ege.cs.egenav.GeoPoint;
-import tr.edu.ege.cs.egenav.GSMLocation;
-import tr.edu.ege.cs.egenav.GSMDirectionURL;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,14 +41,14 @@ public class GSMDirectionURLTest {
      @Test
      public void getAbsoluteURLStringTest() {
      
-        GSMDirectionURL gdu=new GSMDirectionURL(new GSMLocation(new GeoPoint(30,30)),new GSMLocation(new GeoPoint(40,40)));
+        GSMDirectionURL gdu=new GSMDirectionURL(new Location(new GeoPoint(30,30)),new Location(new GeoPoint(40,40)));
         assertEquals(gdu.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/directions/json?origin=30.0,30.0&destination=40.0,40.0&sensor=false");
 
      }
      
      public void getAbsoluteURLStringTest2() {
      
-        GSMDirectionURL gdu=new GSMDirectionURL(new GSMLocation(new GeoPoint(30,30)),new GSMLocation(new GeoPoint(40,40)),GSMDirectionURL.MODE_WALKING_MODE);
+        GSMDirectionURL gdu=new GSMDirectionURL(new Location(new GeoPoint(30,30)),new Location(new GeoPoint(40,40)),GSMDirectionURL.MODE_WALKING_MODE);
         assertEquals(gdu.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/directions/json?origin=30.0,30.0&destination=40.0,40.0&sensor=false&mode=walking");
      
      }

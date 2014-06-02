@@ -56,20 +56,20 @@ public class GSMMapURL extends MapURL{
     }
     
     @Override
-    public GSMLocation getLocation(){
-        return (GSMLocation)super.getLocation();
+    public Location getLocation(){
+        return super.getLocation();
     }
     
-    public GSMLocation getCenter() {
+    public Location getCenter() {
         return getLocation();
     }
 
-    public void setCenter(GSMLocation center) {
+    public void setCenter(Location center) {
         setLocation(center);
     }
     
     public void setCenter(GeoPoint center) {
-        setLocation(new GSMLocation(center));
+        setLocation(new Location(center));
     }
     
     public int getScale() {

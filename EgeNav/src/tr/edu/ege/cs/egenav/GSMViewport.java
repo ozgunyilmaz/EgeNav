@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class GSMViewport extends Parameter{
 
-    private ArrayList<GSMLocation> loc=new ArrayList<GSMLocation>();
+    private ArrayList<Location> loc=new ArrayList<Location>();
     
     @Override
     public String toString() {

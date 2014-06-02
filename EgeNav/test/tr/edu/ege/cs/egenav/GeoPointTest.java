@@ -5,7 +5,6 @@ package tr.edu.ege.cs.egenav;
  * and open the template in the editor.
  */
 
-import tr.edu.ege.cs.egenav.GeoPoint;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
