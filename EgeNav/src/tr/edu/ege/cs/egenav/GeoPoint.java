@@ -1,7 +1,5 @@
 package tr.edu.ege.cs.egenav;
 
-import java.awt.Point;
-
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 13:44:59

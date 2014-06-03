@@ -1,6 +1,7 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
 import java.util.ArrayList;
+import tr.edu.ege.cs.egenav.GeoPoint;
 
 /**
  * @author Özgün Yılmaz

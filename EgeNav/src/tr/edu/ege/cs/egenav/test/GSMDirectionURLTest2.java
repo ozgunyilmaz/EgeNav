@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.io.IOUtils;
-import tr.edu.ege.cs.egenav.GSMDirectionResponse;
-import tr.edu.ege.cs.egenav.Polyline;
-import tr.edu.ege.cs.egenav.PolylineDeserializer;
+import tr.edu.ege.cs.egenav.direction.GSMDirectionResponse;
+import tr.edu.ege.cs.egenav.direction.Polyline;
+import tr.edu.ege.cs.egenav.direction.PolylineDeserializer;
 
 /**
  * @author Özgün Yılmaz

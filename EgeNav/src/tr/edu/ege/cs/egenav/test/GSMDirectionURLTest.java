@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import tr.edu.ege.cs.egenav.GSMColor;
-import tr.edu.ege.cs.egenav.GSMDirectionURL;
+import tr.edu.ege.cs.egenav.direction.GSMDirectionURL;
 import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.GSMMarker;
 import tr.edu.ege.cs.egenav.GSMPath;

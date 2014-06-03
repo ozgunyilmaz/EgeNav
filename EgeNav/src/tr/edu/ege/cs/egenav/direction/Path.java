@@ -1,11 +1,11 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import tr.edu.ege.cs.egenav.GeoPoint;
+import tr.edu.ege.cs.egenav.MapURL;
 import tr.edu.ege.cs.egenav.ui.LineStyle;
 
 /**

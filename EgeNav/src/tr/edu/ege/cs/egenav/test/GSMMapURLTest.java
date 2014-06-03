@@ -1,7 +1,7 @@
 package tr.edu.ege.cs.egenav.test;
 
 import java.awt.Point;
-import tr.edu.ege.cs.egenav.Directions;
+import tr.edu.ege.cs.egenav.direction.Directions;
 import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.Location;

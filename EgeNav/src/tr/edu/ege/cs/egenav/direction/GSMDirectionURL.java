@@ -1,10 +1,12 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.io.IOUtils;
+import tr.edu.ege.cs.egenav.GSMWaypoint;
+import tr.edu.ege.cs.egenav.Location;
 
 /**
  * @author Özgün Yılmaz

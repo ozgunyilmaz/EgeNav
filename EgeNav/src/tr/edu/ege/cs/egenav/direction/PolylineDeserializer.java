@@ -1,4 +1,4 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

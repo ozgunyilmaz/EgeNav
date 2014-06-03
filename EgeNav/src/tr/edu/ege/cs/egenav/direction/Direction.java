@@ -1,6 +1,8 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
 import java.awt.Graphics2D;
+import tr.edu.ege.cs.egenav.GeoPoint;
+import tr.edu.ege.cs.egenav.MapURL;
 import tr.edu.ege.cs.egenav.ui.LineStyle;
 
 /**
