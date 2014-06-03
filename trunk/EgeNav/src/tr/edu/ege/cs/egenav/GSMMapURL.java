@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav;
 
+import tr.edu.ege.cs.egenav.direction.Directions;
 import java.awt.Point;
 import java.util.ArrayList;
 

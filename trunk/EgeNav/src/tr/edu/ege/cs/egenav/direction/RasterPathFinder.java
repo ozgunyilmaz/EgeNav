@@ -1,4 +1,4 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;

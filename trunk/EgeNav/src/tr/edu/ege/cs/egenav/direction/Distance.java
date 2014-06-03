@@ -1,10 +1,10 @@
-package tr.edu.ege.cs.egenav;
+package tr.edu.ege.cs.egenav.direction;
 
 /**
  * @author Özgün Yılmaz
- * Created on 16.May.2014, 15:14:06
+ * Created on 16.May.2014, 15:13:55
  */
-public class Duration {
+public class Distance {
     
     private String text;
     private long value;

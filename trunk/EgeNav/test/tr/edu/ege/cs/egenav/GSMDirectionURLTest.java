@@ -4,6 +4,7 @@
  */
 package tr.edu.ege.cs.egenav;
 
+import tr.edu.ege.cs.egenav.direction.GSMDirectionURL;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
