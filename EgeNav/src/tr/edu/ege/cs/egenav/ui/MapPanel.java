@@ -58,7 +58,18 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     public MapPanel(MapURL mapurl){
         this();
         this.mapurl=mapurl;
-        img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        //img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        //todo aşağıdaki satırdaki uyarıya bak.
+      
+    }
+    
+    public MapPanel(MapURL mapurl,MapCache cache){
+        this();
+        this.mapurl=mapurl;
+        this.cache=cache;
+        //img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+        //todo aşağıdaki satırdaki uyarıya bak.
+        
     }
 
     public NavigationInformation getNavPanel() {
@@ -171,19 +182,20 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         
         navigation.add(new NavigationPointInfo(loc,timestamp,distance,p));
 
-        navPanel.setAverageSpeed(navigation.getAverageSpeed());
-        navPanel.setHeading(Math.toDegrees(navigation.getHeading()));
-        if (direction!=null){
-            navPanel.setInstructions(direction.getInstructions(new GeoPoint(loc.getLatitude(),loc.getLongitude())));
-        }else{
-            navPanel.setInstructions("");
+        if (navPanel!=null){
+            navPanel.setAverageSpeed(navigation.getAverageSpeed());
+            navPanel.setHeading(Math.toDegrees(navigation.getHeading()));
+            if (direction!=null){
+                navPanel.setInstructions(direction.getInstructions(new GeoPoint(loc.getLatitude(),loc.getLongitude())));
+            }else{
+                navPanel.setInstructions("");
+            }
+            navPanel.setLatitude(loc.getLatitude());
+            navPanel.setLongitude(loc.getLongitude());
+            navPanel.setSpeed(navigation.getSpeed());
+            navPanel.setTimeElapsed(navigation.getTimeElapsed());
+            navPanel.setTotalDistance(navigation.getTotalDistance());
         }
-        navPanel.setLatitude(loc.getLatitude());
-        navPanel.setLongitude(loc.getLongitude());
-        navPanel.setSpeed(navigation.getSpeed());
-        navPanel.setTimeElapsed(navigation.getTimeElapsed());
-        navPanel.setTotalDistance(navigation.getTotalDistance());
-        
         
         
         
@@ -323,12 +335,12 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     public void dragMap(int x1,int y1,int x2,int y2){//abstract olmalı
         
         if (y1!=y2){
-            double newLon=MercatorProjection.getLonByPixels(getMapUrl().getLocation().getLongitude(),y1-y2,getMapZoom());
+            double newLon=MercatorProjection.getLonByPixels(getMapUrl().getLocation().getLongitude(),x1-x2,getMapZoom());
             getMapUrl().getLocation().setLongitude(newLon);
         }
         
         if (x1!=x2){
-            double newLat=MercatorProjection.getLonByPixels(getMapUrl().getLocation().getLatitude(),x1-x2,getMapZoom());
+            double newLat=MercatorProjection.getLatByPixels(getMapUrl().getLocation().getLatitude(),y2-y1,getMapZoom());
             getMapUrl().getLocation().setLatitude(newLat);
         }
         

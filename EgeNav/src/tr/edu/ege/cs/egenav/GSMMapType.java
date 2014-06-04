@@ -11,5 +11,8 @@ public class GSMMapType {
     public static final String TERRAIN="terrain";
     public static final String HYBRID="hybrid";
     
-    
+    public static String[] getMapTypes(){
+        String[] types={ROADMAP,SATELLITE,TERRAIN,HYBRID};
+        return types;
+    }
 }

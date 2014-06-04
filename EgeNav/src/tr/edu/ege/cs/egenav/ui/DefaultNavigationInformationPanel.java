@@ -57,19 +57,19 @@ public class DefaultNavigationInformationPanel extends javax.swing.JPanel implem
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText(" ");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText(" ");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText(" ");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText(" ");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setText(" ");
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setText(" ");
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setText(" ");
 
         jLabel9.setText("Latitude");
 

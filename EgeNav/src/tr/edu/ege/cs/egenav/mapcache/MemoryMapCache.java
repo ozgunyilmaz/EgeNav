@@ -61,6 +61,7 @@ public class MemoryMapCache extends MapCache{
                 }
             }
         }else{
+            
             maps=new ArrayList<MapInfo>();
         }
     }
@@ -114,6 +115,7 @@ public class MemoryMapCache extends MapCache{
             MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
             
             File outputfile = new File(getImagePath() + minfo.getImageFileName());
+            outputfile.getParentFile().mkdirs();
             try {
                 
                 ImageIO.write(bim, fs, outputfile);

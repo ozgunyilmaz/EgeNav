@@ -25,6 +25,8 @@ public class MapDownloader {
 
             return img;
         } catch (IOException ex) {
+            
+            System.out.println("Image could not be downloaded");
             Logger.getLogger(MapDownloader.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
