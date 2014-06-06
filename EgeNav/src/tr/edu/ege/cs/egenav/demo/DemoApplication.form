@@ -385,6 +385,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSim">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C:\Users\samsung\Documents\deneme.sim"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>

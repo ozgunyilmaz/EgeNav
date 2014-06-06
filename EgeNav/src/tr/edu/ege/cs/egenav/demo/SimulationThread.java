@@ -14,7 +14,7 @@ public class SimulationThread extends Thread{
     private boolean realTime;
     private NavInfoList list;
     private MapPanel mp;
-    private volatile Thread blinker;
+    private volatile Thread blinker=this;
 
 
     
