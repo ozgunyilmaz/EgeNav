@@ -39,7 +39,10 @@ public class Navigation {
             heading=calcArrowDegree(history.get(history.size()-2).getPoint(),getLastElement().getPoint())+Math.PI/2;
         
             double deltad=getLastElement().getDistanceToPreviousLocation();
-            double deltat=(getLastElement().getTimeStamp()-history.get(history.size()-2).getTimeStamp())/(60*60*1000);
+            long last=getLastElement().getTimeStamp();
+            long prelast=history.get(history.size()-2).getTimeStamp();
+            
+            double deltat=(double)(last-prelast)/(60*60*1000);
             speed=deltad/deltat;    //  in km/hr
             timeElapsed=getLastElement().getTimeStamp()-getFirstElement().getTimeStamp();   //in miliseconds
             averageSpeed=totalDistance/(timeElapsed/60*60*1000);    //  in km/hr
@@ -109,7 +112,7 @@ public class Navigation {
     }
     
     private double calcArrowDegree(Point p1, Point p2){
-        int x1=(int)p1.getX(),y1=(int)p1.getY(),x2=(int)p2.getX(),y2=(int)p2.getY();
+        double x1=p1.getX(),y1=p1.getY(),x2=p2.getX(),y2=p2.getY();
         double degree;
 
 
