@@ -252,6 +252,8 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jLabel6.setText("File name:");
 
+        txtSim.setText("C:\\Users\\samsung\\Documents\\deneme.sim");
+
         jButton4.setText("Browse");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -44,7 +44,7 @@ public class Navigation {
             
             double deltat=(double)(last-prelast)/(60*60*1000);
             speed=deltad/deltat;    //  in km/hr
-            timeElapsed=getLastElement().getTimeStamp()-getFirstElement().getTimeStamp();   //in miliseconds
+            timeElapsed=(double)(getLastElement().getTimeStamp()-getFirstElement().getTimeStamp())/1000;   //in miliseconds
             averageSpeed=totalDistance/(timeElapsed/60*60*1000);    //  in km/hr
             
         }
