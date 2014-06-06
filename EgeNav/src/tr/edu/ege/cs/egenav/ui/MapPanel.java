@@ -197,13 +197,16 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             navPanel.setTotalDistance(navigation.getTotalDistance());
         }
         
-        
-        
         if (enforceCenter){
             
             mapurl.setLocation(loc.clone());
-            navigation.refreshPixelCoordinates(mapurl);
-            direction.refreshPixelCoordinates(mapurl);
+            if (navigation!=null){
+                navigation.refreshPixelCoordinates(mapurl);
+            }
+            if (direction!=null){
+                direction.refreshPixelCoordinates(mapurl);
+            }
+            //************************
             refreshMap();
         }else{
             //harita dışına çıkılmışsa harita güncellenmeli, çıkılmamışsa güncellenmemeli
@@ -223,10 +226,29 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
                 MapURL m=mapurl.getNeighborTile(ver, hor);
                 setMapUrl(m);
                 navigation.refreshPixelCoordinates(m);
-                direction.refreshPixelCoordinates(mapurl);
+                //todo aşağıdaki satır yukarıdakiyle aynı mı olacak.
+                //direction.refreshPixelCoordinates(mapurl);
+                if (direction!=null){
+                    direction.refreshPixelCoordinates(m);
+                }
+                //********************
                 refreshMap();
+                
+            }else{
+                repaint();
             }
             
+        }
+        //refreshMap();
+        
+    }
+    
+    public Location getLastLocation(){
+        
+        if (navigation.isEmpty()){
+            return null;
+        }else{
+            return navigation.getLastElement().getLocation();
         }
         
     }

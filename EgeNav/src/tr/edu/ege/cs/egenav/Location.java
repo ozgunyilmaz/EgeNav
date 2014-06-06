@@ -25,6 +25,10 @@ public class Location {
     public Location(GeoPoint geoPoint) {
         this.geoPoint = geoPoint;
     }
+    
+    public Location(double lat,double lon) {
+        this.geoPoint = new GeoPoint(lat,lon);
+    }
 
     public String getDescription() {
         return description;
