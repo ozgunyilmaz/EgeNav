@@ -39,11 +39,12 @@ public class DemoApplication extends javax.swing.JFrame {
     public DemoApplication() {
         m=new GSMMapURL();
         m.setCenter(new Location(new GeoPoint(40,30)));
+        
         m.setZoom(6);
         m.setMapSize(new MapSize(500,500));
         
         cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");
-        
+        System.out.println(m.getAbsoluteURLString());
         initComponents();
         mp.setNavPanel(np);
         mp.refreshMap();

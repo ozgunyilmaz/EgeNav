@@ -127,7 +127,7 @@ public class Navigation {
             }else{
                 if (x2>x1){
                     degree=Math.atan((y2-y1)/(x2-x1));
-                    System.out.print(degree);
+                    //System.out.print(degree);
                 }else{
                     degree=Math.atan((y2-y1)/(x2-x1))+Math.toRadians(180);
                 }
