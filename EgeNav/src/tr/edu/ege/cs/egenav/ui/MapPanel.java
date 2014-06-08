@@ -172,6 +172,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         
         long timestamp=Calendar.getInstance().getTimeInMillis();
         Point p=mapurl.getPixelOnMap(loc.getLatitude(),loc.getLongitude());
+        //System.out.println(p);
         double distance;
         if (navigation.isEmpty()){
             distance=0;
@@ -362,10 +363,10 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         }
         
         if (x1!=x2){
-            double newLat=MercatorProjection.getLatByPixels(getMapUrl().getLocation().getLatitude(),y2-y1,getMapZoom());
+            double newLat=MercatorProjection.getLatByPixels(getMapUrl().getLocation().getLatitude(),y1-y2,getMapZoom());
             getMapUrl().getLocation().setLatitude(newLat);
         }
-        
+        navigation.refreshPixelCoordinates(getMapUrl());
         refreshMap();
         
     }

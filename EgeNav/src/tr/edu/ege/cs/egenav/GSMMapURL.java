@@ -231,8 +231,9 @@ public class GSMMapURL extends MapURL{
     @Override
     public Point getPixelOnMap(double lat, double lon) {
         
-        Point p=new Point(getMapSize().getVertical()/2+MercatorProjection.getDeltaByLats(this.getLocation().getLatitude(), lat, getZoom()),
-                getMapSize().getHorizontal()/2+MercatorProjection.getDeltaByLons(this.getLocation().getLongitude(), lon, getZoom()));
+        Point p=new Point(getMapSize().getHorizontal()/2+MercatorProjection.getDeltaByLons(this.getLocation().getLongitude(), lon, getZoom()),
+                getMapSize().getVertical()/2+MercatorProjection.getDeltaByLats(this.getLocation().getLatitude(), lat, getZoom()));
+        //System.out.println(this.getLocation().getLatitude()+","+this.getLocation().getLongitude()+","+lat+","+lon+","+p);
         return p;
     }
 
