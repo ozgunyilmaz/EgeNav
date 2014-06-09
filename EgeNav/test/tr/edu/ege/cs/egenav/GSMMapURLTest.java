@@ -4,6 +4,7 @@
  */
 package tr.edu.ege.cs.egenav;
 
+import tr.edu.ege.cs.egenav.direction.Directions;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -112,5 +113,32 @@ public class GSMMapURLTest {
         GSMMapURL map2=map.clone();
         assertEquals(map.getAbsoluteURLString(),map2.getAbsoluteURLString());
     
+    }
+    
+    @Test
+    public void getNeighborTileTest() {
+        
+        GSMMapURL m=new GSMMapURL();
+        m.setCenter(new Location(new GeoPoint(40,30)));
+        
+        m.setZoom(6);
+        m.setMapSize(new MapSize(500,500));
+        
+        GSMMapURL m2=m.getNeighborTile(Directions.CONSTANT, Directions.EAST);
+        assertEquals(m2.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/staticmap?center=40.0,40.98632834851742&zoom=6&size=500x500&sensor=false");
+        
+        m2=m.getNeighborTile(Directions.CONSTANT, Directions.WEST);
+        assertEquals(m2.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/staticmap?center=40.0,19.013672098517418&zoom=6&size=500x500&sensor=false");
+        
+        m2=m.getNeighborTile(Directions.NORTH, Directions.CONSTANT);
+        assertEquals(m2.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/staticmap?center=47.89217139794361,30.0&zoom=6&size=500x500&sensor=false");
+        
+        m2=m.getNeighborTile(Directions.SOUTH, Directions.CONSTANT);
+        assertEquals(m2.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/staticmap?center=31.07851337646032,30.0&zoom=6&size=500x500&sensor=false");
+        
+        m2=m.getNeighborTile(Directions.SOUTH, Directions.WEST);
+        assertEquals(m2.getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/staticmap?center=31.07851337646032,19.013672098517418&zoom=6&size=500x500&sensor=false");
+        
+        
     }
 }
