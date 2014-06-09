@@ -46,9 +46,11 @@ public class DemoApplication extends javax.swing.JFrame {
         cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");
         System.out.println(m.getAbsoluteURLString());
         initComponents();
+        //mp.setEnforceCenter(true);
         mp.setNavPanel(np);
         mp.refreshMap();
-        
+//        mp.dragMap(30, 30, 80, 60);
+//        System.out.println(mp.getMapUrl().getAbsoluteURLString());
     }
 
     /** This method is called from within the constructor to
@@ -399,6 +401,7 @@ public class DemoApplication extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         mp.clearNavigationHistory();
+        mp.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

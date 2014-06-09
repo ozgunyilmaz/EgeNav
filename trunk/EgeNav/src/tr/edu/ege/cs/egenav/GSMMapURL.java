@@ -248,7 +248,7 @@ public class GSMMapURL extends MapURL{
     }
 
     @Override
-    public MapURL getNeighborTile(int verticalDirection, int horizontalDirection) {
+    public GSMMapURL getNeighborTile(int verticalDirection, int horizontalDirection) {
         
         GSMMapURL gsm=clone();
         GeoPoint gp=gsm.getCenter().getGeoPoint();
