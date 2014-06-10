@@ -117,7 +117,6 @@ public class MemoryMapCache extends MapCache{
             File outputfile = new File(getImagePath() + minfo.getImageFileName());
             outputfile.getParentFile().mkdirs();
             try {
-                
                 ImageIO.write(bim, fs, outputfile);
             } catch (IOException ex) {
                 Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);

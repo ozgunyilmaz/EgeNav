@@ -52,7 +52,7 @@ public class MapPanelTest {
         m.setMapSize(new MapSize(500,500));
         
         MapPanel mp=new MapPanel(m);
-        mp.refreshMap();
+        
         assertEquals(mp.getMapUrl().getAbsoluteURLString(),"http://maps.googleapis.com/maps/api/staticmap?center=40.0,30.0&zoom=6&size=500x500&sensor=false");
         
         mp.updateLocation(new Location(42,32));
