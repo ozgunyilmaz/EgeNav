@@ -4,7 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
+import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapURL;
+import tr.edu.ege.cs.egenav.MercatorProjection;
 
 /**
  * @author Özgün Yılmaz
@@ -36,16 +38,19 @@ public class Navigation {
         
         if (history.size()>1){
             
-            heading=calcArrowDegree(history.get(history.size()-2).getPoint(),getLastElement().getPoint())+Math.PI/2;
-        
+            //heading=calcArrowDegree(history.get(history.size()-2).getPoint(),getLastElement().getPoint())+Math.PI/2;
+            heading=calcArrowDegree2(history.get(history.size()-2).getLocation(),getLastElement().getLocation())+Math.PI/2;
+
             double deltad=getLastElement().getDistanceToPreviousLocation();
             long last=getLastElement().getTimeStamp();
             long prelast=history.get(history.size()-2).getTimeStamp();
             
             double deltat=(double)(last-prelast)/(60*60*1000);
             speed=deltad/deltat;    //  in km/hr
-            timeElapsed=(double)(getLastElement().getTimeStamp()-getFirstElement().getTimeStamp())/1000;   //in miliseconds
-            averageSpeed=totalDistance/(timeElapsed/60*60*1000);    //  in km/hr
+            
+            timeElapsed=(double)(getLastElement().getTimeStamp()-getFirstElement().getTimeStamp())/1000;   //in seconds
+            averageSpeed=totalDistance/(timeElapsed/60/60);    //  in km/hr
+            
             
         }
         
@@ -116,24 +121,53 @@ public class Navigation {
         double degree;
 
 
-            if (x1==x2){
+        if (x1==x2){
+            degree=Math.toRadians(90);
+            if (y2>y1){
                 degree=Math.toRadians(90);
-                if (y2>y1){
-                    degree=Math.toRadians(90);
-                    //System.out.print(degree);
-                }else{
-                    degree=Math.toRadians(90)+Math.toRadians(180);
-                }
+                //System.out.print(degree);
             }else{
-                if (x2>x1){
-                    degree=Math.atan((y2-y1)/(x2-x1));
-                    //System.out.print(degree);
-                }else{
-                    degree=Math.atan((y2-y1)/(x2-x1))+Math.toRadians(180);
-                }
-
+                degree=Math.toRadians(90)+Math.toRadians(180);
             }
-            return degree;
+        }else{
+            if (x2>x1){
+                degree=Math.atan((y2-y1)/(x2-x1));
+                //System.out.print(degree);
+            }else{
+                degree=Math.atan((y2-y1)/(x2-x1))+Math.toRadians(180);
+            }
+
+        }
+        return degree;
+    }
+    
+    private double calcArrowDegree2(Location p1, Location p2){
+        
+        double x1=MercatorProjection.LonToX(p1.getLongitude());
+        double y1=MercatorProjection.LatToY(p1.getLatitude());
+        double x2=MercatorProjection.LonToX(p2.getLongitude());
+        double y2=MercatorProjection.LatToY(p2.getLatitude());
+        double degree;
+
+
+        if (x1==x2){
+            degree=Math.toRadians(90);
+            if (y2>y1){
+                degree=Math.toRadians(90);
+                //System.out.print(degree);
+            }else{
+                degree=Math.toRadians(90)+Math.toRadians(180);
+            }
+        }else{
+            if (x2>x1){
+                degree=Math.atan((y2-y1)/(x2-x1));
+                //System.out.print(degree);
+            }else{
+                degree=Math.atan((y2-y1)/(x2-x1))+Math.toRadians(180);
+            }
+
+        }
+        return degree;
     }
     
     public void refreshPixelCoordinates(MapURL m){

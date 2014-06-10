@@ -239,6 +239,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtLon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="27.085423"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -246,6 +249,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtLat">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="38.462303"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -304,6 +310,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDest">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="38.458734,27.095171"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -386,7 +395,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtSim">
           <Properties>
-            <Property name="text" type="java.lang.String" value="C:\Users\samsung\Documents\deneme.sim"/>
+            <Property name="text" type="java.lang.String" value="C:\Users\samsung\Documents\deneme3.sim"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">

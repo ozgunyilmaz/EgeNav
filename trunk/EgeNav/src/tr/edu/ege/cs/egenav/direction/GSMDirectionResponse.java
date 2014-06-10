@@ -14,7 +14,7 @@ import tr.edu.ege.cs.egenav.ui.LineStyle;
  */
 public class GSMDirectionResponse extends Direction{
     
-    private double treshold;
+    private double treshold=0.2;
     private String status;
     private GSMRoute[] routes;
     ArrayList<Point> p;
@@ -56,6 +56,7 @@ public class GSMDirectionResponse extends Direction{
                     
                     GeoPoint gp=a.get(k);
                     double d=gp.getDistanceTo(g);
+                    System.out.println(g+" "+gp+" "+d);
                     if (d<dis){
                         dis=d;
                         index[0]=i;
@@ -71,7 +72,7 @@ public class GSMDirectionResponse extends Direction{
         
         if (index[0]<0){
             return "";
-        }else if (dis<0.2){
+        }else if (dis<treshold){
             GSMStep step=r.getLegs()[index[0]].getSteps()[index[1]];
             return step.getHtml_instructions();
         }
@@ -131,4 +132,13 @@ public class GSMDirectionResponse extends Direction{
         }
     
     }
+
+    public double getTreshold() {
+        return treshold;
+    }
+
+    public void setTreshold(double treshold) {
+        this.treshold = treshold;
+    }
+    
 }
