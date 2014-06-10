@@ -39,8 +39,11 @@ public class DemoApplication extends javax.swing.JFrame {
     public DemoApplication() {
         m=new GSMMapURL();
         m.setCenter(new Location(new GeoPoint(40,30)));
-        
         m.setZoom(6);
+        
+//        m.setCenter(new Location(new GeoPoint(38.461154,27.091094)));
+//        m.setZoom(10);
+        
         m.setMapSize(new MapSize(500,500));
         
         cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");

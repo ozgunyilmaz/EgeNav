@@ -79,38 +79,38 @@ public class MemoryMapCacheTest {
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\deneme\\");
     }
     
-    @Test
-    public void getImagePathTest() {
-    
-        MemoryMapCache mmc=new MemoryMapCache("tr");
-        assertEquals(mmc.getPath(),"tr\\");
-        assertEquals(mmc.getImagePath(),"tr\\images\\");
-        File f1=new File("tr\\");
-        File f2=new File("tr\\images\\");
-        try {
-            FileUtils.deleteDirectory(f1);
-            FileUtils.deleteDirectory(f2);
-        } catch (IOException ex) {
-            Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    @Test
-    public void getCacheFileAbsoluteNameTest() {
-    
-        MemoryMapCache mmc=new MemoryMapCache("tr");
-        assertEquals(mmc.getPath(),"tr\\");
-        assertEquals(mmc.getCacheFileAbsoluteName(),"tr\\mapdata");
-        File f1=new File("tr\\");
-        File f2=new File("tr\\images\\");
-        try {
-            FileUtils.deleteDirectory(f1);
-            FileUtils.deleteDirectory(f2);
-        } catch (IOException ex) {
-            Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    @Test
+//    public void getImagePathTest() {
+//    
+//        MemoryMapCache mmc=new MemoryMapCache("tr");
+//        assertEquals(mmc.getPath(),"tr\\");
+//        assertEquals(mmc.getImagePath(),"tr\\images\\");
+//        File f1=new File("tr\\");
+//        File f2=new File("tr\\images\\");
+//        try {
+//            FileUtils.deleteDirectory(f1);
+//            FileUtils.deleteDirectory(f2);
+//        } catch (IOException ex) {
+//            Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    }
+//    
+//    @Test
+//    public void getCacheFileAbsoluteNameTest() {
+//    
+//        MemoryMapCache mmc=new MemoryMapCache("tr");
+//        assertEquals(mmc.getPath(),"tr\\");
+//        assertEquals(mmc.getCacheFileAbsoluteName(),"tr\\mapdata");
+//        File f1=new File("tr\\");
+//        File f2=new File("tr\\images\\");
+//        try {
+//            FileUtils.deleteDirectory(f1);
+//            FileUtils.deleteDirectory(f2);
+//        } catch (IOException ex) {
+//            Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
     @Test
     public void cacheFilePathTest() {

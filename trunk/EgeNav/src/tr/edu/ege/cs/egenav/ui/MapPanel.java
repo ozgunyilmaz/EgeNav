@@ -260,6 +260,9 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+        if (direction!=null){
+            direction.refreshPixelCoordinates(mapurl);
+        }
         repaint();
     }
     

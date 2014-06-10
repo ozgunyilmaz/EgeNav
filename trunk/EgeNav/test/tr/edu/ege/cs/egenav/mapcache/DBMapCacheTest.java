@@ -50,7 +50,7 @@ public class DBMapCacheTest {
     //
     @Test
     public void contructorTest() {
-        DBMapCache mmc=new DBMapCache();
+        DBMapCache2 mmc=new DBMapCache2();
         mmc.close();
         assertEquals(mmc.getPath(),System.getProperty("user.dir")+"\\");
         File f=new File(System.getProperty("user.dir")+"\\mapdata.db");
@@ -62,7 +62,7 @@ public class DBMapCacheTest {
     @Test
     public void contructorTest2() {
     
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
+        DBMapCache2 mmc=new DBMapCache2("C:\\Users\\samsung\\Documents\\deneme");
         mmc.close();
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\deneme\\");
         File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
@@ -74,7 +74,7 @@ public class DBMapCacheTest {
     @Test
     public void contructorTest3() {
     
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme\\");
+        DBMapCache2 mmc=new DBMapCache2("C:\\Users\\samsung\\Documents\\deneme\\");
         mmc.close();
         assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\deneme\\");
         File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
@@ -86,7 +86,7 @@ public class DBMapCacheTest {
     @Test
     public void cacheFilePathTest() {
     
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme\\");
+        DBMapCache2 mmc=new DBMapCache2("C:\\Users\\samsung\\Documents\\deneme\\");
         mmc.close();
         assertEquals(mmc.getCacheFileAbsoluteName(),"C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
         File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
@@ -110,7 +110,7 @@ public class DBMapCacheTest {
                 Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
+        DBMapCache2 mmc=new DBMapCache2("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
          
         url.setCenter(new Location(new GeoPoint(40,30)));
@@ -168,7 +168,7 @@ public class DBMapCacheTest {
                 Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
+        DBMapCache2 mmc=new DBMapCache2("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
         url.setFormat("jpg");
         url.setCenter(new Location(new GeoPoint(40,30)));
