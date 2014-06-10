@@ -21,17 +21,17 @@ import tr.edu.ege.cs.egenav.MapURL;
  * @author Özgün Yılmaz
  * Created on 27.May.2014, 11:27:25
  */
-public class DBMapCache extends MapCache{
+public class DBMapCache2 extends MapCache{
 
     Connection c = null;
     
-    public DBMapCache() {
+    public DBMapCache2() {
         
         this(System.getProperty("user.dir"));
         
     }
 
-    public DBMapCache(String filePath) {
+    public DBMapCache2(String filePath) {
         super(filePath);
         
         File f=new File(getCacheFileAbsoluteName());
@@ -45,9 +45,9 @@ public class DBMapCache extends MapCache{
 
             //System.out.println("Opened database successfully");
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (!exist){
@@ -70,7 +70,7 @@ public class DBMapCache extends MapCache{
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -101,7 +101,7 @@ public class DBMapCache extends MapCache{
             
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -123,7 +123,7 @@ public class DBMapCache extends MapCache{
             stmt.close();
             return getLimit()<=x;
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return false;
@@ -133,7 +133,7 @@ public class DBMapCache extends MapCache{
         try {
             c.setAutoCommit(b);
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -204,7 +204,7 @@ public class DBMapCache extends MapCache{
             rs.close();
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return maps;
@@ -227,7 +227,7 @@ public class DBMapCache extends MapCache{
             
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -240,7 +240,7 @@ public class DBMapCache extends MapCache{
             rs.close();
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return m;
@@ -254,7 +254,7 @@ public class DBMapCache extends MapCache{
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -265,7 +265,7 @@ public class DBMapCache extends MapCache{
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -277,13 +277,13 @@ public class DBMapCache extends MapCache{
             }
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBMapCache2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
     public static void main(String args[]){
-        DBMapCache dnm=new DBMapCache("C:\\Users\\samsung\\Documents\\Deneme2");
+        DBMapCache2 dnm=new DBMapCache2("C:\\Users\\samsung\\Documents\\Deneme2");
         dnm.close();
         File f=new File("C:\\Users\\samsung\\Documents\\Deneme2\\mapdata.db");
         if (f.exists()){
