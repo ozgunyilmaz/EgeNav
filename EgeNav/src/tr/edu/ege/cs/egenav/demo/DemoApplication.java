@@ -162,7 +162,11 @@ public class DemoApplication extends javax.swing.JFrame {
             }
         });
 
+        txtLon.setText("27.085423");
+
         jLabel4.setText("Longitude:");
+
+        txtLat.setText("38.462303");
 
         jLabel3.setText("Latitude:");
 
@@ -212,6 +216,8 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jLabel5.setText("Destination (coordinates or an address):");
 
+        txtDest.setText("38.458734,27.095171");
+
         jButton3.setText("Get support");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +264,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jLabel6.setText("File name:");
 
-        txtSim.setText("C:\\Users\\samsung\\Documents\\deneme.sim");
+        txtSim.setText("C:\\Users\\samsung\\Documents\\deneme3.sim");
 
         jButton4.setText("Browse");
         jButton4.addActionListener(new java.awt.event.ActionListener() {

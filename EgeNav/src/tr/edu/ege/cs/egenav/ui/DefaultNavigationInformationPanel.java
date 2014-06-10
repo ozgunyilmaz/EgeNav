@@ -193,16 +193,19 @@ public class DefaultNavigationInformationPanel extends javax.swing.JPanel implem
 
     @Override
     public void setHeading(double heading) {
+        heading = Math.round( heading * 100.0 ) / 100.0;
         jLabel3.setText(Double.toString(heading));
     }
 
     @Override
     public void setSpeed(double speed) {
+        speed = Math.round( speed * 100.0 ) / 100.0;
         jLabel4.setText(Double.toString(speed));
     }
 
     @Override
     public void setTotalDistance(double dist) {
+        dist = Math.round( dist * 1000.0 ) / 1000.0;
         jLabel5.setText(Double.toString(dist));
     }
 
@@ -213,11 +216,12 @@ public class DefaultNavigationInformationPanel extends javax.swing.JPanel implem
 
     @Override
     public void setAverageSpeed(double averageSpeed) {
+        averageSpeed = Math.round( averageSpeed * 100.0 ) / 100.0;
         jLabel7.setText(Double.toString(averageSpeed));
     }
 
     @Override
     public void setInstructions(String ins) {
-        jTextPane1.setText(ins);
+        jTextPane1.setText("<html>"+ins+"</html>");
     }
 }
