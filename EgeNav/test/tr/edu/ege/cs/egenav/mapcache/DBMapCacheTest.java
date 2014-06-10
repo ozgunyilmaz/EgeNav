@@ -4,6 +4,10 @@
  */
 package tr.edu.ege.cs.egenav.mapcache;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import tr.edu.ege.cs.egenav.MapSize;
 import tr.edu.ege.cs.egenav.GeoPoint;
 import tr.edu.ege.cs.egenav.Location;
@@ -58,10 +62,10 @@ public class DBMapCacheTest {
     @Test
     public void contructorTest2() {
     
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         mmc.close();
-        assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\");
-        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\deneme\\");
+        File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
         if (f.exists()){
             f.delete();
         }
@@ -70,10 +74,10 @@ public class DBMapCacheTest {
     @Test
     public void contructorTest3() {
     
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme\\");
         mmc.close();
-        assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\");
-        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        assertEquals(mmc.getPath(),"C:\\Users\\samsung\\Documents\\deneme\\");
+        File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
         if (f.exists()){
             f.delete();
         }
@@ -82,10 +86,10 @@ public class DBMapCacheTest {
     @Test
     public void cacheFilePathTest() {
     
-        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\");
+        DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme\\");
         mmc.close();
-        assertEquals(mmc.getCacheFileAbsoluteName(),"C:\\Users\\samsung\\Documents\\mapdata.db");
-        File f=new File("C:\\Users\\samsung\\Documents\\mapdata.db");
+        assertEquals(mmc.getCacheFileAbsoluteName(),"C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
+        File f=new File("C:\\Users\\samsung\\Documents\\deneme\\mapdata.db");
         if (f.exists()){
             f.delete();
         }
@@ -100,7 +104,11 @@ public class DBMapCacheTest {
         }
         File f2=new File("C:\\Users\\samsung\\Documents\\deneme\\images");
         if (f2.exists()){
-            f2.delete();
+            try {
+                FileUtils.deleteDirectory(f2.getAbsoluteFile());
+            } catch (IOException ex) {
+                Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
@@ -137,7 +145,11 @@ public class DBMapCacheTest {
         }
         
         if (f4.exists()){
-            f4.delete();
+            try {
+                FileUtils.deleteDirectory(f4.getAbsoluteFile());
+            } catch (IOException ex) {
+                Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -150,7 +162,11 @@ public class DBMapCacheTest {
         }
         File f2=new File("C:\\Users\\samsung\\Documents\\deneme\\images");
         if (f2.exists()){
-            f2.delete();
+            try {
+                FileUtils.deleteDirectory(f2.getAbsoluteFile());
+            } catch (IOException ex) {
+                Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         DBMapCache mmc=new DBMapCache("C:\\Users\\samsung\\Documents\\deneme");
         GSMMapURL url=new GSMMapURL();
@@ -188,7 +204,11 @@ public class DBMapCacheTest {
         }
         
         if (f4.exists()){
-            f4.delete();
+            try {
+                FileUtils.deleteDirectory(f4.getAbsoluteFile());
+            } catch (IOException ex) {
+                Logger.getLogger(MemoryMapCacheTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

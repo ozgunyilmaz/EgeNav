@@ -155,6 +155,7 @@ public class DBMapCache extends MapCache{
             MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
             
             File outputfile = new File(getImagePath() + minfo.getImageFileName());
+            outputfile.getParentFile().mkdirs();
             try {
                 
                 ImageIO.write(bim, fs, outputfile);
