@@ -8,6 +8,7 @@ import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  * @author Özgün Yılmaz
@@ -27,6 +28,7 @@ public class MapDownloader {
         } catch (IOException ex) {
             
             System.out.println("Image could not be downloaded");
+            JOptionPane.showMessageDialog(null, ex, "Image could not be downloaded", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(MapDownloader.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
