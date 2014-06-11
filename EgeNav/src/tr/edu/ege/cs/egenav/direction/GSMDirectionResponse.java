@@ -56,7 +56,7 @@ public class GSMDirectionResponse extends Direction{
                     
                     GeoPoint gp=a.get(k);
                     double d=gp.getDistanceTo(g);
-                    System.out.println(g+" "+gp+" "+d);
+                    //System.out.println(g+" "+gp+" "+d);
                     if (d<dis){
                         dis=d;
                         index[0]=i;

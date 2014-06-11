@@ -38,22 +38,22 @@ public class DemoApplication extends javax.swing.JFrame {
     /** Creates new form DemoApplication */
     public DemoApplication() {
         m=new GSMMapURL();
-        m.setCenter(new Location(new GeoPoint(40,30)));
-        m.setZoom(6);
+//        m.setCenter(new Location(new GeoPoint(40,30)));
+//        m.setZoom(6);
         
-//        m.setCenter(new Location(new GeoPoint(38.461154,27.091094)));
-//        m.setZoom(10);
+        m.setCenter(new Location(new GeoPoint(38.461154,27.091094)));
+        m.setZoom(15);
         
         m.setMapSize(new MapSize(500,500));
         
         cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");
         System.out.println(m.getAbsoluteURLString());
         initComponents();
-        //mp.setEnforceCenter(true);
+        zoom.setSelectedIndex(m.getZoom()-4);
+//      mp.setEnforceCenter(true);
         mp.setNavPanel(np);
         mp.refreshMap();
-//        mp.dragMap(30, 30, 80, 60);
-//        System.out.println(mp.getMapUrl().getAbsoluteURLString());
+
     }
 
     /** This method is called from within the constructor to
@@ -264,7 +264,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jLabel6.setText("File name:");
 
-        txtSim.setText("C:\\Users\\samsung\\Documents\\deneme3.sim");
+        txtSim.setText("src\\tr\\edu\\ege\\cs\\egenav\\demo\\resources\\deneme3.sim");
 
         jButton4.setText("Browse");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -280,6 +280,7 @@ public class DemoApplication extends javax.swing.JFrame {
             }
         });
 
+        chkRealTime.setSelected(true);
         chkRealTime.setText("Real time simulation");
 
         jButton7.setText("Stop");
@@ -416,6 +417,7 @@ public class DemoApplication extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         GSMDirectionURL dir=new GSMDirectionURL(mp.getLastLocation(),new Location (txtDest.getText()));
+        dir.setLanguage("tr");
         try {
             GSMDirectionResponse res=dir.getDirections();
             mp.setDirection(res);

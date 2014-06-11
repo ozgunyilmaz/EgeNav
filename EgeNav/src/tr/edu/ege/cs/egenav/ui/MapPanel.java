@@ -6,6 +6,7 @@
 package tr.edu.ege.cs.egenav.ui;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -41,7 +42,7 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private Navigation navigation=new Navigation();
     
     private Arrow arrow=new Arrow();
-    private LineStyle directionLineStyle=new LineStyle(Color.YELLOW,null,AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F));
+    private LineStyle directionLineStyle=new LineStyle(Color.RED,new BasicStroke(5,BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL),AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F));
     private LineStyle routeLineStyle=new LineStyle();
     
     private Direction direction;
@@ -370,6 +371,9 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             getMapUrl().getLocation().setLatitude(newLat);
         }
         navigation.refreshPixelCoordinates(getMapUrl());
+        if (direction!=null){
+            direction.refreshPixelCoordinates(getMapUrl());
+        }
         refreshMap();
         
     }
