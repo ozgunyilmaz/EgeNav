@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import tr.edu.ege.cs.egenav.GSMMapType;
 import tr.edu.ege.cs.egenav.GSMMapURL;
@@ -37,22 +38,27 @@ public class DemoApplication extends javax.swing.JFrame {
 
     /** Creates new form DemoApplication */
     public DemoApplication() {
-        m=new GSMMapURL();
-//        m.setCenter(new Location(new GeoPoint(40,30)));
-//        m.setZoom(6);
-        
-        m.setCenter(new Location(new GeoPoint(38.461154,27.091094)));
-        m.setZoom(15);
-        
-        m.setMapSize(new MapSize(500,500));
-        
-        cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");
-        System.out.println(m.getAbsoluteURLString());
-        initComponents();
-        zoom.setSelectedIndex(m.getZoom()-4);
-//      mp.setEnforceCenter(true);
-        mp.setNavPanel(np);
-        mp.refreshMap();
+        try{
+            m=new GSMMapURL();
+    //        m.setCenter(new Location(new GeoPoint(40,30)));
+    //        m.setZoom(6);
+
+            m.setCenter(new Location(new GeoPoint(37.461154,27.091094)));
+            m.setZoom(15);
+
+            m.setMapSize(new MapSize(500,500));
+
+            cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");
+            //cache=new MemoryMapCache();
+            System.out.println(m.getAbsoluteURLString());
+            initComponents();
+            zoom.setSelectedIndex(m.getZoom()-4);
+    //      mp.setEnforceCenter(true);
+            mp.setNavPanel(np);
+            mp.refreshMap();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex, "Image could not be downloaded", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 

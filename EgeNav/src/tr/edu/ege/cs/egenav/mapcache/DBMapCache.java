@@ -27,7 +27,7 @@ public class DBMapCache extends MapCache{
     
     public DBMapCache() {
         
-        this(System.getProperty("user.dir"));
+        this(System.getProperty("user.dir")+"\\maps\\");
         
     }
 

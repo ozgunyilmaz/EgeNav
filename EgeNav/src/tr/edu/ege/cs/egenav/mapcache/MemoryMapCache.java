@@ -26,7 +26,7 @@ public class MemoryMapCache extends MapCache{
 
     public MemoryMapCache() {
         
-        this(System.getProperty("user.dir"));
+        this(System.getProperty("user.dir")+"\\maps\\");
         
     }
 
