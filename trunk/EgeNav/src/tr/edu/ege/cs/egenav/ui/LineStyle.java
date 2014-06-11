@@ -1,6 +1,7 @@
 package tr.edu.ege.cs.egenav.ui;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Stroke;
@@ -17,7 +18,7 @@ public class LineStyle {
 
     public LineStyle() {
         this.color = Color.BLUE;
-        this.stroke = null;
+        this.stroke = new BasicStroke(5,BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL);
         this.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F);
     }
     

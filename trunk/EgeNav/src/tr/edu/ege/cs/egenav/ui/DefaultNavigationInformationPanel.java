@@ -11,6 +11,7 @@
 package tr.edu.ege.cs.egenav.ui;
 
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -211,7 +212,22 @@ public class DefaultNavigationInformationPanel extends javax.swing.JPanel implem
 
     @Override
     public void setTimeElapsed(double timeElapsed) {
-        jLabel6.setText(Double.toString(timeElapsed));
+        if (timeElapsed<120){
+            double sec2=Math.round( timeElapsed * 10.0 ) / 10.0;
+            jLabel6.setText(sec2+" sec.");
+        }else{
+//            int hr=(int)timeElapsed/60/60;
+//            timeElapsed=timeElapsed-(hr*60);
+//            int min=(int)timeElapsed/60;
+//            timeElapsed=timeElapsed-(min*60);
+//            double sec=Math.round( timeElapsed * 10.0 ) / 10.0;
+            //DecimalFormat df = new DecimalFormat("##.#");
+            int hr = (int)timeElapsed / 3600;
+            int min = (int)(timeElapsed % 3600) / 60;
+            int sec = (int)timeElapsed % 60;
+            jLabel6.setText(String.format("%02d",hr)+":"+String.format("%02d",min)+":"+String.format("%02d",sec));
+        }
+        
     }
 
     @Override
