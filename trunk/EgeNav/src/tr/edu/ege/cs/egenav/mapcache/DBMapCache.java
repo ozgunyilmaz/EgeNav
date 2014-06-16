@@ -246,7 +246,7 @@ public class DBMapCache extends MapCache{
         return m;
     }
     
-    public void addToDB(MapInfo m){
+    private void addToDB(MapInfo m){
         try {
             Statement stmt = c.createStatement();
             String sql = "INSERT INTO Maps (Mapurl,ImageFileName,DownloadDate,UsageCount) " +
@@ -258,7 +258,7 @@ public class DBMapCache extends MapCache{
         }
     }
     
-    public void updateToDB(MapInfo m){
+    private void updateToDB(MapInfo m){
         try {
             Statement stmt = c.createStatement();
             String sql = "UPDATE Maps set UsageCount = "+m.getUsageCount()+" where Mapurl='"+m.getMapurl()+"';"; 
