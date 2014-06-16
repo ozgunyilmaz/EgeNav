@@ -11,13 +11,12 @@
 package tr.edu.ege.cs.egenav.ui;
 
 import java.awt.Dimension;
-import java.text.DecimalFormat;
 
 /**
  *
  * @author Özgün Yılmaz
  */
-public class DefaultNavigationInformationPanel extends javax.swing.JPanel implements NavigationInformation{
+public class DefaultNavigationInformationPanel extends NavigationInformationPanel{
 
     /** Creates new form DefaultNavigationInformationPanel */
     public DefaultNavigationInformationPanel() {
