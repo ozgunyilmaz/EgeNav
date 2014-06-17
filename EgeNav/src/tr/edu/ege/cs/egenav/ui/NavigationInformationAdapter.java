@@ -6,28 +6,29 @@ package tr.edu.ege.cs.egenav.ui;
  */
 public abstract class NavigationInformationAdapter implements NavigationInformation{
 
-    @Override
-    public void setLatitude(double lat){}
 
     @Override
-    public void setLongitude(double lon){}
-
-    @Override
-    public void setHeading(double heading){}
-
-    @Override
-    public void setSpeed(double speed){}
-
-    @Override
-    public void setTotalDistance(double dist){}
-
-    @Override
-    public void setTimeElapsed(double timeElapsed){}
-
-    @Override
-    public void setAverageSpeed(double averageSpeed){}
+    public abstract void setLatitude(double lat);
     
     @Override
-    public void setInstructions(String ins){}
+    public abstract void setLongitude(double lon);
+
+    @Override
+    public abstract void setHeading(double heading);
+
+    @Override
+    public abstract void setSpeed(double speed);
+
+    @Override
+    public abstract void setTotalDistance(double dist);
+
+    @Override
+    public abstract void setTimeElapsed(double timeElapsed);
+
+    @Override
+    public abstract void setAverageSpeed(double averageSpeed);
+    
+    @Override
+    public abstract void setInstructions(String ins);
     
 }
