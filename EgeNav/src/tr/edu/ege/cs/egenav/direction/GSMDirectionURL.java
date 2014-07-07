@@ -129,7 +129,10 @@ public class GSMDirectionURL extends DirectionURL{
     
     @Override
     public GSMDirectionResponse getDirections() throws MalformedURLException, IOException{
+        String temp=output;
+        output="json";
         String url = getAbsoluteURLString();
+        output=temp;
         // Get the contents of json as a string using commons IO IOUTils class.
         
         GsonBuilder gson = new GsonBuilder();

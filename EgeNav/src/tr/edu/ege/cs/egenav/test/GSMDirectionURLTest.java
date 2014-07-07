@@ -82,40 +82,40 @@ public class GSMDirectionURLTest {
         
         /////////////////////
         map=new GSMMapURL();
-        map.setCenter(new GeoPoint(30,40));
+        map.setCenter(new GeoPoint(40,30));
         map.setMapSize(new MapSize(500,500));
         map.setZoom(5);
         
         ps=new GSMPathStyle("0x0000ff","5");
         GSMPath path=new GSMPath(ps);
-        path.addPathPoint(new Location(new GeoPoint(35,45)));
-        path.addPathPoint(new Location(new GeoPoint(36,44)));
-        path.addPathPoint(new Location(new GeoPoint(37,46)));
-        path.addPathPoint(new Location(new GeoPoint(38,47)));
+        path.addPathPoint(new Location(new GeoPoint(40,35)));
+        path.addPathPoint(new Location(new GeoPoint(41,34)));
+        path.addPathPoint(new Location(new GeoPoint(42,36)));
+        path.addPathPoint(new Location(new GeoPoint(38,37)));
         map.addPath(path);
         
         
-        GSMPathStyle ps2=new GSMPathStyle("0x00ff00","3");
-        GSMPath path2=new GSMPath(ps,"_p~iF~ps|U");
+        GSMPathStyle ps2=new GSMPathStyle("0xff0000","3");
+        GSMPath path2=new GSMPath(ps2,"_dpkFkulpDhoeCombFwbxBa|wFwcmEfdwB??`ukDvvfF");
         map.addPath(path2);
         
         m=new GSMMarker(GSMColor.YELLOW);
-        m.addPoint(new GeoPoint(30,40));
-        m.addPoint(new GeoPoint(32,42));
-        m.addPoint(new GeoPoint(33,43));
+        m.addPoint(new GeoPoint(40,30));
+        m.addPoint(new GeoPoint(42,32));
+        m.addPoint(new GeoPoint(43,33));
         map.addMarker(m);
         
         GSMMarker m2=new GSMMarker(GSMColor.BLUE);
-        m2.addPoint(new GeoPoint(27,40));
-        m2.addPoint(new GeoPoint(28,42));
-        m2.addPoint(new GeoPoint(29,43));
+        m2.addPoint(new GeoPoint(42,30));
+        m2.addPoint(new GeoPoint(45,32));
+        m2.addPoint(new GeoPoint(38,33));
         map.addMarker(m2);
         
-        style=new GSMStyle("road.local","geometry");
+        style=new GSMStyle("road.highway","geometry");
         
         rule=new GSMStyleRule();
         rule.setColor("0x00ff00");
-        rule.setWeight("1");
+        rule.setWeight("3");
         rule.setVisibility(GSMStyleRule.VISIBILITY_ON);
         style.addRule(rule);
         map.addStyle(style);

@@ -18,6 +18,7 @@ public class GSMDirectionResponse extends Direction{
     private String status;
     private GSMRoute[] routes;
     ArrayList<Point> p;
+    private int activeRouteIndex=0;
 
     public GSMRoute[] getRoutes() {
         return routes;
@@ -34,11 +35,19 @@ public class GSMDirectionResponse extends Direction{
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getActiveRouteIndex() {
+        return activeRouteIndex;
+    }
+
+    public void setActiveRouteIndex(int activeRouteIndex) {
+        this.activeRouteIndex = activeRouteIndex;
+    }
     
     @Override
     public String getInstructions(GeoPoint g) {
         //todo_later bir önceki bulunan yer akılda tutulup oradan başlanabilir.
-        GSMRoute r=routes[0];
+        GSMRoute r=routes[activeRouteIndex];
 
         double dis=1000000;
         int[] index={-1,-1,-1};
