@@ -66,7 +66,8 @@ public class MemoryMapCache extends MapCache{
         }
     }
     
-    private void deleteDateDueMaps(){
+    @Override
+    public void deleteDateDueMaps(){
         
         if (getTimeLimit()<0){
             return;
@@ -144,7 +145,8 @@ public class MemoryMapCache extends MapCache{
         
     }
     
-    private void removeLeastUsed(){
+    @Override
+    public void removeLeastUsed(){
         
         int index=-1,eks=1000;
         for (int i=0;i<maps.size();i++){

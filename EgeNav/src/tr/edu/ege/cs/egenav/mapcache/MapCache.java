@@ -58,10 +58,14 @@ public abstract class MapCache {
     }
     
     public abstract String getCacheFileAbsoluteName();
-
     public abstract BufferedImage getMap(MapURL mapurl);
-    public abstract void close();
+    public abstract MapInfo find(String mapurl);
     public abstract boolean isLimitReached();
+    public abstract void deleteDateDueMaps();
+    public abstract void removeLeastUsed();
+    public abstract void close();
+    
+    
     
     
 }

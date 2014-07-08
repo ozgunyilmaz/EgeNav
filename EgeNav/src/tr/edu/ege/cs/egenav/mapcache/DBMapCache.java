@@ -74,7 +74,8 @@ public class DBMapCache extends MapCache{
         }
     }
     
-    private void deleteDateDueMaps(){
+    @Override
+    public void deleteDateDueMaps(){
         
         if (getTimeLimit()<0){
             return;
@@ -210,7 +211,8 @@ public class DBMapCache extends MapCache{
         return maps;
     }
     
-    private void removeLeastUsed(){
+    @Override
+    public void removeLeastUsed(){
         //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
         
         try {    
