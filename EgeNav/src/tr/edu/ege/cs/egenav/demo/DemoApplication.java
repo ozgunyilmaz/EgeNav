@@ -105,6 +105,8 @@ public class DemoApplication extends javax.swing.JFrame {
             }
         });
 
+        np.setBorder(javax.swing.BorderFactory.createTitledBorder("Navigation Information"));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Map properties"));
 
         type.setModel(new javax.swing.DefaultComboBoxModel(GSMMapType.getMapTypes()));
@@ -315,7 +317,7 @@ public class DemoApplication extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7)
                         .addGap(43, 43, 43)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

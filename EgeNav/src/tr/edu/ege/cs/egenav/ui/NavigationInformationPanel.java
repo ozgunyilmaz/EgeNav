@@ -14,7 +14,7 @@ package tr.edu.ege.cs.egenav.ui;
  *
  * @author Özgün Yılmaz
  */
-public class NavigationInformationPanel extends javax.swing.JPanel implements NavigationInformation{
+public abstract class NavigationInformationPanel extends javax.swing.JPanel implements NavigationInformation{
 
     /** Creates new form NavigationInformationPanel */
     public NavigationInformationPanel() {

@@ -8,27 +8,43 @@ public abstract class NavigationInformationAdapter implements NavigationInformat
 
 
     @Override
-    public abstract void setLatitude(double lat);
+    public void setLatitude(double lat){
+        
+    }
     
     @Override
-    public abstract void setLongitude(double lon);
+    public void setLongitude(double lon){
+        
+    }
 
     @Override
-    public abstract void setHeading(double heading);
+    public void setHeading(double heading){
+        
+    }
 
     @Override
-    public abstract void setSpeed(double speed);
+    public void setSpeed(double speed){
+        
+    }
 
     @Override
-    public abstract void setTotalDistance(double dist);
+    public void setTotalDistance(double dist){
+        
+    }
 
     @Override
-    public abstract void setTimeElapsed(double timeElapsed);
+    public void setTimeElapsed(double timeElapsed){
+        
+    }
 
     @Override
-    public abstract void setAverageSpeed(double averageSpeed);
+    public void setAverageSpeed(double averageSpeed){
+        
+    }
     
     @Override
-    public abstract void setInstructions(String ins);
+    public void setInstructions(String ins){
+        
+    }
     
 }
