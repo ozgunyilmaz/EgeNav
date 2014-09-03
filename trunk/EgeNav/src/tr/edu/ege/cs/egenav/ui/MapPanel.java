@@ -227,7 +227,9 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             if (hor!=Directions.CONSTANT || ver!=Directions.CONSTANT){
                 MapURL m=mapurl.getNeighborTile(ver, hor);
                 setMapUrl(m);
-                navigation.refreshPixelCoordinates(m);
+                if (navigation!=null){
+                    navigation.refreshPixelCoordinates(m);
+                }
                 //todo aşağıdaki satır yukarıdakiyle aynı mı olacak.
                 //direction.refreshPixelCoordinates(mapurl);
                 if (direction!=null){
