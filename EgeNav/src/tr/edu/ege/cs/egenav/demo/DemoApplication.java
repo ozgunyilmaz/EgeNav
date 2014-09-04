@@ -10,6 +10,8 @@
  */
 package tr.edu.ege.cs.egenav.demo;
 
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
@@ -35,6 +37,7 @@ public class DemoApplication extends javax.swing.JFrame {
     GSMMapURL m;
     MemoryMapCache cache;
     SimulationThread st;
+    Voice voice;
 
     /** Creates new form DemoApplication */
     public DemoApplication() {
@@ -56,6 +59,13 @@ public class DemoApplication extends javax.swing.JFrame {
     //      mp.setEnforceCenter(true);
             mp.setNavPanel(np);
             mp.refreshMap();
+            
+            VoiceManager voiceManager = VoiceManager.getInstance();
+            voice = voiceManager.getVoice("kevin16");
+            voice.allocate();
+            //voice.setRate(120) ;
+            mp.setVoice(voice);
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Image could not be downloaded", JOptionPane.ERROR_MESSAGE);
         }
@@ -405,6 +415,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        voice.deallocate();
         System.out.println("closed");
         cache.close();
     }//GEN-LAST:event_formWindowClosing

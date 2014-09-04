@@ -5,6 +5,7 @@
  */
 package tr.edu.ege.cs.egenav.ui;
 
+import com.sun.speech.freetts.Voice;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -24,6 +25,7 @@ import tr.edu.ege.cs.egenav.Location;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapURL;
 import tr.edu.ege.cs.egenav.MercatorProjection;
+import tr.edu.ege.cs.egenav.direction.DirectionSpeaker;
 import tr.edu.ege.cs.egenav.mapcache.MapCache;
 
 /**
@@ -40,10 +42,12 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     private int x1,y1,x2,y2;
     private boolean enforceCenter=false;
     private Navigation navigation=new Navigation();
+    private String ins="";
     
     private Arrow arrow=new Arrow();
     private LineStyle directionLineStyle=new LineStyle(Color.RED,new BasicStroke(5,BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL),AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5F));
     private LineStyle routeLineStyle=new LineStyle();
+    private Voice voice;
     
     private Direction direction;
     private NavigationInformation navPanel;
@@ -138,6 +142,14 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         this.arrow = arrow;
     }
 
+    public Voice getVoice() {
+        return voice;
+    }
+
+    public void setVoice(Voice voice) {
+        this.voice = voice;
+    }
+    
     public LineStyle getRouteLineStyle() {
         return routeLineStyle;
     }
@@ -188,7 +200,12 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             navPanel.setAverageSpeed(navigation.getAverageSpeed());
             navPanel.setHeading(Math.toDegrees(navigation.getHeading()));
             if (direction!=null){
-                navPanel.setInstructions(direction.getInstructions(new GeoPoint(loc.getLatitude(),loc.getLongitude())));
+                String old=ins;
+                ins=direction.getInstructions(new GeoPoint(loc.getLatitude(),loc.getLongitude()));
+                navPanel.setInstructions(ins);
+                if (voice!=null && !old.equals(ins)){
+                    (new DirectionSpeaker(voice,ins)).start();
+                }
             }else{
                 navPanel.setInstructions("");
             }
