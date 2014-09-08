@@ -16,10 +16,9 @@ public class MapInfo implements Serializable{
     private String imageFileName;
     private Date downloadDate;
     private int usageCount;
-
+    
     public MapInfo(String mapurl, String format) {
         this.mapurl = mapurl;
-        
         downloadDate=Calendar.getInstance().getTime();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
@@ -37,9 +36,9 @@ public class MapInfo implements Serializable{
     
     
     
-    public boolean deleteImageFile(){
+    public boolean deleteImageFile(String path){
         
-        File f=new File(imageFileName);
+        File f=new File(path+imageFileName);
         return f.delete();
         
     }

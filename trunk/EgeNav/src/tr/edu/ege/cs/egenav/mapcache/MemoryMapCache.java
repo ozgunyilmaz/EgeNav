@@ -82,7 +82,7 @@ public class MemoryMapCache extends MapCache{
             if (due>dd){
                 maps.remove(i);
                 i--;
-                m.deleteImageFile();
+                m.deleteImageFile(getImagePath());
             }
         }
         
@@ -148,19 +148,23 @@ public class MemoryMapCache extends MapCache{
     @Override
     public void removeLeastUsed(){
         
-        int index=-1,eks=1000;
+        int index=-1,eks=100000;
         for (int i=0;i<maps.size();i++){
             
             MapInfo m=maps.get(i);
             if (m.getUsageCount()<eks){
-                
+                //Önce en az kullanılma sayısını bul, sonra o sayıda kullanılan ilk elemanı sil
+                eks=m.getUsageCount();
                 index=i;
                 
             }
         }
-        MapInfo m=maps.get(index);
-        maps.remove(index);
-        m.deleteImageFile();
+        if (index>0){
+            MapInfo m=maps.get(index);
+            maps.remove(index);
+            m.deleteImageFile(getImagePath());
+        }
+        
         
     }
     
