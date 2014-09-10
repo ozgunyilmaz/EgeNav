@@ -12,8 +12,11 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.MapDownloader;
+import tr.edu.ege.cs.egenav.MapPosition;
 import tr.edu.ege.cs.egenav.MapURL;
+import tr.edu.ege.cs.egenav.direction.Directions;
 
 /**
  * @author Özgün Yılmaz
@@ -104,14 +107,57 @@ public class MemoryMapCache extends MapCache{
         String mstr=mapurl.getAbsoluteURLString();
         MapInfo m=find(mstr);
         if (m==null){
-            BufferedImage bim=MapDownloader.downloadMap(mstr);
-            
-            String fs;
-            if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
-                fs="png";
+
+            if (isPartialMapsSupported()){
+                return getMapFromPartialMaps(mapurl);
             }else{
-                fs=mapurl.getFormat();
+            
+                String fs;
+                if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
+                    fs="png";
+                }else{
+                    fs=mapurl.getFormat();
+                }
+    
+                return downloadMap(mstr,fs);
             }
+        }else{
+
+            return getCachedMap(m);
+            
+        }
+        
+    }
+    
+    private BufferedImage getMapFromPartialMaps(MapURL mapurl) {
+        
+        for (int i=0;i<maps.size();i++){
+            GSMMapURL m=GSMMapURL.parseString();
+            MapPosition mp=m.intersects(mapurl);
+            if (mp.isIntersection()){
+                
+                if (mp.getHorizontal()==Directions.CONSTANT || mp.getVertical()==Directions.CONSTANT){
+                    
+                    m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+                    
+                }else{
+                    
+                    m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
+                    m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+                    m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
+                    
+                }
+                
+                break;
+            }
+        }
+        return null;
+    }
+    
+    private BufferedImage downloadMap(String mstr, String fs) {
+        
+        BufferedImage bim=MapDownloader.downloadMap(mstr);
+            
             
             MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
             
@@ -131,18 +177,18 @@ public class MemoryMapCache extends MapCache{
             maps.add(minfo);
             
             return bim;
-        }else{
-            m.incrementUsageCount();
-            String fname=m.getImageFileName();
-            try {
-                return ImageIO.read(new File(getImagePath()+fname));
-            } catch (IOException ex) {
-                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
-            
-        }
         
+    }
+    
+    private BufferedImage getCachedMap(MapInfo m) {
+        m.incrementUsageCount();
+        String fname=m.getImageFileName();
+        try {
+            return ImageIO.read(new File(getImagePath()+fname));
+        } catch (IOException ex) {
+            Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
     @Override

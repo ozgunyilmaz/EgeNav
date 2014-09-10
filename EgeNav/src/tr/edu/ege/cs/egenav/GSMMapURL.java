@@ -355,5 +355,78 @@ public class GSMMapURL extends MapURL{
         }
         markers.remove(i);
     }
+
+    @Override
+    public boolean isCompatible(MapURL m) {
+        
+        GSMMapURL gm=(GSMMapURL)m;
+        if (paths.size()!=gm.getPathList().size() || 
+                markers.size()!=gm.getMarkerList().size() ||
+                styles.size()!=gm.getStyleList().size() ||
+                parameters.size()!=gm.getParameterList().size()) {
+            return false;
+        }
+        for (int i=0; i<paths.size();i++){
+            if (!paths.get(i).toString().equals(gm.getPathList().get(i).toString())){
+                return false;
+            }
+        }
+        for (int i=0; i<markers.size();i++){
+            if (!markers.get(i).toString().equals(gm.getMarkerList().get(i).toString())){
+                return false;
+            }
+        }
+        for (int i=0; i<styles.size();i++){
+            if (!styles.get(i).toString().equals(gm.getStyleList().get(i).toString())){
+                return false;
+            }
+        }
+        for (int i=0; i<parameters.size();i++){
+            if (!parameters.get(i).toString().equals(gm.getParameterList().get(i).toString())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public MapPosition intersects(MapURL mapurl) {
+        
+        int h=getMapSize().getHorizontal()/2;
+        int v=getMapSize().getVertical()/2;
+        GSMMapURL gm=(GSMMapURL)mapurl;
+        Point p=getPixelOnMap(gm.getLocation().getLatitude(),gm.getLocation().getLongitude());
+        int h2=p.x;
+        int v2=p.y;
+        int dh=h2-h;
+        int dv=v2-v;
+        
+        if (Math.abs(dh)>=getMapSize().getHorizontal() || Math.abs(dv)>=getMapSize().getVertical()){
+            return new MapPosition(false);
+        }
+        
+        MapPosition mp=new MapPosition(true);
+        if (dh<0){
+            mp.setHorizontal(Directions.EAST);
+        }else if (dh>0){
+            mp.setHorizontal(Directions.WEST);
+        }else{
+            mp.setHorizontal(Directions.CONSTANT);
+        }
+        
+        if (dv<0){
+            mp.setVertical(Directions.SOUTH);
+        }else if (dv>0){
+            mp.setHorizontal(Directions.NORTH);
+        }else{
+            mp.setHorizontal(Directions.CONSTANT);
+        }
+        return mp;
+        
+    }
+    
+    public static GSMMapURL parseString() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
     
 }
