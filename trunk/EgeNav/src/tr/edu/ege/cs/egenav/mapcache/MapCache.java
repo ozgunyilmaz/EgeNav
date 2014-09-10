@@ -13,6 +13,7 @@ public abstract class MapCache {
     private String path;
     private int limit=100;
     private int timeLimit=-1;
+    private boolean partialMapsSupported=true;
 
     public MapCache() {
     
@@ -55,6 +56,14 @@ public abstract class MapCache {
     
     public String getImagePath(){
         return getPath()+"images\\";
+    }
+
+    public boolean isPartialMapsSupported() {
+        return partialMapsSupported;
+    }
+
+    public void setPartialMapsSupported(boolean partialMapsSupported) {
+        this.partialMapsSupported = partialMapsSupported;
     }
     
     public abstract String getCacheFileAbsoluteName();

@@ -128,6 +128,12 @@ public abstract class MapURL {
     public void appendParameters(Collection c){
         parameters.addAll(c);
     }
+
+    public ArrayList<Parameter> getParameterList() {
+        return parameters;
+    }
+    
+    
     
     
     public abstract Point getPixelOnMap(double lat, double lon);
@@ -135,5 +141,9 @@ public abstract class MapURL {
     public abstract GeoPoint getCordinatesOnMap(Point p);
     
     public abstract MapURL getNeighborTile(int verticalDirection, int horizontalDirection);
+    
+    public abstract boolean isCompatible(MapURL m);
+    
+    public abstract MapPosition intersects(MapURL mapurl);
     
 }
