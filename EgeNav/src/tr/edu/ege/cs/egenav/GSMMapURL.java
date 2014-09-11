@@ -268,6 +268,14 @@ public class GSMMapURL extends MapURL{
         return gsm;
         
     }
+    
+    @Override
+    public void removeAllParameters(){
+        super.removeAllParameters();
+        markers.clear();
+        paths.clear();
+        styles.clear();
+    }
 
     public ArrayList<GSMPath> getPathList() {
         return paths;
