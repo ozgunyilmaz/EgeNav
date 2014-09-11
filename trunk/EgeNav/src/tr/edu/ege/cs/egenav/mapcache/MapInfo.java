@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import tr.edu.ege.cs.egenav.MapURL;
 
 /**
  * @author Özgün Yılmaz
@@ -13,12 +14,23 @@ import java.util.Date;
 public class MapInfo implements Serializable{
     
     private String mapurl;
+    private MapURL mobject;
     private String imageFileName;
     private Date downloadDate;
     private int usageCount;
     
     public MapInfo(String mapurl, String format) {
         this.mapurl = mapurl;
+        downloadDate=Calendar.getInstance().getTime();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        
+        imageFileName="map_image"+dateFormat.format(downloadDate)+"."+format;
+        usageCount=1;
+    }
+    
+    public MapInfo(MapURL mobject, String format) {
+        this.mobject = mobject;
         downloadDate=Calendar.getInstance().getTime();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
@@ -34,7 +46,20 @@ public class MapInfo implements Serializable{
         this.usageCount = usageCount;
     }
     
-    
+    public MapInfo(MapURL mobject, String imageFileName, Date downloadDate, int usageCount) {
+        this.mobject = mobject;
+        this.imageFileName = imageFileName;
+        this.downloadDate = downloadDate;
+        this.usageCount = usageCount;
+    }
+
+    public MapURL getMapObject() {
+        return mobject;
+    }
+
+    public void setMapObject(MapURL mobject) {
+        this.mobject = mobject;
+    }
     
     public boolean deleteImageFile(String path){
         

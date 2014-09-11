@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav.mapcache;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -105,37 +106,38 @@ public class MemoryMapCache extends MapCache{
     public BufferedImage getMap(MapURL mapurl) {
         
         String mstr=mapurl.getAbsoluteURLString();
-        MapInfo m=find(mstr);
-        if (m==null){
-
-            if (isPartialMapsSupported()){
-                return getMapFromPartialMaps(mapurl);
-            }else{
+        MapInfo m=find(mapurl);
+        if (m!=null){
             
-                String fs;
-                if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
-                    fs="png";
-                }else{
-                    fs=mapurl.getFormat();
-                }
-    
-                return downloadMap(mstr,fs);
-            }
-        }else{
-
             return getCachedMap(m);
-            
         }
+
+        if (isPartialMapsSupported()){
+            
+            BufferedImage bim=getMapFromPartialMaps(mapurl);
+            if (bim!=null){
+                return bim;
+            }
+        }
+
+        String fs;
+        if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
+            fs="png";
+        }else{
+            fs=mapurl.getFormat();
+        }
+
+        return downloadMap(mapurl,fs);  //*********
         
     }
     
     private BufferedImage getMapFromPartialMaps(MapURL mapurl) {
         
         for (int i=0;i<maps.size();i++){
-            GSMMapURL m=GSMMapURL.parseString();
+            MapURL m=maps.get(i).getMapObject();
             MapPosition mp=m.intersects(mapurl);
             if (mp.isIntersection()){
-                
+                //*************************
                 if (mp.getHorizontal()==Directions.CONSTANT || mp.getVertical()==Directions.CONSTANT){
                     
                     m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
@@ -147,36 +149,67 @@ public class MemoryMapCache extends MapCache{
                     m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
                     
                 }
-                
+                //************************
                 break;
             }
         }
         return null;
     }
     
-    private BufferedImage downloadMap(String mstr, String fs) {
+    private BufferedImage composeMap(MapInfo mi, MapPosition mp){
         
-        BufferedImage bim=MapDownloader.downloadMap(mstr);
+        MapURL m=mi.getMapObject();
+        if (mp.getHorizontal()==Directions.CONSTANT){
+                    
+            MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+            BufferedImage bim1=getCachedMap(mi);    //
+            BufferedImage bim2=getFullMap(neighbor);
             
             
-            MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
+        }else if (mp.getVertical()==Directions.CONSTANT){
             
-            File outputfile = new File(getImagePath() + minfo.getImageFileName());
-            outputfile.getParentFile().mkdirs();
-            try {
-                ImageIO.write(bim, fs, outputfile);
-            } catch (IOException ex) {
-                Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+            BufferedImage bim1=getCachedMap(mi);    //0,dv X hor-1,ver-1        0,0      X hor-1,(ver+dv)-1
+            BufferedImage bim2=getFullMap(neighbor);//0,0  X hor-1,dv-1         0,ver+dv X hor-1,ver-1
             
-            if (isLimitReached()){
-                removeLeastUsed();  
-                //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
-            }
+            BufferedImage comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            Graphics2D g2d=comp.createGraphics();
+            int dv=Math.abs(mp.getVertical());
             
-            maps.add(minfo);
+            //g2d.drawImage();
             
-            return bim;
+        }else{
+            m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
+            m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+            m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
+        }
+        
+        return null;
+    }
+    
+    private BufferedImage downloadMap(MapURL mapurl, String fs) {
+        
+        BufferedImage bim=MapDownloader.downloadMap(mapurl.getAbsoluteURLString()); //******
+            
+            
+        MapInfo minfo=new MapInfo(mapurl,fs);    //Eğer limitse çıkarılmalı     //******
+
+        File outputfile = new File(getImagePath() + minfo.getImageFileName());
+        outputfile.getParentFile().mkdirs();
+        try {
+            ImageIO.write(bim, fs, outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (isLimitReached()){
+            removeLeastUsed();  
+            //en az sayıda kullanılanı ve en eski olanı çıkar ve image dosyasını sil.
+        }
+
+        maps.add(minfo);
+
+        return bim;
         
     }
     
@@ -188,6 +221,28 @@ public class MemoryMapCache extends MapCache{
         } catch (IOException ex) {
             Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+    
+    private BufferedImage getFullMap(MapURL mapurl) {
+        
+        String mstr=mapurl.getAbsoluteURLString();
+        MapInfo m=find(mapurl);
+        if (m==null){
+
+            String fs;
+            if (mapurl.getFormat()==null || mapurl.getFormat().equals("")){
+                fs="png";
+            }else{
+                fs=mapurl.getFormat();
+            }
+
+            return downloadMap(mapurl,fs);
+
+        }else{
+
+            return getCachedMap(m);
+            
         }
     }
     
@@ -214,10 +269,11 @@ public class MemoryMapCache extends MapCache{
         
     }
     
-    public MapInfo find(String mapurl){
+    @Override
+    public MapInfo find(MapURL mapurl){
         
         for (int i=0;i<maps.size();i++){
-            if (maps.get(i).getMapurl().equals(mapurl)){
+            if (maps.get(i).getMapObject().getAbsoluteURLString().equals(mapurl.getAbsoluteURLString())){
                 return maps.get(i);
             }
         }

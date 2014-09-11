@@ -1,6 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,7 +9,7 @@ import java.util.Collection;
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 13:28:15
  */
-public abstract class MapURL {
+public abstract class MapURL implements Serializable{
     
     private boolean secure=false;
     private String midURL,clientID,mapType,format;
@@ -127,6 +128,10 @@ public abstract class MapURL {
     
     public void appendParameters(Collection c){
         parameters.addAll(c);
+    }
+    
+    public void removeAllParameters(){
+        parameters.clear();
     }
 
     public ArrayList<Parameter> getParameterList() {

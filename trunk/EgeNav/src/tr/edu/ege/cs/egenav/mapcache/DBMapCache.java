@@ -142,7 +142,7 @@ public class DBMapCache extends MapCache{
     public BufferedImage getMap(MapURL mapurl) {
         
         String mstr=mapurl.getAbsoluteURLString();
-        MapInfo m=find(mstr);
+        MapInfo m=find(mapurl);
         if (m==null){
             BufferedImage bim=MapDownloader.downloadMap(mstr);
             
@@ -233,11 +233,12 @@ public class DBMapCache extends MapCache{
         }
     }
     
-    public MapInfo find(String mapurl){
+    @Override
+    public MapInfo find(MapURL mapurl){
         MapInfo m=null;
         try {
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM Maps WHERE Mapurl='"+mapurl+"';" );
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM Maps WHERE Mapurl='"+mapurl.getAbsoluteURLString()+"';" );
             m=new MapInfo(mapurl,rs.getString("ImageFileName"),new Date(rs.getLong("DownloadDate")),rs.getInt("UsageCount"));
             rs.close();
             stmt.close();
