@@ -174,9 +174,22 @@ public class MemoryMapCache extends MapCache{
             
             BufferedImage comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
             Graphics2D g2d=comp.createGraphics();
+            int ver=bim1.getHeight();
+            int hor=bim1.getWidth();
             int dv=Math.abs(mp.getVertical());
+            if (mp.getVertical()>0){
             
-            //g2d.drawImage();
+                                //dest                      //source
+            g2d.drawImage(bim1, 0, 0,       hor, ver-dv,    0, dv, hor, ver, null);  //0,dv,hor-1,ver-1
+            g2d.drawImage(bim2, 0, ver-dv,  hor, ver,       0, 0,  hor, dv, null);
+            
+            }else{
+            
+            g2d.drawImage(bim1, 0, dv, hor, ver,            0, 0,       hor, ver-dv, null);  //0, 0,       hor, ver-dv,
+            g2d.drawImage(bim2, 0, 0,  hor, dv,             0, ver-dv,  hor, ver, null);  //0, ver-dv,  hor, ver
+            
+        }
+            
             
         }else{
             m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
