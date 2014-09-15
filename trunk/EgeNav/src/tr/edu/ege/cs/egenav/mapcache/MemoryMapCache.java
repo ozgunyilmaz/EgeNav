@@ -137,19 +137,7 @@ public class MemoryMapCache extends MapCache{
             MapURL m=maps.get(i).getMapObject();
             MapPosition mp=m.intersects(mapurl);
             if (mp.isIntersection()){
-                //*************************
-                if (mp.getHorizontal()==Directions.CONSTANT || mp.getVertical()==Directions.CONSTANT){
-                    
-                    m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
-                    
-                }else{
-                    
-                    m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
-                    m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
-                    m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
-                    
-                }
-                //************************
+                composeMap(maps.get(i),mp);
                 break;
             }
         }
@@ -158,46 +146,133 @@ public class MemoryMapCache extends MapCache{
     
     private BufferedImage composeMap(MapInfo mi, MapPosition mp){
         
+        BufferedImage comp=null;
         MapURL m=mi.getMapObject();
         if (mp.getHorizontal()==Directions.CONSTANT){
                     
             MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
-            BufferedImage bim1=getCachedMap(mi);    //
-            BufferedImage bim2=getFullMap(neighbor);
+            BufferedImage bim1=null, bim2=null;
+            
+            if (mp.getVertical()>0){
+                bim1=getCachedMap(mi);    //0,dv X hor-1,ver-1        0,0      X hor-1,(ver+dv)-1
+                bim2=getFullMap(neighbor);//0,0  X hor-1,dv-1         0,ver+dv X hor-1,ver-1
+            }else{
+                bim1=getFullMap(neighbor);    
+                bim2=getCachedMap(mi);
+            }
+            
+            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            Graphics2D g2d=comp.createGraphics();
+            int ver=bim1.getHeight();
+            int hor=bim1.getWidth();
+            
+            int dv=mp.getVertical();
+            
+            if (dv<0){
+                dv=ver+dv;
+            }
+            
+//            if (mp.getVertical()>0){
+//                                //dest                      //source
+            g2d.drawImage(bim1, 0, 0,       hor, ver-dv,    0, dv, hor, ver, null);  //0,dv,hor-1,ver-1
+            g2d.drawImage(bim2, 0, ver-dv,  hor, ver,       0, 0,  hor, dv, null);
+
+//            }else{
+//            
+//                g2d.drawImage(bim1, 0, dv, hor, ver,            0, 0,       hor, ver-dv, null);  //0, 0,       hor, ver-dv,
+//                g2d.drawImage(bim2, 0, 0,  hor, dv,             0, ver-dv,  hor, ver, null);  //0, ver-dv,  hor, ver
+//
+//            }
             
             
         }else if (mp.getVertical()==Directions.CONSTANT){
             
             MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
-            BufferedImage bim1=getCachedMap(mi);    //0,dv X hor-1,ver-1        0,0      X hor-1,(ver+dv)-1
-            BufferedImage bim2=getFullMap(neighbor);//0,0  X hor-1,dv-1         0,ver+dv X hor-1,ver-1
+            BufferedImage bim1=null, bim2=null;
             
-            BufferedImage comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            if (mp.getHorizontal()>0){
+                bim1=getCachedMap(mi);    //0,dv X hor-1,ver-1        0,0      X hor-1,(ver+dv)-1
+                bim2=getFullMap(neighbor);//0,0  X hor-1,dv-1         0,ver+dv X hor-1,ver-1
+            }else{
+                bim1=getFullMap(neighbor);    
+                bim2=getCachedMap(mi);
+            }
+            
+            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
             Graphics2D g2d=comp.createGraphics();
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
-            int dv=Math.abs(mp.getVertical());
-            if (mp.getVertical()>0){
             
-                                //dest                      //source
-            g2d.drawImage(bim1, 0, 0,       hor, ver-dv,    0, dv, hor, ver, null);  //0,dv,hor-1,ver-1
-            g2d.drawImage(bim2, 0, ver-dv,  hor, ver,       0, 0,  hor, dv, null);
+            int dh=mp.getHorizontal();
             
-            }else{
+            if (dh<0){
+                dh=hor+dh;
+            }
             
-            g2d.drawImage(bim1, 0, dv, hor, ver,            0, 0,       hor, ver-dv, null);  //0, 0,       hor, ver-dv,
-            g2d.drawImage(bim2, 0, 0,  hor, dv,             0, ver-dv,  hor, ver, null);  //0, ver-dv,  hor, ver
-            
-        }
+//            if (mp.getVertical()>0){
+//                                //dest                      //source
+            g2d.drawImage(bim1, 0,      0, hor-dh, ver,    dh, 0, hor, ver, null);  
+            g2d.drawImage(bim2, hor-dh, 0, hor,    ver,    0, 0,  dh, ver, null);
             
             
         }else{
-            m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
-            m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
-            m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
+//            m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
+//            m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+//            m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
+            
+            BufferedImage bim1=null, bim2=null, bim3=null, bim4=null;
+            
+            if (mp.getHorizontal()>0){
+                
+                if (mp.getVertical()>0){
+                    bim1=getCachedMap(mi);    
+                    bim2=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                    bim3=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
+                    bim4=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
+                }else{
+                    bim1=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
+                    bim2=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
+                    bim3=getCachedMap(mi);
+                    bim4=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                }
+                
+            }else{
+                if (mp.getVertical()>0){
+                    bim1=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                    bim2=getCachedMap(mi);
+                    bim3=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
+                    bim4=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
+                }else{
+                    bim1=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
+                    bim2=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
+                    bim3=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                    bim4=getCachedMap(mi);    
+                }
+            }
+            
+            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            Graphics2D g2d=comp.createGraphics();
+            int ver=bim1.getHeight();
+            int hor=bim1.getWidth();
+            
+            int dh=mp.getHorizontal();
+            int dv=mp.getVertical();
+            
+            if (dh<0){
+                dh=hor+dh;
+            }
+            
+            if (dv<0){
+                dv=ver+dv;
+            }
+            
+            g2d.drawImage(bim1, 0,      0, hor-dh, ver-dv,    dh, dv, hor, ver, null);  //0,dv,hor-1,ver-1
+            g2d.drawImage(bim2, hor-dh, 0, hor,    ver-dv,    0,  dv,  dh, ver, null);
+            g2d.drawImage(bim3, 0, ver-dv,  hor-dh, ver,      dh, 0,  hor, dv, null);
+            g2d.drawImage(bim4, hor-dh, ver-dv,  hor, ver,    0, 0,  dh, dv, null);
         }
         
-        return null;
+        return comp;
     }
     
     private BufferedImage downloadMap(MapURL mapurl, String fs) {
