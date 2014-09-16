@@ -13,7 +13,6 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import tr.edu.ege.cs.egenav.GSMMapURL;
 import tr.edu.ege.cs.egenav.MapDownloader;
 import tr.edu.ege.cs.egenav.MapPosition;
 import tr.edu.ege.cs.egenav.MapURL;
@@ -105,7 +104,7 @@ public class MemoryMapCache extends MapCache{
     @Override
     public BufferedImage getMap(MapURL mapurl) {
         
-        String mstr=mapurl.getAbsoluteURLString();
+        //String mstr=mapurl.getAbsoluteURLString();
         MapInfo m=find(mapurl);
         if (m!=null){
             
@@ -172,19 +171,11 @@ public class MemoryMapCache extends MapCache{
                 dv=ver+dv;
             }
             
-//            if (mp.getVertical()>0){
-//                                //dest                      //source
+
+//                              //dest                      //source
             g2d.drawImage(bim1, 0, 0,       hor, ver-dv,    0, dv, hor, ver, null);  //0,dv,hor-1,ver-1
             g2d.drawImage(bim2, 0, ver-dv,  hor, ver,       0, 0,  hor, dv, null);
 
-//            }else{
-//            
-//                g2d.drawImage(bim1, 0, dv, hor, ver,            0, 0,       hor, ver-dv, null);  //0, 0,       hor, ver-dv,
-//                g2d.drawImage(bim2, 0, 0,  hor, dv,             0, ver-dv,  hor, ver, null);  //0, ver-dv,  hor, ver
-//
-//            }
-            
-            
         }else if (mp.getVertical()==Directions.CONSTANT){
             
             MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
@@ -208,17 +199,12 @@ public class MemoryMapCache extends MapCache{
             if (dh<0){
                 dh=hor+dh;
             }
-            
-//            if (mp.getVertical()>0){
-//                                //dest                      //source
+          
             g2d.drawImage(bim1, 0,      0, hor-dh, ver,    dh, 0, hor, ver, null);  
             g2d.drawImage(bim2, hor-dh, 0, hor,    ver,    0, 0,  dh, ver, null);
             
             
         }else{
-//            m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal());
-//            m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
-//            m.getNeighborTile(mp.getVertical(), Directions.CONSTANT);
             
             BufferedImage bim1=null, bim2=null, bim3=null, bim4=null;
             
@@ -278,7 +264,10 @@ public class MemoryMapCache extends MapCache{
     private BufferedImage downloadMap(MapURL mapurl, String fs) {
         
         BufferedImage bim=MapDownloader.downloadMap(mapurl.getAbsoluteURLString()); //******
-            
+        
+        if (bim==null){
+            return null;
+        }
             
         MapInfo minfo=new MapInfo(mapurl,fs);    //Eğer limitse çıkarılmalı     //******
 
@@ -314,7 +303,7 @@ public class MemoryMapCache extends MapCache{
     
     private BufferedImage getFullMap(MapURL mapurl) {
         
-        String mstr=mapurl.getAbsoluteURLString();
+        //String mstr=mapurl.getAbsoluteURLString();
         MapInfo m=find(mapurl);
         if (m==null){
 
