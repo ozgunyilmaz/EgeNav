@@ -1,5 +1,7 @@
 package tr.edu.ege.cs.egenav;
 
+import java.io.Serializable;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 13:44:59
@@ -7,7 +9,7 @@ package tr.edu.ege.cs.egenav;
 //Koordinat sınıfı
 //enlem ve boylam değereleri String'den double'a çevriliyor.
 
-public class GeoPoint{
+public class GeoPoint implements Serializable{
 	
     private double lat,lon;	//enlem ve boylam
 

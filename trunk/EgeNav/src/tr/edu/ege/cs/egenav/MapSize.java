@@ -1,10 +1,12 @@
 package tr.edu.ege.cs.egenav;
 
+import java.io.Serializable;
+
 /**
  * @author Özgün Yılmaz
  * Created on 04.Nis.2014, 14:03:02
  */
-public class MapSize {
+public class MapSize implements Serializable{
     private int horizontal,vertical;
 
     public MapSize(int horizantal, int vertical) {

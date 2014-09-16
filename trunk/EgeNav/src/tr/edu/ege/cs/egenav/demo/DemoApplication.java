@@ -51,7 +51,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
             m.setMapSize(new MapSize(500,500));
 
-            cache=new MemoryMapCache("C:\\Users\\samsung\\Documents");
+            cache=new MemoryMapCache("C:\\Users\\samsung\\Documents\\egenavDemoMaps");
             //cache=new MemoryMapCache();
             System.out.println(m.getAbsoluteURLString());
             initComponents();

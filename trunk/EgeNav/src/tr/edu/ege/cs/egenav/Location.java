@@ -1,5 +1,6 @@
 package tr.edu.ege.cs.egenav;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
  * @author Özgün Yılmaz
  * Created on 21.Nis.2014, 14:14:03
  */
-public class Location {
+public class Location implements Serializable{
     
     private String description, address;
     private GeoPoint geoPoint;
