@@ -159,7 +159,7 @@ public class MemoryMapCache extends MapCache{
                 bim2=getCachedMap(mi);
             }
             
-            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d=comp.createGraphics();
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
@@ -188,7 +188,7 @@ public class MemoryMapCache extends MapCache{
                 bim2=getCachedMap(mi);
             }
             
-            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d=comp.createGraphics();
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
@@ -235,7 +235,7 @@ public class MemoryMapCache extends MapCache{
                 }
             }
             
-            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),bim1.getType());
+            comp=new BufferedImage(bim1.getWidth(),bim1.getHeight(),BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d=comp.createGraphics();
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
