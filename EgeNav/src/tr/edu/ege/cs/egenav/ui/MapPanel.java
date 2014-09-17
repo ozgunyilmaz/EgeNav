@@ -380,15 +380,15 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     
     public void dragMap(int x1,int y1,int x2,int y2){//abstract olmalı
         
-        //if (y1!=y2){
+        if (x1!=x2){
             double newLon=MercatorProjection.getLonByPixels(getMapUrl().getLocation().getLongitude(),x1-x2,getMapZoom());
             getMapUrl().getLocation().setLongitude(newLon);
-        //}
+        }
         
-        //if (x1!=x2){
+        if (y1!=y2){
             double newLat=MercatorProjection.getLatByPixels(getMapUrl().getLocation().getLatitude(),y1-y2,getMapZoom());
             getMapUrl().getLocation().setLatitude(newLat);
-        //}
+        }
         navigation.refreshPixelCoordinates(getMapUrl());
         if (direction!=null){
             direction.refreshPixelCoordinates(getMapUrl());
