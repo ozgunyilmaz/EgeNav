@@ -414,21 +414,8 @@ public class GSMMapURL extends MapURL{
         }
         
         MapPosition mp=new MapPosition(true);
-        if (dh<0){
-            mp.setHorizontal(Directions.EAST);
-        }else if (dh>0){
-            mp.setHorizontal(Directions.WEST);
-        }else{
-            mp.setHorizontal(Directions.CONSTANT);
-        }
-        
-        if (dv<0){
-            mp.setVertical(Directions.SOUTH);
-        }else if (dv>0){
-            mp.setHorizontal(Directions.NORTH);
-        }else{
-            mp.setHorizontal(Directions.CONSTANT);
-        }
+        mp.setDeltaHorizontal(dh);
+        mp.setDeltaVertical(dv);
         return mp;
         
     }

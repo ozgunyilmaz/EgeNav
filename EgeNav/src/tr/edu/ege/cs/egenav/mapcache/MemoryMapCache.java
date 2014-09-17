@@ -136,8 +136,7 @@ public class MemoryMapCache extends MapCache{
             MapURL m=maps.get(i).getMapObject();
             MapPosition mp=m.intersects(mapurl);
             if (mp.isIntersection()){
-                composeMap(maps.get(i),mp);
-                break;
+                return composeMap(maps.get(i),mp);
             }
         }
         return null;
@@ -147,12 +146,12 @@ public class MemoryMapCache extends MapCache{
         
         BufferedImage comp=null;
         MapURL m=mi.getMapObject();
-        if (mp.getHorizontal()==Directions.CONSTANT){
+        if (mp.getHorizontalDirection()==Directions.CONSTANT){
                     
-            MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+            MapURL neighbor=m.getNeighborTile(mp.getVerticalDirection(), mp.getHorizontalDirection());
             BufferedImage bim1=null, bim2=null;
             
-            if (mp.getVertical()>0){
+            if (mp.getDeltaVertical()>0){
                 bim1=getCachedMap(mi);    //0,dv X hor-1,ver-1        0,0      X hor-1,(ver+dv)-1
                 bim2=getFullMap(neighbor);//0,0  X hor-1,dv-1         0,ver+dv X hor-1,ver-1
             }else{
@@ -165,7 +164,7 @@ public class MemoryMapCache extends MapCache{
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
             
-            int dv=mp.getVertical();
+            int dv=mp.getDeltaVertical();
             
             if (dv<0){
                 dv=ver+dv;
@@ -176,12 +175,12 @@ public class MemoryMapCache extends MapCache{
             g2d.drawImage(bim1, 0, 0,       hor, ver-dv,    0, dv, hor, ver, null);  //0,dv,hor-1,ver-1
             g2d.drawImage(bim2, 0, ver-dv,  hor, ver,       0, 0,  hor, dv, null);
 
-        }else if (mp.getVertical()==Directions.CONSTANT){
+        }else if (mp.getVerticalDirection()==Directions.CONSTANT){
             
-            MapURL neighbor=m.getNeighborTile(mp.getVertical(), mp.getHorizontal());
+            MapURL neighbor=m.getNeighborTile(mp.getVerticalDirection(), mp.getHorizontalDirection());
             BufferedImage bim1=null, bim2=null;
             
-            if (mp.getHorizontal()>0){
+            if (mp.getDeltaHorizontal()>0){
                 bim1=getCachedMap(mi);    //0,dv X hor-1,ver-1        0,0      X hor-1,(ver+dv)-1
                 bim2=getFullMap(neighbor);//0,0  X hor-1,dv-1         0,ver+dv X hor-1,ver-1
             }else{
@@ -194,7 +193,7 @@ public class MemoryMapCache extends MapCache{
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
             
-            int dh=mp.getHorizontal();
+            int dh=mp.getDeltaHorizontal();
             
             if (dh<0){
                 dh=hor+dh;
@@ -208,30 +207,30 @@ public class MemoryMapCache extends MapCache{
             
             BufferedImage bim1=null, bim2=null, bim3=null, bim4=null;
             
-            if (mp.getHorizontal()>0){
+            if (mp.getDeltaHorizontal()>0){
                 
-                if (mp.getVertical()>0){
+                if (mp.getDeltaVertical()>0){
                     bim1=getCachedMap(mi);    
-                    bim2=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
-                    bim3=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
-                    bim4=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
+                    bim2=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontalDirection()));
+                    bim3=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), Directions.CONSTANT));
+                    bim4=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), mp.getHorizontalDirection()));
                 }else{
-                    bim1=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
-                    bim2=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
+                    bim1=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), Directions.CONSTANT));
+                    bim2=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), mp.getHorizontalDirection()));
                     bim3=getCachedMap(mi);
-                    bim4=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                    bim4=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontalDirection()));
                 }
                 
             }else{
-                if (mp.getVertical()>0){
-                    bim1=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                if (mp.getDeltaVertical()>0){
+                    bim1=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontalDirection()));
                     bim2=getCachedMap(mi);
-                    bim3=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
-                    bim4=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
+                    bim3=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), mp.getHorizontalDirection()));
+                    bim4=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), Directions.CONSTANT));
                 }else{
-                    bim1=getFullMap(m.getNeighborTile(mp.getVertical(), mp.getHorizontal()));
-                    bim2=getFullMap(m.getNeighborTile(mp.getVertical(), Directions.CONSTANT));
-                    bim3=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontal()));
+                    bim1=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), mp.getHorizontalDirection()));
+                    bim2=getFullMap(m.getNeighborTile(mp.getVerticalDirection(), Directions.CONSTANT));
+                    bim3=getFullMap(m.getNeighborTile(Directions.CONSTANT, mp.getHorizontalDirection()));
                     bim4=getCachedMap(mi);    
                 }
             }
@@ -241,8 +240,8 @@ public class MemoryMapCache extends MapCache{
             int ver=bim1.getHeight();
             int hor=bim1.getWidth();
             
-            int dh=mp.getHorizontal();
-            int dv=mp.getVertical();
+            int dh=mp.getDeltaHorizontal();
+            int dv=mp.getDeltaVertical();
             
             if (dh<0){
                 dh=hor+dh;
@@ -269,7 +268,7 @@ public class MemoryMapCache extends MapCache{
             return null;
         }
             
-        MapInfo minfo=new MapInfo(mapurl,fs);    //Eğer limitse çıkarılmalı     //******
+        MapInfo minfo=new MapInfo(mapurl.clone(),fs);    //Eğer limitse çıkarılmalı     //******
 
         File outputfile = new File(getImagePath() + minfo.getImageFileName());
         outputfile.getParentFile().mkdirs();

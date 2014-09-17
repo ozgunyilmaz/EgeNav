@@ -133,10 +133,7 @@ public class GeoPoint implements Serializable{
         double dLon = Math.toRadians(lon2-lon1); 
 
         lat1=Math.toRadians(lat1);
-        lon1=Math.toRadians(lon1);
         lat2=Math.toRadians(lat2);
-        lon2=Math.toRadians(lon2);
-
 
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                         Math.cos(lat1) * Math.cos(lat2) * 
