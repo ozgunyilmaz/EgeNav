@@ -65,7 +65,6 @@ public class DemoApplication extends javax.swing.JFrame {
             voice.allocate();
             //voice.setRate(120) ;
             mp.setVoice(voice);
-            mp.dragMap(50, 50, 10, 50);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex, "Image could not be downloaded", JOptionPane.ERROR_MESSAGE);
         }
