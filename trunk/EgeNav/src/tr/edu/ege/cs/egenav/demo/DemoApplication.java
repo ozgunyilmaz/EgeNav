@@ -55,7 +55,6 @@ public class DemoApplication extends javax.swing.JFrame {
             //cache=new MemoryMapCache();
             System.out.println(m.getAbsoluteURLString());
             initComponents();
-            zoom.setSelectedIndex(m.getZoom()-4);
     //      mp.setEnforceCenter(true);
             mp.setNavPanel(np);
             mp.refreshMap();
@@ -66,7 +65,7 @@ public class DemoApplication extends javax.swing.JFrame {
             //voice.setRate(120) ;
             mp.setVoice(voice);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex, "Image could not be downloaded", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error occurred", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -129,6 +128,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jLabel2.setText("Zoom level:");
 
+        zoom.setSelectedIndex(11);
         zoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 zoomActionPerformed(evt);

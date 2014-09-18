@@ -107,7 +107,10 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         
         //cache kullanılacaksa cachede mapurldeki harita indirilmeden oluşturulabilir mi diye kontrol et
         //Eğer oluşturulan harita null değilse yeniden indirme
-        repaint();
+        
+        if (img!=null){
+            repaint();
+        }
     }
 
     public boolean isCenterEnforced() {
