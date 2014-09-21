@@ -153,7 +153,7 @@ public class DBMapCache extends MapCache{
                 fs=mapurl.getFormat();
             }
             
-            MapInfo minfo=new MapInfo(mstr,fs);    //Eğer limitse çıkarılmalı
+            MapInfo minfo=new MapInfo(mstr,fs,getImagePath());    //Eğer limitse çıkarılmalı
             
             File outputfile = new File(getImagePath() + minfo.getImageFileName());
             outputfile.getParentFile().mkdirs();

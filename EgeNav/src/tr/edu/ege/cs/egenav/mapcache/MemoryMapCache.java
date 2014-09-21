@@ -268,7 +268,7 @@ public class MemoryMapCache extends MapCache{
             return null;
         }
             
-        MapInfo minfo=new MapInfo(mapurl.clone(),fs);    //Eğer limitse çıkarılmalı     //******
+        MapInfo minfo=new MapInfo(mapurl.clone(),fs, getImagePath());    //Eğer limitse çıkarılmalı     //******
 
         File outputfile = new File(getImagePath() + minfo.getImageFileName());
         outputfile.getParentFile().mkdirs();
