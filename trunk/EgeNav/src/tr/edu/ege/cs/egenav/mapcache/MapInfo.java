@@ -19,23 +19,37 @@ public class MapInfo implements Serializable{
     private Date downloadDate;
     private int usageCount;
     
-    public MapInfo(String mapurl, String format) {
+    public MapInfo(String mapurl, String format, String path) {
         this.mapurl = mapurl;
         downloadDate=Calendar.getInstance().getTime();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         
         imageFileName="map_image"+dateFormat.format(downloadDate)+"."+format;
+        File f=new File(path + imageFileName);
+        int i=1;
+        while (f.exists()){
+            i++;
+            f=new File(path + imageFileName + "(" + i +")");
+        }
+        imageFileName=f.getAbsolutePath();
         usageCount=1;
     }
     
-    public MapInfo(MapURL mobject, String format) {
+    public MapInfo(MapURL mobject, String format, String path) {
         this.mobject = mobject;
         downloadDate=Calendar.getInstance().getTime();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         
         imageFileName="map_image"+dateFormat.format(downloadDate)+"."+format;
+        File f=new File(path + imageFileName);
+        int i=1;
+        while (f.exists()){
+            i++;
+            f=new File(path + "map_image"+dateFormat.format(downloadDate) + "(" + i +")."+format);
+        }
+        imageFileName=f.getName();
         usageCount=1;
     }
 
@@ -82,6 +96,10 @@ public class MapInfo implements Serializable{
 
     public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
+    }
+    
+    public void updateImageFileName(){
+        
     }
 
     public String getMapurl() {

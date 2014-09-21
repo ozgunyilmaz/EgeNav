@@ -58,7 +58,6 @@ public class DemoApplication extends javax.swing.JFrame {
     //      mp.setEnforceCenter(true);
             mp.setNavPanel(np);
             mp.refreshMap();
-            
             VoiceManager voiceManager = VoiceManager.getInstance();
             voice = voiceManager.getVoice("kevin16");
             voice.allocate();
