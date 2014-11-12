@@ -139,7 +139,7 @@ public class DBMapCache extends MapCache{
     }
     
     @Override
-    public BufferedImage getMap(MapURL mapurl) {
+    public BufferedImage getMap(MapURL mapurl) throws IOException{
         
         String mstr=mapurl.getAbsoluteURLString();
         MapInfo m=find(mapurl);

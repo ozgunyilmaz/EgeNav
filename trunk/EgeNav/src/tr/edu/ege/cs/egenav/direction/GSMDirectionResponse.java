@@ -43,7 +43,7 @@ public class GSMDirectionResponse extends Direction{
     public void setActiveRouteIndex(int activeRouteIndex) {
         this.activeRouteIndex = activeRouteIndex;
     }
-    
+    //todo treshold da parametre olarak aktarılabilir.
     @Override
     public String getInstructions(GeoPoint g) {
         //todo_later bir önceki bulunan yer akılda tutulup oradan başlanabilir.

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * @author Özgün Yılmaz
@@ -36,6 +37,7 @@ public class NavInfoList {
             } // end while 
         } catch (IOException ex) {
             Logger.getLogger(NavInfoList.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex, "Error occurred", JOptionPane.ERROR_MESSAGE);
         }
         
     }

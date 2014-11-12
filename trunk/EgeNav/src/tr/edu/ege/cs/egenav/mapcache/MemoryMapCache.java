@@ -102,7 +102,7 @@ public class MemoryMapCache extends MapCache{
     }
     
     @Override
-    public BufferedImage getMap(MapURL mapurl) {
+    public BufferedImage getMap(MapURL mapurl) throws IOException{
         
         //String mstr=mapurl.getAbsoluteURLString();
         MapInfo m=find(mapurl);
@@ -130,7 +130,7 @@ public class MemoryMapCache extends MapCache{
         
     }
     
-    private BufferedImage getMapFromPartialMaps(MapURL mapurl) {
+    private BufferedImage getMapFromPartialMaps(MapURL mapurl) throws IOException{
         
         for (int i=0;i<maps.size();i++){
             MapURL m=maps.get(i).getMapObject();
@@ -142,7 +142,7 @@ public class MemoryMapCache extends MapCache{
         return null;
     }
     
-    private BufferedImage composeMap(MapInfo mi, MapPosition mp){
+    private BufferedImage composeMap(MapInfo mi, MapPosition mp) throws IOException{
         
         BufferedImage comp=null;
         MapURL m=mi.getMapObject();
@@ -260,7 +260,7 @@ public class MemoryMapCache extends MapCache{
         return comp;
     }
     
-    private BufferedImage downloadMap(MapURL mapurl, String fs) {
+    private BufferedImage downloadMap(MapURL mapurl, String fs) throws IOException{
         
         BufferedImage bim=MapDownloader.downloadMap(mapurl.getAbsoluteURLString()); //******
         
@@ -272,11 +272,11 @@ public class MemoryMapCache extends MapCache{
 
         File outputfile = new File(getImagePath() + minfo.getImageFileName());
         outputfile.getParentFile().mkdirs();
-        try {
+        //try {
             ImageIO.write(bim, fs, outputfile);
-        } catch (IOException ex) {
-            Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //} catch (IOException ex) {
+        //    Logger.getLogger(MemoryMapCache.class.getName()).log(Level.SEVERE, null, ex);
+        //}
 
         if (isLimitReached()){
             removeLeastUsed();  
@@ -300,7 +300,7 @@ public class MemoryMapCache extends MapCache{
         }
     }
     
-    private BufferedImage getFullMap(MapURL mapurl) {
+    private BufferedImage getFullMap(MapURL mapurl) throws IOException{
         
         //String mstr=mapurl.getAbsoluteURLString();
         MapInfo m=find(mapurl);
