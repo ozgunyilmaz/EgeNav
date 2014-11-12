@@ -17,7 +17,11 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tr.edu.ege.cs.egenav.direction.Direction;
 import tr.edu.ege.cs.egenav.direction.Directions;
 import tr.edu.ege.cs.egenav.GeoPoint;
@@ -95,22 +99,37 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     
     public void clearNavigationHistory(){
         navigation.clearHistory();
+        if (navPanel!=null){
+            navPanel.clear();
+        }
     }
     
     public void refreshMap(){
         
-        if (cache==null){
-            img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
-        }else{
-            img=cache.getMap(mapurl);
+        try {
+            if (cache==null){
+                img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
+            }else{
+                img=cache.getMap(mapurl);
+            }
+
+            //cache kullanılacaksa cachede mapurldeki harita indirilmeden oluşturulabilir mi diye kontrol et
+            //Eğer oluşturulan harita null değilse yeniden indirme
+
+            if (img!=null){
+                repaint();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.toString().startsWith("java.net.UnknownHostException")){
+                System.out.println("Image could not be downloaded");
+                JOptionPane.showMessageDialog(null, ex+"\nImage could not be downloaded\nCheck your internet connection", "Error", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
         
-        //cache kullanılacaksa cachede mapurldeki harita indirilmeden oluşturulabilir mi diye kontrol et
-        //Eğer oluşturulan harita null değilse yeniden indirme
-        
-        if (img!=null){
-            repaint();
-        }
     }
 
     public boolean isCenterEnforced() {

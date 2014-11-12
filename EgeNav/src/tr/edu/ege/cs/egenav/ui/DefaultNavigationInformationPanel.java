@@ -239,4 +239,18 @@ public class DefaultNavigationInformationPanel extends NavigationInformationPane
     public void setInstructions(String ins) {
         jTextPane1.setText("<html>"+ins+"</html>");
     }
+
+    @Override
+    public void clear() {
+        
+        jLabel1.setText("");
+        jLabel2.setText("");
+        jLabel3.setText("");
+        jLabel4.setText("");
+        jLabel5.setText("");
+        jLabel6.setText("");
+        jLabel7.setText("");
+        jTextPane1.setText("");
+        
+    }
 }

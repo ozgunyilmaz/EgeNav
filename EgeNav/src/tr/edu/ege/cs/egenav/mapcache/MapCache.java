@@ -2,6 +2,7 @@ package tr.edu.ege.cs.egenav.mapcache;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import tr.edu.ege.cs.egenav.MapURL;
 
 /**
@@ -67,7 +68,7 @@ public abstract class MapCache {
     }
     
     public abstract String getCacheFileAbsoluteName();
-    public abstract BufferedImage getMap(MapURL mapurl);
+    public abstract BufferedImage getMap(MapURL mapurl) throws IOException;
     public abstract MapInfo find(MapURL mapurl);
     public abstract boolean isLimitReached();
     public abstract void deleteDateDueMaps();

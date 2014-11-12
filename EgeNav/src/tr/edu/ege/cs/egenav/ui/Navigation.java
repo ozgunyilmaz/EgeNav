@@ -58,6 +58,11 @@ public class Navigation {
     
     public void clearHistory(){
         history.clear();
+        heading=0;
+        speed=0;
+        averageSpeed=0;
+        timeElapsed=0;
+        totalDistance=0;
     }
     
     public boolean isEmpty(){

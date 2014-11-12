@@ -14,7 +14,8 @@ public class SimulationThread extends Thread{
     private boolean realTime;
     private NavInfoList list;
     private MapPanel mp;
-    private volatile Thread blinker=this;
+    //private volatile Thread blinker=this;
+    private volatile boolean flag=true;
 
 
     
@@ -33,11 +34,11 @@ public class SimulationThread extends Thread{
     @Override
     public void run(){
         
-        Thread thisThread = Thread.currentThread();
+        //Thread thisThread = Thread.currentThread();
         
         int i=0;
         
-        while (blinker == thisThread && i<list.size()) {
+        while (flag && i<list.size()) {
 
             NavInfo n=list.get(i);
             if (realTime){
@@ -47,14 +48,19 @@ public class SimulationThread extends Thread{
                     Logger.getLogger(SimulationThread.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            mp.updateLocation(new Location(n.getLat(),n.getLon()));
+            if (flag){
+                mp.updateLocation(new Location(n.getLat(),n.getLon()));
+            }
+            
             i++;
         }
         
     }
     
     public void stop2() {
-        blinker = null;
+        flag = false;
+        mp.clearNavigationHistory();
+        mp.repaint();
     }
 
 

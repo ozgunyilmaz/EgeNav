@@ -403,7 +403,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtSim">
           <Properties>
-            <Property name="text" type="java.lang.String" value="src\tr\edu\ege\cs\egenav\demo\resources\deneme3.sim"/>
+            <Property name="text" type="java.lang.String" value="SimData.sim"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">

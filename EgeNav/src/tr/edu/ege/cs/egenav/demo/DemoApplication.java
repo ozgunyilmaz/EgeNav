@@ -41,6 +41,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
     /** Creates new form DemoApplication */
     public DemoApplication() {
+        
         try{
             m=new GSMMapURL();
 //            m.setCenter(new Location(new GeoPoint(40,30)));
@@ -51,7 +52,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
             m.setMapSize(new MapSize(500,500));
 
-            cache=new MemoryMapCache("C:\\Users\\samsung\\Documents\\egenavDemoMaps");
+            cache=new MemoryMapCache("MapData");
             //cache=new MemoryMapCache();
             System.out.println(m.getAbsoluteURLString());
             initComponents();
@@ -61,10 +62,10 @@ public class DemoApplication extends javax.swing.JFrame {
             VoiceManager voiceManager = VoiceManager.getInstance();
             voice = voiceManager.getVoice("kevin16");
             voice.allocate();
-            //voice.setRate(120) ;
+            voice.setRate(120) ;
             mp.setVoice(voice);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex, "Error occurred", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getStackTrace(), "Error occurred", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -280,7 +281,7 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jLabel6.setText("File name:");
 
-        txtSim.setText("src\\tr\\edu\\ege\\cs\\egenav\\demo\\resources\\deneme3.sim");
+        txtSim.setText("SimData.sim");
 
         jButton4.setText("Browse");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -435,16 +436,22 @@ public class DemoApplication extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if (mp.getLastLocation()==null){
+            JOptionPane.showMessageDialog(null, "First should move to a place by using 'Navigate' panel", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         GSMDirectionURL dir=new GSMDirectionURL(mp.getLastLocation(),new Location (txtDest.getText()));
-        dir.setLanguage("tr");
+        dir.setLanguage("en");
         try {
             GSMDirectionResponse res=dir.getDirections();
             mp.setDirection(res);
             
         } catch (MalformedURLException ex) {
             Logger.getLogger(DemoApplication.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(DemoApplication.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.toString()+"\n\nYour internet connection might be down", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -474,7 +481,10 @@ public class DemoApplication extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        st.stop2();
+        if (st!=null){
+            st.stop2();
+        }
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
