@@ -400,6 +400,21 @@ public class GSMMapURL extends MapURL{
     @Override
     public MapPosition intersects(MapURL mapurl) {
         
+        String mp1=getMapType();
+        String mp2=mapurl.getMapType();
+        
+        if(mp1==null){
+            mp1="null";
+        }
+        
+        if(mp2==null){
+            mp2="null";
+        }
+        
+        if (!mp1.equals(mp2) || getZoom()!=mapurl.getZoom()){
+            return new MapPosition(false);
+        }
+        
         int h=getMapSize().getHorizontal()/2;
         int v=getMapSize().getVertical()/2;
         GSMMapURL gm=(GSMMapURL)mapurl;
