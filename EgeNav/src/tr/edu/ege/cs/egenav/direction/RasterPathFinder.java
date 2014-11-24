@@ -18,10 +18,10 @@ public class RasterPathFinder {
         int y = dest.y;
         
         int renk = img.getRGB(x, y);
-        if (mcm.isBorder(renk)) {
+        if (!mcm.isOnTrack(renk)) {//not on track
             return null;
         }
-        
+        int pencil=mcm.getABorderColor().getRGB();
 //System.out.println(renk);
         ArrayList<Path> paths = new ArrayList<Path>();
         paths.add(new Path(init));
@@ -32,7 +32,7 @@ public class RasterPathFinder {
             Path temp = paths.get(0);
             x2 = temp.getLastX();
             y2 = temp.getLastY();
-            img.setRGB(x2, y2, mcm.getABorderColor().getRGB());
+            img.setRGB(x2, y2, pencil);
 
             if ((x2 == x) && (y2 == y)) {
             //Eğer bulunursa gidiş yolu p vektöründedir.
@@ -46,34 +46,33 @@ public class RasterPathFinder {
             }else{
 
                 if (x2 > 0 && img.getRGB(x2 - 1, y2) == renk) {
-                    img.setRGB(x2 - 1, y2, mcm.getABorderColor().getRGB());
+                    img.setRGB(x2 - 1, y2, pencil);
                     Path p = temp.clone();
                     p.add(new Point(x2 - 1, y2));
                     paths.add(p);
                 }
                 if (y2 > 0 && img.getRGB(x2, y2 - 1) == renk) {
-                    img.setRGB(x2, y2 - 1, mcm.getABorderColor().getRGB());
+                    img.setRGB(x2, y2 - 1, pencil);
                     Path p = temp.clone();
                     p.add(new Point(x2, y2 - 1));
                     paths.add(p);
                 }
 
                 if (x2 < img.getWidth() - 1 && img.getRGB(x2 + 1, y2) == renk) {
-                    img.setRGB(x2 + 1, y2, mcm.getABorderColor().getRGB());
+                    img.setRGB(x2 + 1, y2, pencil);
                     Path p = temp.clone();
                     p.add(new Point(x2 + 1, y2));
                     paths.add(p);
                 }
 
                 if (y2 < img.getHeight() - 1 && img.getRGB(x2, y2 + 1) == renk) {
-                    img.setRGB(x2, y2 + 1, mcm.getABorderColor().getRGB());
+                    img.setRGB(x2, y2 + 1, pencil);
                     Path p = temp.clone();
                     p.add(new Point(x2, y2 + 1));
                     paths.add(p);
                 }
 
             }
-
 
             paths.remove(0);
         }

@@ -367,6 +367,21 @@ public class GSMMapURL extends MapURL{
     @Override
     public boolean isCompatible(MapURL m) {
         
+        String mp1=getMapType();
+        String mp2=m.getMapType();
+        
+        if(mp1==null){
+            mp1="null";
+        }
+        
+        if(mp2==null){
+            mp2="null";
+        }
+        
+        if (!mp1.equals(mp2) || getZoom()!=m.getZoom()){
+            return false;
+        }
+        
         GSMMapURL gm=(GSMMapURL)m;
         if (paths.size()!=gm.getPathList().size() || 
                 markers.size()!=gm.getMarkerList().size() ||
@@ -400,18 +415,22 @@ public class GSMMapURL extends MapURL{
     @Override
     public MapPosition intersects(MapURL mapurl) {
         
-        String mp1=getMapType();
-        String mp2=mapurl.getMapType();
+        //        String mp1=getMapType();
+//        String mp2=mapurl.getMapType();
+//        
+//        if(mp1==null){
+//            mp1="null";
+//        }
+//        
+//        if(mp2==null){
+//            mp2="null";
+//        }
+//        
+//        if (!mp1.equals(mp2) || getZoom()!=mapurl.getZoom()){
+//            return new MapPosition(false);
+//        }
         
-        if(mp1==null){
-            mp1="null";
-        }
-        
-        if(mp2==null){
-            mp2="null";
-        }
-        
-        if (!mp1.equals(mp2) || getZoom()!=mapurl.getZoom()){
+        if (!isCompatible(mapurl)){
             return new MapPosition(false);
         }
         
@@ -435,8 +454,8 @@ public class GSMMapURL extends MapURL{
         
     }
     
-    public static GSMMapURL parseString() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+//    public static GSMMapURL parseString() {
+//        throw new UnsupportedOperationException("Not yet implemented");
+//    }
     
 }
