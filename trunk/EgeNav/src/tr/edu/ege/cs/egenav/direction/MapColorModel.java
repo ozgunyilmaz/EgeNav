@@ -11,10 +11,12 @@ public class MapColorModel {
     
     private ArrayList<Color> border;
     private ArrayList<Color> track;
+    private boolean borderBased;
 
-    public MapColorModel(ArrayList<Color> border, ArrayList<Color> track) {
+    public MapColorModel(ArrayList<Color> border, ArrayList<Color> track, boolean borderBased) {
         this.border = border;
         this.track = track;
+        this.borderBased=borderBased;
     }
     
     public MapColorModel(){
@@ -44,6 +46,39 @@ public class MapColorModel {
     }
     
     public Color getABorderColor(){
-        return border.get(0);
+        if (!border.isEmpty()){
+            return border.get(0);
+        }else{
+            if (track.isEmpty()){
+                return null;
+            }else{
+                Color c=track.get(0).darker();
+                while (isBorder(c) || isTrack(c)){
+                    c=track.get(0).darker();
+                }
+                return c;
+            }
+        }
+        
+    }
+
+    public boolean isBorderBased() {
+        return borderBased;
+    }
+
+    public void setBorderBased(boolean borderBased) {
+        this.borderBased = borderBased;
+    }
+    
+    public boolean isOnTrack(Color c){
+        if (borderBased){
+            return isBorder(c);
+        }else{
+            return !(isTrack(c));
+        }
+    }
+    
+    public boolean isOnTrack(int rgb){
+        return isOnTrack(new Color(rgb));
     }
 }
