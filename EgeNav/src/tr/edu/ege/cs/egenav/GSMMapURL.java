@@ -382,33 +382,33 @@ public class GSMMapURL extends MapURL{
             return false;
         }
         
-        GSMMapURL gm=(GSMMapURL)m;
-        if (paths.size()!=gm.getPathList().size() || 
-                markers.size()!=gm.getMarkerList().size() ||
-                styles.size()!=gm.getStyleList().size() ||
-                parameters.size()!=gm.getParameterList().size()) {
-            return false;
-        }
-        for (int i=0; i<paths.size();i++){
-            if (!paths.get(i).toString().equals(gm.getPathList().get(i).toString())){
-                return false;
-            }
-        }
-        for (int i=0; i<markers.size();i++){
-            if (!markers.get(i).toString().equals(gm.getMarkerList().get(i).toString())){
-                return false;
-            }
-        }
-        for (int i=0; i<styles.size();i++){
-            if (!styles.get(i).toString().equals(gm.getStyleList().get(i).toString())){
-                return false;
-            }
-        }
-        for (int i=0; i<parameters.size();i++){
-            if (!parameters.get(i).toString().equals(gm.getParameterList().get(i).toString())){
-                return false;
-            }
-        }
+//        GSMMapURL gm=(GSMMapURL)m;
+//        if (paths.size()!=gm.getPathList().size() || 
+//                markers.size()!=gm.getMarkerList().size() ||
+//                styles.size()!=gm.getStyleList().size() ||
+//                parameters.size()!=gm.getParameterList().size()) {
+//            return false;
+//        }
+//        for (int i=0; i<paths.size();i++){
+//            if (!paths.get(i).toString().equals(gm.getPathList().get(i).toString())){
+//                return false;
+//            }
+//        }
+//        for (int i=0; i<markers.size();i++){
+//            if (!markers.get(i).toString().equals(gm.getMarkerList().get(i).toString())){
+//                return false;
+//            }
+//        }
+//        for (int i=0; i<styles.size();i++){
+//            if (!styles.get(i).toString().equals(gm.getStyleList().get(i).toString())){
+//                return false;
+//            }
+//        }
+//        for (int i=0; i<parameters.size();i++){
+//            if (!parameters.get(i).toString().equals(gm.getParameterList().get(i).toString())){
+//                return false;
+//            }
+//        }
         return true;
     }
 
