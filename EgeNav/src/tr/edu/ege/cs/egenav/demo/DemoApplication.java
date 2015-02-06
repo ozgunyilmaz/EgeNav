@@ -43,27 +43,24 @@ public class DemoApplication extends javax.swing.JFrame {
     public DemoApplication() {
         
         try{
-            m=new GSMMapURL();
-//            m.setCenter(new Location(new GeoPoint(40,30)));
-//            m.setZoom(6);
+            m=new GSMMapURL();  //Create a new Google static map url object.
 
-            m.setCenter(new Location(new GeoPoint(38.461154,27.091094)));
-            m.setZoom(15);
+            m.setCenter(new Location(new GeoPoint(38.461154,27.091094)));  //Set center location of the map
+            m.setZoom(15);  //set zoom level
 
-            m.setMapSize(new MapSize(500,500));
+            m.setMapSize(new MapSize(500,500));  //set map size
 
-            cache=new MemoryMapCache("MapData");
-            //cache=new MemoryMapCache();
-            System.out.println(m.getAbsoluteURLString());
-            initComponents();
-    //      mp.setEnforceCenter(true);
-            mp.setNavPanel(np);
-            mp.refreshMap();
-            VoiceManager voiceManager = VoiceManager.getInstance();
-            voice = voiceManager.getVoice("kevin16");
+            cache=new MemoryMapCache("MapData"); //create memory mapped cache object and store maps under ./MapData directory
+            
+            initComponents(); //GUI
+
+            mp.setNavPanel(np);  //set the navigation panel for the map panel
+            mp.refreshMap();     //show the map represented by the MapURL object
+            VoiceManager voiceManager = VoiceManager.getInstance();  //get voice manager
+            voice = voiceManager.getVoice("kevin16");   //get a voice
             voice.allocate();
             voice.setRate(120) ;
-            mp.setVoice(voice);
+            mp.setVoice(voice); //set voice object for the map panel
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getStackTrace(), "Error occurred", JOptionPane.ERROR_MESSAGE);
         }
@@ -86,8 +83,8 @@ public class DemoApplication extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         zoom = new javax.swing.JComboBox(new String[] {/*"1","2","3",*/"4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"/*,"21"*/});
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGo = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         txtLon = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtLat = new javax.swing.JTextField();
@@ -95,18 +92,20 @@ public class DemoApplication extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtDest = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnGetSupport = new javax.swing.JButton();
+        btnReset2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtSim = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnBrowse = new javax.swing.JButton();
+        btnStartSim = new javax.swing.JButton();
         chkRealTime = new javax.swing.JCheckBox();
-        jButton7 = new javax.swing.JButton();
+        btnStopSim = new javax.swing.JButton();
         mp = new tr.edu.ege.cs.egenav.ui.MapPanel(m,cache);
+        hint = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EgeNav Demo Application");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -165,17 +164,17 @@ public class DemoApplication extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Navigate"));
 
-        jButton1.setText("Go");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGo.setText("Go");
+        btnGo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Reset");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -206,16 +205,16 @@ public class DemoApplication extends javax.swing.JFrame {
                             .addComponent(txtLon, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtLat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnGo)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnReset)
                         .addGap(30, 30, 30)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtLat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,8 +224,8 @@ public class DemoApplication extends javax.swing.JFrame {
                     .addComponent(txtLon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)))
+                    .addComponent(btnReset)
+                    .addComponent(btnGo)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Navigation support"));
@@ -235,17 +234,17 @@ public class DemoApplication extends javax.swing.JFrame {
 
         txtDest.setText("38.458734,27.095171");
 
-        jButton3.setText("Get support");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnGetSupport.setText("Get support");
+        btnGetSupport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnGetSupportActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Reset");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnReset2.setText("Reset");
+        btnReset2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnReset2ActionPerformed(evt);
             }
         });
 
@@ -254,16 +253,19 @@ public class DemoApplication extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtDest, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jButton3)
-                .addGap(33, 33, 33)
-                .addComponent(jButton6))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnGetSupport)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReset2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtDest, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,8 +275,8 @@ public class DemoApplication extends javax.swing.JFrame {
                 .addComponent(txtDest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton6)))
+                    .addComponent(btnGetSupport)
+                    .addComponent(btnReset2)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Simulation"));
@@ -283,27 +285,27 @@ public class DemoApplication extends javax.swing.JFrame {
 
         txtSim.setText("SimData.sim");
 
-        jButton4.setText("Browse");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnBrowse.setText("Browse");
+        btnBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnBrowseActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Start simulation");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnStartSim.setText("Start simulation");
+        btnStartSim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnStartSimActionPerformed(evt);
             }
         });
 
         chkRealTime.setSelected(true);
         chkRealTime.setText("Real time simulation");
 
-        jButton7.setText("Stop");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnStopSim.setText("Stop");
+        btnStopSim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnStopSimActionPerformed(evt);
             }
         });
 
@@ -319,12 +321,12 @@ public class DemoApplication extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtSim, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
+                        .addComponent(btnBrowse))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jButton5)
+                        .addComponent(btnStartSim)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7)
+                        .addComponent(btnStopSim)
                         .addGap(43, 43, 43)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -335,13 +337,13 @@ public class DemoApplication extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(btnBrowse))
                 .addGap(18, 18, 18)
                 .addComponent(chkRealTime)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton7))
+                    .addComponent(btnStartSim)
+                    .addComponent(btnStopSim))
                 .addContainerGap())
         );
 
@@ -356,6 +358,10 @@ public class DemoApplication extends javax.swing.JFrame {
             .addGap(0, 500, Short.MAX_VALUE)
         );
 
+        hint.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 12));
+        hint.setText("<html><b>Quick start steps:</b><br><b>1.</b> Press the <b>'Go'</b> button in the 'Navigate' panel.<br><b>2.</b> Press <b>'Get support'</b> button in the 'Navigation support' panel.<br><b>3.</b> Press the <b>'Start simulation'</b> button in the 'Simulation' panel.</html>");
+        hint.setToolTipText("Follow these steps to get a quick glimpse of the demo application");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -368,11 +374,13 @@ public class DemoApplication extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hint, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(np, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(np, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -381,10 +389,11 @@ public class DemoApplication extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hint))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -401,50 +410,53 @@ public class DemoApplication extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeActionPerformed
-        // TODO add your handling code here:
+        // When the map type changes set selected item as new map type of the MapURL object
         m.setMapType((String)type.getSelectedItem());
+        // call refreshMap method to refresh the map shown on the map panel
         mp.refreshMap();
     }//GEN-LAST:event_typeActionPerformed
 
     private void zoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoomActionPerformed
-        // TODO add your handling code here:
+        // When the zoom level changes set selected item as new zoom level of the MapURL object
         m.setZoom(Integer.parseInt((String)zoom.getSelectedItem()));
+        // call refreshMap method to refresh the map shown on the map panel
         mp.refreshMap();
     }//GEN-LAST:event_zoomActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+        //When the window is closing, allocated resources are released
         if (voice!=null) {
             voice.deallocate();
         }
         System.out.println("closed");
-        cache.close();
+        cache.close();  //cache should be closed
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void btnGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoActionPerformed
+        //When the user clicks go button, map panel's map url is updated with a new location
         double lat=Double.parseDouble(txtLat.getText());
         double lon=Double.parseDouble(txtLon.getText());
         mp.updateLocation(new Location (lat,lon));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        //When reset button is clicked, navigation history is cleared and the map is repainted
         mp.clearNavigationHistory();
         mp.repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnResetActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    private void btnGetSupportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetSupportActionPerformed
+        //There should be a location to get direction support
         if (mp.getLastLocation()==null){
             JOptionPane.showMessageDialog(null, "First should move to a place by using 'Navigate' panel", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        //new GSMDirectionURL object is created for using Google Directions service
         GSMDirectionURL dir=new GSMDirectionURL(mp.getLastLocation(),new Location (txtDest.getText()));
-        dir.setLanguage("en");
+        dir.setLanguage("en");  //language is set to English
         try {
-            GSMDirectionResponse res=dir.getDirections();
-            mp.setDirection(res);
+            GSMDirectionResponse res=dir.getDirections();  //Directions are get from GSMDirectionURL object and then assigned to direction response
+            mp.setDirection(res);  //map panel's direction object is set
             
         } catch (MalformedURLException ex) {
             Logger.getLogger(DemoApplication.class.getName()).log(Level.SEVERE, null, ex);
@@ -453,15 +465,15 @@ public class DemoApplication extends javax.swing.JFrame {
             Logger.getLogger(DemoApplication.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex.toString()+"\n\nYour internet connection might be down", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnGetSupportActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+    private void btnReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset2ActionPerformed
+        //if reset is clicked map panel's direction object is set to null.
         mp.setDirection(null);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnReset2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
+        //When browse button is clicked, a file chooser dialog box is shown
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Simulation files (*.sim)", "sim");
         fc.setFileFilter(filter);
@@ -469,23 +481,23 @@ public class DemoApplication extends javax.swing.JFrame {
         if (fc.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
             txtSim.setText(fc.getSelectedFile().getAbsolutePath());
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnBrowseActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+    private void btnStartSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartSimActionPerformed
+        //SimulationThread is created and simulation is started
         st=null;
         NavInfoList list=new NavInfoList(txtSim.getText());
         st=new SimulationThread(mp,list,chkRealTime.isSelected());
         st.start();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnStartSimActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+    private void btnStopSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopSimActionPerformed
+        //Stop the simulation
         if (st!=null){
             st.stop2();
         }
         
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnStopSimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -500,14 +512,15 @@ public class DemoApplication extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBrowse;
+    private javax.swing.JButton btnGetSupport;
+    private javax.swing.JButton btnGo;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnReset2;
+    private javax.swing.JButton btnStartSim;
+    private javax.swing.JButton btnStopSim;
     private javax.swing.JCheckBox chkRealTime;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JLabel hint;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

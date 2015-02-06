@@ -129,12 +129,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Latitude"/>
+        <Property name="text" type="java.lang.String" value="Latitude:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Longitude"/>
+        <Property name="text" type="java.lang.String" value="Longitude:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">

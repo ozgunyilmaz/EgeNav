@@ -72,9 +72,9 @@ public class MapColorModel {
     
     public boolean isOnTrack(Color c){
         if (borderBased){
-            return isBorder(c);
+            return !isBorder(c);
         }else{
-            return !(isTrack(c));
+            return isTrack(c);
         }
     }
     

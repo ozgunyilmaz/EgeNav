@@ -22,7 +22,7 @@ public class NavInfoList {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             while ((line = br.readLine()) != null) { // while loop begins here
-                System.out.println(line);
+                //System.out.println(line);
                 String[] st=line.split(",");
                 double lat=Double.parseDouble(st[0]);
                 double lon=Double.parseDouble(st[1]);

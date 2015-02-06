@@ -71,9 +71,9 @@ public class DefaultNavigationInformationPanel extends NavigationInformationPane
 
         jLabel7.setText(" ");
 
-        jLabel9.setText("Latitude");
+        jLabel9.setText("Latitude:");
 
-        jLabel10.setText("Longitude");
+        jLabel10.setText("Longitude:");
 
         jLabel11.setText("Heading (degrees):");
 
