@@ -79,7 +79,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel" name="np">
+    <Component class="tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel2" name="np">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">

@@ -4,7 +4,7 @@
  */
 
 /*
- * DefaultNavigationInformationPanel.java
+ * DefaultNavigationInformationPanel2.java
  *
  * Created on 22.May.2014, 15:42:40
  */
@@ -16,14 +16,14 @@ import java.awt.Dimension;
  *
  * @author Özgün Yılmaz
  */
-public class DefaultNavigationInformationPanel extends NavigationInformationPanel{
+public class DefaultNavigationInformationPanel2 extends NavigationInformationPanel{
 
-    /** Creates new form DefaultNavigationInformationPanel */
-    public DefaultNavigationInformationPanel() {
+    /** Creates new form DefaultNavigationInformationPanel2 */
+    public DefaultNavigationInformationPanel2() {
         initComponents();
     }
     
-    public DefaultNavigationInformationPanel(boolean instructions) {
+    public DefaultNavigationInformationPanel2(boolean instructions) {
         initComponents();
         if (!instructions){
             setPreferredSize(new Dimension(235,165));

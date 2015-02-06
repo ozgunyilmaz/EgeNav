@@ -76,7 +76,7 @@ public class DemoApplication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        np = new tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel();
+        np = new tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel2();
         jPanel1 = new javax.swing.JPanel();
         type = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -532,7 +532,7 @@ public class DemoApplication extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private tr.edu.ege.cs.egenav.ui.MapPanel mp;
-    private tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel np;
+    private tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel2 np;
     private javax.swing.JTextField txtDest;
     private javax.swing.JTextField txtLat;
     private javax.swing.JTextField txtLon;

@@ -32,7 +32,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel" name="defaultNavigationInformationPanel1">
+    <Component class="tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel2" name="defaultNavigationInformationPanel1">
     </Component>
   </SubComponents>
 </Form>

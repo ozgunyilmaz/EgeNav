@@ -30,7 +30,7 @@ public class DefaultNavigationInfoPanelTest2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        defaultNavigationInformationPanel1 = new tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel();
+        defaultNavigationInformationPanel1 = new tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel2();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +60,6 @@ public class DefaultNavigationInfoPanelTest2 extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel defaultNavigationInformationPanel1;
+    private tr.edu.ege.cs.egenav.ui.DefaultNavigationInformationPanel2 defaultNavigationInformationPanel1;
     // End of variables declaration//GEN-END:variables
 }
