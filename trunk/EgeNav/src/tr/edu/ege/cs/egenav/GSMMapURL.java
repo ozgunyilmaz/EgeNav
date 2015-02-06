@@ -382,33 +382,56 @@ public class GSMMapURL extends MapURL{
             return false;
         }
         
-//        GSMMapURL gm=(GSMMapURL)m;
-//        if (paths.size()!=gm.getPathList().size() || 
-//                markers.size()!=gm.getMarkerList().size() ||
-//                styles.size()!=gm.getStyleList().size() ||
-//                parameters.size()!=gm.getParameterList().size()) {
-//            return false;
-//        }
-//        for (int i=0; i<paths.size();i++){
-//            if (!paths.get(i).toString().equals(gm.getPathList().get(i).toString())){
-//                return false;
-//            }
-//        }
-//        for (int i=0; i<markers.size();i++){
-//            if (!markers.get(i).toString().equals(gm.getMarkerList().get(i).toString())){
-//                return false;
-//            }
-//        }
-//        for (int i=0; i<styles.size();i++){
-//            if (!styles.get(i).toString().equals(gm.getStyleList().get(i).toString())){
-//                return false;
-//            }
-//        }
-//        for (int i=0; i<parameters.size();i++){
-//            if (!parameters.get(i).toString().equals(gm.getParameterList().get(i).toString())){
-//                return false;
-//            }
-//        }
+        GSMMapURL gm=(GSMMapURL)m;
+        
+        if ((paths!=null ^ gm.getPathList()!=null) || (paths!=null && gm.getPathList()!=null && paths.size()!=gm.getPathList().size())){
+            return false;
+        }
+                
+        if ((markers!=null ^ gm.getMarkerList()!=null) || (markers!=null && gm.getMarkerList()!=null && markers.size()!=gm.getMarkerList().size())){
+            return false;
+        }
+        
+        if ((styles!=null ^ gm.getStyleList()!=null) || (styles!=null && gm.getStyleList()!=null && styles.size()!=gm.getStyleList().size())){
+            return false;
+        }
+        
+        if ((parameters!=null ^ gm.getParameterList()!=null) || (parameters!=null && gm.getParameterList()!=null && parameters.size()!=gm.getParameterList().size())){
+            return false;
+        }
+        
+        if ((paths!=null && gm.getPathList()!=null)){
+            for (int i=0; i<paths.size();i++){
+                if (!paths.get(i).toString().equals(gm.getPathList().get(i).toString())){
+                    return false;
+                }
+            }
+        }
+                
+        if (markers!=null && gm.getMarkerList()!=null){
+            for (int i=0; i<markers.size();i++){
+                if (!markers.get(i).toString().equals(gm.getMarkerList().get(i).toString())){
+                    return false;
+                }
+            }
+        }
+        
+        if (styles!=null && gm.getStyleList()!=null){
+            for (int i=0; i<styles.size();i++){
+                if (!styles.get(i).toString().equals(gm.getStyleList().get(i).toString())){
+                    return false;
+                }
+            }
+        }
+        
+        if (parameters!=null && gm.getParameterList()!=null){
+            for (int i=0; i<parameters.size();i++){
+                if (!parameters.get(i).toString().equals(gm.getParameterList().get(i).toString())){
+                    return false;
+                }
+            }
+        }
+        
         return true;
     }
 

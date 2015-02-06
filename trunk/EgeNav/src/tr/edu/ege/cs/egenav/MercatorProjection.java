@@ -52,10 +52,10 @@ public class MercatorProjection {
     }
     
     public static void main(String args[]) {
-        System.out.println(getLatByPixels(40,500,6));
+        //System.out.println(getLatByPixels(40,500,6));
         System.out.println(getDeltaByLats(40,38,6));
         
-        System.out.println(getLonByPixels(30,500,6));
+        //System.out.println(getLonByPixels(30,500,6));
         System.out.println(getDeltaByLons(30,32,6));
         
         

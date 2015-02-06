@@ -106,6 +106,11 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
     
     public void refreshMap(){
         
+        navigation.refreshPixelCoordinates(getMapUrl());
+        if (direction!=null){
+            direction.refreshPixelCoordinates(getMapUrl());
+        }
+        
         try {
             if (cache==null){
                 img=MapDownloader.downloadMap(mapurl.getAbsoluteURLString());
@@ -122,8 +127,11 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
         } catch (IOException ex) {
             Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
             if (ex.toString().startsWith("java.net.UnknownHostException")){
-                System.out.println("Image could not be downloaded");
-                JOptionPane.showMessageDialog(null, ex+"\nImage could not be downloaded\nCheck your internet connection", "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println("Error: Image could not be downloaded\nPlease check your internet connection");
+                JOptionPane.showMessageDialog(null, ex+"\nImage could not be downloaded\nPlease check your internet connection", "Error", JOptionPane.ERROR_MESSAGE);
+            }else if (ex.toString().startsWith("java.io.IOException: Server returned HTTP response code: 403")){
+                System.out.println("Error: Image could not be downloaded\nDownload request was rejected by the server. You may have reached your daily usage limit");
+                JOptionPane.showMessageDialog(null, ex+"\nImage could not be downloaded. Download request was rejected by the server. You may have reached your daily usage limit", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
             }
