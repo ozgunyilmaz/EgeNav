@@ -628,13 +628,13 @@ public class DemoApplication2_V1_1 extends javax.swing.JFrame {
 
                             Path path = RasterPathFinder.findPath(img, p1, p2, mcm);
                             //A path is found (if there is any) using RasterPathFinder class's static method findPath
-
+//path.drawLinePath(img2);
                             Threshold x=path.getThreshold(img2, mcm); //threshold value  is auto-detected. It is also possible to manually specify threshold values.
                             
                             Path pts2=path.toNormalizedLine(img2,mcm,x); //path is converted to a normalized (simplified) line 
-
+//pts2.drawLinePath(img2);
                             pts2.centerPath(img2, mcm, x);  //path is centered
-
+//pts2.drawLinePath(img2);
                             lblHT.setText(Integer.toString(x.getHorizontal()));  //auto-detected threshold values are shown
                             lblVT.setText(Integer.toString(x.getVertical()));
 

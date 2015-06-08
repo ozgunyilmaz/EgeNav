@@ -245,9 +245,11 @@ public class MapPanel extends javax.swing.JPanel implements MouseListener{
             navPanel.setTimeElapsed(navigation.getTimeElapsed());
             navPanel.setTotalDistance(navigation.getTotalDistance());
         }
+        int hr=getMapUrl().getMapSize().getHorizontal();
+        int vr=getMapUrl().getMapSize().getVertical();
         
-        if (enforceCenter){
-            
+        if (enforceCenter || (p.x<-1*hr) || p.x>2*hr || p.y<-1*vr || p.y>2*vr){
+
             mapurl.setLocation(loc.clone());
             if (navigation!=null){
                 navigation.refreshPixelCoordinates(mapurl);

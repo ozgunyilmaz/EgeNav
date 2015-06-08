@@ -105,7 +105,7 @@ public class DemoApplication extends javax.swing.JFrame {
         hint = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("EgeNav Demo Application");
+        setTitle("EgeNav Demo Navigation Application");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -178,11 +178,11 @@ public class DemoApplication extends javax.swing.JFrame {
             }
         });
 
-        txtLon.setText("27.085423");
+        txtLon.setText("27.086159");
 
         jLabel4.setText("Longitude:");
 
-        txtLat.setText("38.462303");
+        txtLat.setText("38.461507");
 
         jLabel3.setText("Latitude:");
 
