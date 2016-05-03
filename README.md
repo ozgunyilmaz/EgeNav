@@ -32,6 +32,12 @@ EgeNav supports following features:
   * Detection of junction points and the available directions
   * Detection of turning points
 
+
+##Downloads
+
+1. [Demo application 1](https://drive.google.com/open?id=0B0jxyO3H3yKHX0pDc05yNEZVZjA) (includes EgeNav library)
+2. [Demo application 2](https://drive.google.com/open?id=0B0jxyO3H3yKHMEc2UnRVd1lPZlk) (includes EgeNav library)
+
 ##Demo Applications
 
 2 demo applications are developed using EgeNav framework to promote and show what EgeNav is capable of doing. The demo applications, each including EgeNav library, other external libraries and the user manual packed in a single file can be downloaded from [here](https://drive.google.com/drive/folders/0B0jxyO3H3yKHX19GTTJQVEdkbm8).
