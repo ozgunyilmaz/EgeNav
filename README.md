@@ -1,6 +1,6 @@
 # EgeNav
 
-##Introduction##
+## Introduction ##
 
 With the widespread use of mobile devices, location-awareness in software applications becomes an increasingly important concept. In this framework, it is aimed to develop an easy to use navigation framework for Java developers. By using this navigation framework, software developers will be able to add map and navigation support (such as location, speed, heading and direction information on a map) to their applications. Getting maps and directions is made possible by using external URL-based map and direction services. Thus, software developers will be able to integrate maps, navigation and direction support easily to their applications.
 
