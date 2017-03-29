@@ -46,7 +46,7 @@ The demo applications can be executed by double clicking **EgeNav.jar** file aft
 
 Please note that, each of the **EgeNav.jar** files contains EgeNav framework classes plus the 2 demo applications. So If you want to use the EgeNav framework, just include any one of the **EgeNav.jar** files in the classpath of your project. And you are done.
 
-### Demo Application 1 ##
+### Demo Application 1 ###
 
 This application is a sample navigation application which shows maps, direction support and navigation information to the user as shown in the below figure.
 ![alt tag](/EgeNav/docs/ss/EgeNav_img1.png)
@@ -58,7 +58,7 @@ This demo application supports
 * getting textual, audio and visual direction instructions for travelling from the current location to a destination location, 
 * simulating a real-time travel, passing from many locations which are defined in a file.
 
-### Demo Application 2 ##
+### Demo Application 2 ###
 
 The second demo application is implemented to show image-based path finding features of EgeNav as shown in the below figure.
 ![alt tag](/EgeNav/docs/ss/EgeNav_img2.png)
