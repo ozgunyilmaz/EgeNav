@@ -75,4 +75,3 @@ Under construction...
 
 ## Acknowledgments ##
 
-This project was partially supported by Ege University's Scientific Research Project program under grant number 12-MUH-001.
